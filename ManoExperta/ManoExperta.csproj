@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
-    <Content Include="Resourses\Images\login_background.jpg" />
+    <Content Include="Resources\Images\login_background.jpg" />
     <Content Include="Style\Style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -98,7 +98,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Resourses\Icons\" />
+    <Folder Include="Resources\Icons\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
