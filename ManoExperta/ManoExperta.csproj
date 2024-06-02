@@ -69,6 +69,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Registrar.aspx" />
     <Content Include="Resources\Images\login_background.jpg" />
+    <Content Include="scripts\ManoExperta.sql" />
     <Content Include="Style\Style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
