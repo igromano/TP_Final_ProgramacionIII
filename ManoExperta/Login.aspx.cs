@@ -18,7 +18,7 @@ namespace ManoExperta
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-                string error = "<script type = 'text/javascript'>alert('Error en login!')</script>";
+                string error = "<script type = 'text/javascript'>alert('Error en acceder a la aplicación!')</script>";
                 if (accesoExitoso)
                 {
                     //hacer redirect al home
