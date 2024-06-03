@@ -1,0 +1,51 @@
+﻿body {
+    background-color: #ababab;
+    padding: initial;
+}
+
+#MenuLateral {
+    height: 1000px;
+    background: linear-gradient( 179deg, rgba(0, 0, 0, 1) 12%, rgba(156, 156, 156, 1) 84%, rgba(156, 156, 156, 1) 84% );
+    background-blend-mode: normal;
+}
+
+#NavBar {
+    height: 80px;
+    background: linear-gradient( 108deg, rgba(0, 0, 0, 1) 12%, rgba(156, 156, 156, 1) 84%, rgba(156, 156, 156, 1) 84% );
+    background-blend-mode: normal;
+}
+
+#MenuCentral {
+    height: auto;
+    flex: content;
+    display: inline-flex;
+}
+#NombreNavBar {
+    color: orange;
+    padding-top: 25px;
+    margin-left: 22px;
+    font-size: 50px;
+}
+#ImgService {
+    max-width: 250px;
+    transition: max-width 350ms ease-out;
+}
+
+#ImgService:hover {
+    max-width: 260px;
+}
+.fs-4, .fs-6 {
+    color: orange;
+    text-decoration: none;
+    transition: margin-left 400ms ease-out;
+}
+.fs-6:hover {
+    opacity: 0.3;
+    margin-left: 15px;
+}
+.lblLogin {
+    margin-right: 20px;
+    margin-top: 20px;
+    float: right;
+    color: #bf6b04;
+}

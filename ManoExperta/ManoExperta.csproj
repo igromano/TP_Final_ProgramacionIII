@@ -66,16 +66,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Home.aspx" />
+    <Content Include="Images\cleaning-service.png" />
+    <Content Include="Images\customer-service.png" />
+    <Content Include="Images\home-repair.png" />
+    <Content Include="Images\user.png" />
     <Content Include="Login.aspx" />
     <Content Include="Registrar.aspx" />
     <Content Include="Resources\Images\login_background.jpg" />
+    <Content Include="scripts\Inserts.sql" />
     <Content Include="scripts\ManoExperta.sql" />
+    <Content Include="scripts\SPs.sql" />
+    <Content Include="Style\MasterStyle.css" />
     <Content Include="Style\Style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -114,6 +129,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\Icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dominio\dominio.csproj">
+      <Project>{e811e3e9-c0bf-42b3-9f20-c0be141459a3}</Project>
+      <Name>dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\negocio\negocio.csproj">
+      <Project>{0b3bd3d0-feaa-44b4-aca8-4a4c0500e681}</Project>
+      <Name>negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
