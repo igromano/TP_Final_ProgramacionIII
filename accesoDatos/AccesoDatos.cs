@@ -11,7 +11,7 @@ namespace accesoDatos
     {
         private SqlConnection conexion;
         private SqlCommand comando;
-        private SqlDataReader lector;
+        public SqlDataReader lector;
 
         public AccesoADatos()
         {
@@ -44,6 +44,13 @@ namespace accesoDatos
                 throw ex;
             }
         }
+
+        public void setearProcedimiento(string sp)
+        {
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.CommandText = sp;
+        }
+
         public void settearParametros(string nombre, object valor)
             {
                 comando.Parameters.AddWithValue(nombre, valor);

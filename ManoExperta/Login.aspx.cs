@@ -1,34 +1,68 @@
-﻿using System;
+﻿using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
+using negocio;
+using System.Drawing;
 
 namespace ManoExperta
 {
+
     public partial class login : System.Web.UI.Page
     {
+        
+        public bool accesoExitoso = true;
+        public string error;
 
-        public bool accesoExitoso = false;
+        //public bool accesoExitoso = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-                string error = "<script type = 'text/javascript'>alert('Error en acceder a la aplicación!')</script>";
-                if (accesoExitoso)
+            //Usuario usuario = new Usuario(txtUser.Text, txtPass.Text);
+            try
+            {
+                //accesoExitoso = new UsuarioNegocio().login(usuario);
+                if (txtPass.Text.Length > 0 || txtUser.Text.Length > 0)
                 {
-                    //hacer redirect al home
+                    Usuario usuario = new UsuarioNegocio().login(new Usuario(txtUser.Text, txtPass.Text));
+                    if (usuario != null)
+                    {
+                        //hacer redirect al home
+                        Session.Add("usuario", usuario);
+                        accesoExitoso = true;
+                        Response.Redirect("Home.aspx", false);
+                    }
+                    else
+                    {
+                        accesoExitoso = false;
+                        txtUser.Text = "";
+                        error = "Los datos proporcionados son incorrectos";
+                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "Mifuncion", error);
+                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "Mifuncion", "errorMsg()", true);
+                        //}
+
+                    }
                 }
                 else
                 {
-                    accesoExitoso = true;
-                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "Mifuncion", error);
-                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "Mifuncion", "errorMsg()", true);
+                    accesoExitoso = false;
+                    error = "Debe ingresar un usuario y contraseña";
                 }
+            }catch (Exception ex)
+            {
+                throw ex;
+            }
             //Session.Add("clientIp", Request.ServerVariables["REMOTE_ADDR"]);
         }
     }

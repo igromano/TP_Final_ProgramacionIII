@@ -14,7 +14,7 @@ declare @UsuarioExistente varchar(50)
 	begin 
 		RAISERROR ('Este usuario no puede crearse', 16, 0)
 	end
-		INSERT Usuarios values(@Usuario, @Contrasenia, @IdRol) 
+		INSERT Usuarios values(@Usuario, @Contrasenia, @IdRol)
 	END TRY
 	BEGIN CATCH
 		PRINT ERROR_MESSAGE()

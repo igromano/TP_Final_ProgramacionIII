@@ -20,7 +20,15 @@
             <div class="col-14 col-sm-16 col-md-18 col-lg-22" id="NavBar">
                 <asp:Label ID="NombreNavBar" runat="server" Text="Mano Experta" CssClass="fs-2 fst-italic fw-bold"></asp:Label>
                 <img src="Images/user.png" class="lblLogin" />
-                <a href="" class="fs-6 fw-bold lblLogin" id="lblLogin">Ingrese</a>
+                <%if (!ManoExperta.helpers.AuthServices.estaLogueado((dominio.Usuario)Session["usuario"]))
+                    {%>
+                <a href="Login.aspx" class="fs-6 fw-bold lblLogin" id="lblLogin">Ingrese</a>
+                <%}
+                    else
+                    {
+                        //Session.Remove("usuario");%>
+                <a href="Login.aspx" class="fs-6 fw-bold lblLogin" id="lblLogout">Salir</a>
+                <%} %>
             </div>
         </div>
         <div class="row">

@@ -15,35 +15,38 @@
 <body class="">
 
     <form id="form1" runat="server">
-        <%if(accesoExitoso){%>
-        <div class="alert alert-danger d-flex align-items-center" role="alert" >
-            <div>
-                Error al ingresar a la aplicación!
-            </div>
-        </div>
-        <%} %>
-        <div id="login" class="container opacity-85" style="--bs-bg-opacity: .5;">
+
+        <form class="row g-3 needs-validation" novalidate>
             <div class="container align-self-end">
-                <div class="form-text opacity-100">
-                    <asp:Label ID="lblUser" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
-                    <asp:TextBox ID="txtUser" CssClass="form-control" TextMode="Email" runat="server"></asp:TextBox>
-                </div>
+                <div id="login" class="container opacity-85" style="--bs-bg-opacity: .5;">
+                    <%if (!accesoExitoso)
+                        { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%:error %>
+                    </div>
+                    <%} %>
+                    <div class="form-text opacity-100 needs-validation">
+                        <asp:Label ID="lblUser" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
+                        <asp:TextBox ID="txtUser" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:Label ID="lblValidateUser" runat="server" Text=""></asp:Label>
+                    </div>
 
-                <div id="passwordHelpBlock" class="form-text">
-                    <asp:Label ID="lblPass" CssClass="form-label fw-bold" runat="server" Text="Password"></asp:Label>
-                    <asp:TextBox ID="txtPass" CssClass="form-control" TextMode="Password" runat="server"></asp:TextBox>
-                </div>
+                    <div id="passwordHelpBlock" class="form-text">
+                        <asp:Label ID="lblPass" CssClass="form-label fw-bold" runat="server" Text="Password"></asp:Label>
+                        <asp:TextBox ID="txtPass" CssClass="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                    </div>
 
-                <div class="d-grid gap-2 p-4">
-                    <asp:Button ID="btnLogin" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="btnLogin_Click" />
-                </div>
-                <asp:Label ID="lblIp" runat="server"></asp:Label>
+                    <div class="d-grid gap-2 p-4">
+                        <asp:Button ID="btnLogin" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="btnLogin_Click" />
+                    </div>
+                    <asp:Label ID="lblIp" runat="server"></asp:Label>
 
 
-                <div class="d-grid gap-2 p-4">
-                    <a href="" class="">Registrate</a>
+                    <div class="d-grid gap-2 p-4">
+                        <a href="Registrar.aspx" class="">Registrate</>
+                    </div>
                 </div>
-            </div>
+        </form>
         </div>
     </form>
 

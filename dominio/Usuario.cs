@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    public class Usuario
+    public class Usuario : Persona
     {
+
+        public Usuario(string userName, string contrasenia) {
+            this.UserName = userName;
+            this.Contrasenia = contrasenia;
+        }
         public int Id { get; set; }
 
-        public int UserName { get; set; }
+        public string UserName { get; set; }
 
-        public int Contrasenia { get; set; }
+        public string Contrasenia { get; set; }
 
         public RolUsuario RolUsuario { get; set; }
     }

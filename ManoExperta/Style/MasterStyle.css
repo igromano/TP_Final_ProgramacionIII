@@ -32,7 +32,7 @@
 }
 
 #ImgService:hover {
-    max-width: 260px;
+    max-width: 255px;
 }
 .fs-4, .fs-6 {
     color: orange;
@@ -40,7 +40,7 @@
     transition: margin-left 400ms ease-out;
 }
 .fs-6:hover {
-    opacity: 0.3;
+    opacity: 0.5;
     margin-left: 15px;
 }
 .lblLogin {
