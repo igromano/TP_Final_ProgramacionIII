@@ -6,7 +6,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="container" id="MenuCentral">
-
         <div class="row row-cols-1 row-col-sm-1 row-cols-md-2 row-cols-lg-4 g-2">
             <div class="col pt-4">
                 <div class="card p-2">
