@@ -86,6 +86,7 @@
     <Content Include="scripts\Inserts.sql" />
     <Content Include="scripts\ManoExperta.sql" />
     <Content Include="scripts\SPs.sql" />
+    <Content Include="Style\Home.css" />
     <Content Include="Style\MasterStyle.css" />
     <Content Include="Style\Style.css" />
     <Content Include="Web.config" />
