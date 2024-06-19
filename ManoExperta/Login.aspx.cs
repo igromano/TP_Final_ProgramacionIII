@@ -6,8 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
-using negocio;
-using System.Drawing;
+using ManoExperta.Services;
 
 namespace ManoExperta
 {
@@ -21,6 +20,8 @@ namespace ManoExperta
         //public bool accesoExitoso = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            getClientLocation();
+
             if (!IsPostBack)
             {
                 
@@ -39,6 +40,7 @@ namespace ManoExperta
                     if (usuario != null)
                     {
                         //hacer redirect al home
+                        
                         Session.Add("usuario", usuario);
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
@@ -64,6 +66,12 @@ namespace ManoExperta
                 throw ex;
             }
             //Session.Add("clientIp", Request.ServerVariables["REMOTE_ADDR"]);
+        }
+
+        async private void getClientLocation()
+        {
+            ServiciosExternos service = new ServiciosExternos();
+            Locacion locacion = await service.getLocacion();
         }
     }
 }
