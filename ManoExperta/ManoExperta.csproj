@@ -69,15 +69,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="Images\cleaning-service.png" />
     <Content Include="Images\customer-service.png" />
     <Content Include="Images\home-repair.png" />
     <Content Include="Images\user.png" />
+    <Content Include="Index.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Provee.aspx" />
     <Content Include="Registrar.aspx" />
+    <Content Include="Resources\Images\errorFondo.jpg" />
+    <Content Include="Resources\Images\imagenProveedor.jpg" />
+    <Content Include="Resources\Images\imagenUsuarioNormal.jpg" />
     <Content Include="Resources\Images\login_background.jpg" />
+    <Content Include="Resources\Images\Provee\ProveeImagen1.jpg" />
+    <Content Include="Resources\Images\Provee\ProveeImagen2.jpg" />
+    <Content Include="Resources\Images\Provee\ProveeImagen3.jpg" />
     <Content Include="scripts\Inserts.sql" />
     <Content Include="scripts\ManoExperta.sql" />
     <Content Include="scripts\SPs.sql" />
@@ -86,6 +95,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -96,6 +112,20 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Index.Master.cs">
+      <DependentUpon>Index.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.Master.designer.cs">
+      <DependentUpon>Index.Master</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -117,6 +147,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Provee.aspx.cs">
+      <DependentUpon>Provee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Provee.aspx.designer.cs">
+      <DependentUpon>Provee.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registrar.aspx.cs">
       <DependentUpon>Registrar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -129,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master.Master" />
+    <Content Include="Index.Master" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
