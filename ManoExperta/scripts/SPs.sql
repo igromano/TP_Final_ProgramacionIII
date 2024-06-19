@@ -1,20 +1,21 @@
 --Creacion de SPs
 
 --Creacion de un nuevo usuario
-CREATE PROCEDURE SP_NuevoUsuario (
+CREATE procedure SP_NuevoUsuario (
 @Usuario varchar(50),
 @Contrasenia varchar(50),
-@IdRol smallint
+@IdRol smallint,
+@Email varchar(255)
 )
 as
 begin
 declare @UsuarioExistente varchar(50)
 	BEGIN TRY
-		if @Usuario IN (SELECT u.Usuario from Usuarios u)
+	if @Usuario IN (SELECT u.Usuario from Usuarios u)
 	begin 
-		RAISERROR ('Este usuario no puede crearse', 16, 0)
+		RAISERROR ('Este usuario ya existe', 16, 0)
 	end
-		INSERT Usuarios values(@Usuario, @Contrasenia, @IdRol)
+		INSERT Usuarios values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email)
 	END TRY
 	BEGIN CATCH
 		PRINT ERROR_MESSAGE()
@@ -43,3 +44,4 @@ begin
 		PRINT ERROR_MESSAGE()
 	 end catch
 end
+

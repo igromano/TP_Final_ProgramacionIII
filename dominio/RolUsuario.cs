@@ -8,7 +8,7 @@ namespace dominio
 {
     public enum RolUsuario
     {
-        ADMIN = 0,
+        ADMIN = 0,//Soporte-Admin
         PRESTADOR = 1,
         USUARIO = 2
     }

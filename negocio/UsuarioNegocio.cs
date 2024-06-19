@@ -11,7 +11,7 @@ namespace negocio
 {
     public class UsuarioNegocio
     {
-        public bool agregarUsuario(Usuario usuario)
+        public bool registrarUsuario(Usuario usuario)
         {
             AccesoADatos datos = new AccesoADatos();
             datos.setearProcedimiento("SP_NuevoUsuario");
@@ -30,7 +30,7 @@ namespace negocio
         {
             try
             {
-                if (usuario != null || usuario.UserName != "pepe" || usuario.UserName.Length > 0)
+                if (usuario != null || usuario.UserName.Length > 0)
                 {
                     AccesoADatos datos = new AccesoADatos();
                     datos.configurarProcedimiento("SP_Login");
@@ -43,16 +43,19 @@ namespace negocio
                         {
                             case 0:
                                 usuario.RolUsuario = RolUsuario.ADMIN;
+                                usuario.Id = (int)datos.lector["ID"];
                                 return usuario;
-                                break;
+                                //break;
                             case 1:
                                 usuario.RolUsuario = RolUsuario.PRESTADOR;
+                                usuario.Id = (int)datos.lector["ID"];
                                 return usuario;
-                                break;
+                                //break;
                             case 2:
                                 usuario.RolUsuario = RolUsuario.USUARIO;
+                                usuario.Id = (int)datos.lector["ID"];
                                 return usuario;
-                                break;
+                                //break;
                             default:
                                 return usuario;
                         }

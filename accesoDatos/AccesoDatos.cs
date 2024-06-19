@@ -51,6 +51,22 @@ namespace accesoDatos
             comando.CommandText = sp;
         }
 
+        //Retorna 
+        public int ejecutarAccion()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return (int)comando.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public void settearParametros(string nombre, object valor)
             {
                 comando.Parameters.AddWithValue(nombre, valor);
