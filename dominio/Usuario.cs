@@ -20,5 +20,7 @@ namespace dominio
         public string Contrasenia { get; set; }
 
         public RolUsuario RolUsuario { get; set; }
+
+        public string Email { get; set; }
     }
 }

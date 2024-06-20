@@ -17,11 +17,19 @@ namespace negocio
             datos.setearProcedimiento("SP_NuevoUsuario");
             try
             {
-                //datos.ejecutarConsulta();
+                datos.settearParametros("@Usuario", usuario.UserName);
+                datos.settearParametros("@Contrasenia", usuario.Contrasenia);
+                datos.settearParametros("@IdRol", usuario.RolUsuario);
+                datos.settearParametros("@Email", usuario.Email);
+                datos.ejecutarConsulta();
             }
             catch (Exception ex)
             {
 
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
             return true;
         }
@@ -45,28 +53,66 @@ namespace negocio
                                 usuario.RolUsuario = RolUsuario.ADMIN;
                                 usuario.Id = (int)datos.lector["ID"];
                                 return usuario;
-                                //break;
                             case 1:
                                 usuario.RolUsuario = RolUsuario.PRESTADOR;
                                 usuario.Id = (int)datos.lector["ID"];
                                 return usuario;
-                                //break;
                             case 2:
                                 usuario.RolUsuario = RolUsuario.USUARIO;
                                 usuario.Id = (int)datos.lector["ID"];
                                 return usuario;
-                                //break;
                             default:
                                 return usuario;
                         }
                     }
-                    //return null;
                 }
                 return null;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public void updateUsuario(Usuario usuario)
+        {
+
+            if (usuario == null || usuario.Id == null || usuario.Id < 0)
+            {
+                throw new Exception("El usuario provisto no es valido");
+            }
+            bool persona = false;
+            AccesoADatos datos = new AccesoADatos();
+            if (usuario.IdPersona != null || usuario.IdPersona > 0)
+            {
+                persona = true;
+            }
+            try
+            {
+                datos.configurarProcedimiento("SP_UpdateUser");
+                datos.settearParametros("@Id", usuario.Id);
+                datos.settearParametros("@Usuario", usuario.UserName);
+                datos.settearParametros("@Contrasenia", usuario.Contrasenia);
+                datos.settearParametros("@Email", usuario.Email);
+                datos.settearParametros("@Persona", persona);
+                datos.settearParametros("@IdPersona", usuario.IdPersona);
+                datos.settearParametros("@Nombre", usuario.Nombre);
+                datos.settearParametros("@Apellido", usuario.Apellido);
+                datos.settearParametros("@Sexo", usuario.Sexo);
+                datos.settearParametros("@FechaNacimiento", usuario.FechaNacimiento);
+                datos.settearParametros("@IDLocalidad", usuario.IdLocalidad);
+
+                datos.ejecutarConsulta();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }
