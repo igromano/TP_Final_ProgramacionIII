@@ -42,29 +42,29 @@
 
                     <div id="nombreUsuario" class="form-text">
                         <asp:Label ID="Label7" CssClass="form-label fw-bold" runat="server" Text="Nombre"></asp:Label>
-                        <asp:TextBox ID="TextBox5" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxNombreUsuario" CssClass="form-control" runat="server" required="true"></asp:TextBox>
                     </div>
                     <div id="apellidoUsuario" class="form-text">
                         <asp:Label ID="Label8" CssClass="form-label fw-bold" runat="server" Text="Apellido"></asp:Label>
-                        <asp:TextBox ID="TextBox6" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxApellidoUsuario" CssClass="form-control" runat="server" required="true"></asp:TextBox>
                     </div>
                     <div id="emailUsuario" class="form-text">
                         <asp:Label ID="Label16" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
-                        <asp:TextBox ID="TextBox14" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxEmailUsuario" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
                     </div>
                     <div class="form-text opacity-100 needs-validation">
                         <asp:Label ID="lblUser" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
-                        <asp:TextBox ID="txtUser" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxUsuarioUsuario" CssClass="form-control" runat="server" required="true"></asp:TextBox>
                         <asp:Label ID="lblValidateUser" runat="server" Text=""></asp:Label>
                     </div>
 
                     <div id="passwordHelpBlockUsuario" class="form-text">
                         <asp:Label ID="lblPass" CssClass="form-label fw-bold" runat="server" Text="Contraseña"></asp:Label>
-                        <asp:TextBox ID="txtPass" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxUsuarioContrasenia" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
                     </div>
                     <div id="passwordHelpBlockRepetirUsuario" class="form-text">
                         <asp:Label ID="Label15" CssClass="form-label fw-bold" runat="server" Text="Repetir Contraseña"></asp:Label>
-                        <asp:TextBox ID="TextBox13" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxUsuarioContraseniaConfirmar" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
                     </div>
 
 
@@ -83,31 +83,31 @@
         <form class="row g-3 needs-validation" novalidate>
             <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
                 <div id="registrarProveedor" class="container opacity-85" style="--bs-bg-opacity: .5; max-width: 400px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <div class="form-text opacity-100 needs-validation">
-                        <asp:Label ID="Label1" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
-                        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" required="true"></asp:TextBox>
-                        <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
-                    </div>
                     <div id="nombreProveedor" class="form-text">
                         <asp:Label ID="Label9" CssClass="form-label fw-bold" runat="server" Text="Nombre"></asp:Label>
-                        <asp:TextBox ID="TextBox7" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxNombreProveedor" CssClass="form-control" runat="server" required="true"></asp:TextBox>
                     </div>
                     <div id="apellidoProveedor" class="form-text">
                         <asp:Label ID="Label10" CssClass="form-label fw-bold" runat="server" Text="Apellido"></asp:Label>
-                        <asp:TextBox ID="TextBox8" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxApellidoProveedor" CssClass="form-control" runat="server" required="true"></asp:TextBox>
                     </div>
                     <div id="emailProveedor" class="form-text">
                         <asp:Label ID="Label5" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
-                        <asp:TextBox ID="TextBox4" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxEmailProveedor" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
                     </div>
 
+                    <div class="form-text opacity-100 needs-validation">
+                        <asp:Label ID="Label1" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
+                        <asp:TextBox ID="TextBoxUsuarioProveedor" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+                    </div>
                     <div id="passwordHelpBlockProveedor" class="form-text">
                         <asp:Label ID="Label3" CssClass="form-label fw-bold" runat="server" Text="Contraseña"></asp:Label>
-                        <asp:TextBox ID="TextBox2" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxProveedorContrasenia" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
                     </div>
                     <div id="passwordHelpBlockRepetirProveedor" class="form-text">
                         <asp:Label ID="Label4" CssClass="form-label fw-bold" runat="server" Text="Repetir Contraseña"></asp:Label>
-                        <asp:TextBox ID="TextBox3" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxProveedorContraseniaConfirmar" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
                     </div>
 
 
