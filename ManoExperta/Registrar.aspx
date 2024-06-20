@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <link href="Style/Style.css" rel="stylesheet" />
     <div class="container-fluid" style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%">
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
             <div class="modal-dialog">
@@ -35,6 +36,38 @@
         </div>
         <% if (creaUsuario)
             { %>
+        <form class="row g-3 needs-validation" novalidate>
+            <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+                <div id="registrarUsuario" class="container opacity-85" style="--bs-bg-opacity: .5; max-width: 400px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div class="form-text opacity-100 needs-validation">
+                        <asp:Label ID="lblUser" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
+                        <asp:TextBox ID="txtUser" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:Label ID="lblValidateUser" runat="server" Text=""></asp:Label>
+                    </div>
+
+                    <div id="passwordHelpBlockUsuario" class="form-text">
+                        <asp:Label ID="lblPass" CssClass="form-label fw-bold" runat="server" Text="Contraseña"></asp:Label>
+                        <asp:TextBox ID="txtPass" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="passwordHelpBlockRepetirUsuario" class="form-text">
+                        <asp:Label ID="Label15" CssClass="form-label fw-bold" runat="server" Text="Repetir Contraseña"></asp:Label>
+                        <asp:TextBox ID="TextBox13" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="emailUsuario" class="form-text">
+                        <asp:Label ID="Label16" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
+                        <asp:TextBox ID="TextBox14" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
+                    </div>
+
+                    <div class="d-grid gap-2 p-4">
+                        <%-- <asp:Button ID="btnLogin" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="btnLogin_Click" />--%>
+                        <button class="btn btn-success" type="submit">Registrar</button>
+                    </div>
+                    <asp:Label ID="lblIp" runat="server"></asp:Label>
+                </div>
+            </div>
+        </form>
+
+        <%-- 
         <div class="container-fluid" style="display: flex; align-items: center; justify-content: center">
             <div class="container form-container" style="display: flex; align-items: center; justify-content: center">
                 <div class="card p-4 shadow-sm" style="width: 100%; max-width: 80%; background-color: darkorange; box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%)">
@@ -124,11 +157,42 @@
                 </div>
             </div>
         </div>
+        --%>
 
         <% } %>
         <% if (creaProveedor)
             { %>
+        <form class="row g-3 needs-validation" novalidate>
+            <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+                <div id="registrarProveedor" class="container opacity-85" style="--bs-bg-opacity: .5; max-width: 400px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div class="form-text opacity-100 needs-validation">
+                        <asp:Label ID="Label1" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
+                        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+                    </div>
 
+                    <div id="passwordHelpBlockProveedor" class="form-text">
+                        <asp:Label ID="Label3" CssClass="form-label fw-bold" runat="server" Text="Contraseña"></asp:Label>
+                        <asp:TextBox ID="TextBox2" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="passwordHelpBlockRepetirProveedor" class="form-text">
+                        <asp:Label ID="Label4" CssClass="form-label fw-bold" runat="server" Text="Repetir Contraseña"></asp:Label>
+                        <asp:TextBox ID="TextBox3" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="emailUsuarioProveedor" class="form-text">
+                        <asp:Label ID="Label5" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
+                        <asp:TextBox ID="TextBox4" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
+                    </div>
+
+                    <div class="d-grid gap-2 p-4">
+                        <%-- <asp:Button ID="btnLogin" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="btnLogin_Click" />--%>
+                        <button class="btn btn-success" type="submit">Registrar</button>
+                    </div>
+                    <asp:Label ID="Label6" runat="server"></asp:Label>
+                </div>
+            </div>
+        </form>
+        <%-- 
         <div class="container-fluid" style="display: flex; align-items: center; justify-content: center">
             <div class="container form-container" style="display: flex; align-items: center; justify-content: center">
                 <div class="card p-4 shadow-sm" style="width: 100%; max-width: 80%; background-color: darkorange; box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%)">
@@ -247,18 +311,20 @@
                 </div>
             </div>
         </div>
+        --%>
         <% } %>
+
         <script type="text/javascript">
             $(document).ready(() => {
                 var modalMostrar = ('<%= modalOpciones%>' === 'True') ? true : false;
-                    var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-                    if (modalMostrar) {
-                        myModal.show();
-                    }
-                    else {
-                        myModal.hide();
-                    }
-                })
+                var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                if (modalMostrar) {
+                    myModal.show();
+                }
+                else {
+                    myModal.hide();
+                }
+            })
 
         </script>
     </div>

@@ -16,3 +16,13 @@
     height: 50px;
     width: 350px;
 }
+
+#registrar {
+    margin-top: 150px;
+    padding-top: 50px;
+    background-color: whitesmoke;
+    opacity: 0.92;
+    width: 400px;
+    height: 350px;
+    border-radius: 10px;
+}
