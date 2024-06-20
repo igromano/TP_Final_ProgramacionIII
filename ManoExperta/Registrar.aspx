@@ -39,6 +39,19 @@
         <form class="row g-3 needs-validation" novalidate>
             <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
                 <div id="registrarUsuario" class="container opacity-85" style="--bs-bg-opacity: .5; max-width: 400px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+                    <div id="nombreUsuario" class="form-text">
+                        <asp:Label ID="Label7" CssClass="form-label fw-bold" runat="server" Text="Nombre"></asp:Label>
+                        <asp:TextBox ID="TextBox5" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="apellidoUsuario" class="form-text">
+                        <asp:Label ID="Label8" CssClass="form-label fw-bold" runat="server" Text="Apellido"></asp:Label>
+                        <asp:TextBox ID="TextBox6" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="emailUsuario" class="form-text">
+                        <asp:Label ID="Label16" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
+                        <asp:TextBox ID="TextBox14" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
+                    </div>
                     <div class="form-text opacity-100 needs-validation">
                         <asp:Label ID="lblUser" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
                         <asp:TextBox ID="txtUser" CssClass="form-control" runat="server" required="true"></asp:TextBox>
@@ -53,111 +66,16 @@
                         <asp:Label ID="Label15" CssClass="form-label fw-bold" runat="server" Text="Repetir Contraseña"></asp:Label>
                         <asp:TextBox ID="TextBox13" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
                     </div>
-                    <div id="emailUsuario" class="form-text">
-                        <asp:Label ID="Label16" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
-                        <asp:TextBox ID="TextBox14" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
-                    </div>
+
 
                     <div class="d-grid gap-2 p-4">
-                        <%-- <asp:Button ID="btnLogin" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="btnLogin_Click" />--%>
-                        <button class="btn btn-success" type="submit">Registrar</button>
+                        <asp:Button ID="btnRegistrarUsuario" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="CrearUsuario" />
+
                     </div>
                     <asp:Label ID="lblIp" runat="server"></asp:Label>
                 </div>
             </div>
         </form>
-
-        <%-- 
-        <div class="container-fluid" style="display: flex; align-items: center; justify-content: center">
-            <div class="container form-container" style="display: flex; align-items: center; justify-content: center">
-                <div class="card p-4 shadow-sm" style="width: 100%; max-width: 80%; background-color: darkorange; box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%)">
-                    <h2 class="card-title text-center">Alta de Usuario</h2>
-                    <form>
-                        <div class="mb-3 row">
-                            <div class="col">
-                                <asp:Label runat="server" ID="labelNombre" CssClass="form-label">Nombre</asp:Label>
-                                <asp:TextBox runat="server" ID="textBoxNombre" CssClass="form-control" />
-                            </div>
-                            <div class="col">
-
-                                <asp:Label runat="server" ID="labelApellido" CssClass="form-label">Apellido</asp:Label>
-                                <asp:TextBox ID="textBoxApellido" runat="server" CssClass="form-control" />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-
-                                <asp:Label ID="labelEmail" runat="server" CssClass="form-label">Email</asp:Label>
-                                <asp:TextBox ID="textBoxEmail" runat="server" CssClass="form-control" TextMode="Email" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="labelDNI" runat="server" CssClass="form-label">DNI</asp:Label>
-                                <asp:TextBox ID="textBoxDNI" runat="server" CssClass="form-control" MaxLength="8" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="labelTelefono" runat="server" CssClass="form-label">Teléfono</asp:Label>
-                                <asp:TextBox ID="textBoxTelefono" runat="server" TextMode="Phone" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="labelFechaNacimiento" runat="server" CssClass="form-label">Fecha Nacimiento</asp:Label>
-                                <asp:TextBox ID="calendarFechaNacimiento" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                            </div>
-
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <asp:Label ID="LabelDireccion" runat="server" CssClass="form-label">Dirección Casa</asp:Label>
-                                <asp:TextBox ID="textBoxDireccion" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="labelAltura" runat="server" CssClass="form-label">Altura de la Calle</asp:Label>
-                                <asp:TextBox ID="textBoxAltura" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="labelPiso" runat="server" CssClass="form-label">Piso</asp:Label>
-                                <asp:TextBox ID="textBoxPiso" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="labelDepartamento" runat="server" CssClass="form-label">Departamento</asp:Label>
-                                <asp:TextBox ID="textBoxDepartamento" runat="server" CssClass="form-control" />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-md">
-                                <asp:Label ID="labelProvincia" runat="server" CssClass="form-label">Provincia</asp:Label>
-                                <asp:DropDownList ID="pronvincia" runat="server" CssClass="form-select" OnSelectedIndexChanged="pronvincia_SelectedIndexChanged">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="col-md">
-                                <asp:Label ID="labelCuidad" runat="server" CssClass="form-label">Ciudad</asp:Label>
-                                <select class="form-select" id="ciudad" required>
-                                    <option value="">Ciudad...</option>
-                                </select>
-                            </div>
-                            <div class="col-md">
-                                <asp:Label ID="labelBarrio" runat="server" CssClass="form-label">Barrio</asp:Label>
-                                <asp:TextBox ID="textBoxBarrio" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-sm-2">
-                                <asp:Label ID="labelCodPostal" runat="server" CssClass="form-label">Codigo Postal</asp:Label>
-                                <asp:TextBox ID="textBoxCodPostal" runat="server" CssClass="form-control" />
-                            </div>
-                        </div>
-                        <div class="container text-center">
-                            <div class="row">
-                                <div class="col">
-                                    <asp:Button ID="buttonRegistrar" runat="server" Text="Registrar" CssClass="btn btn-primary" Width="100%" />
-                                </div>
-                                <div class="col">
-                                    <a class="btn btn-danger" href="/Login.aspx" style="width: 100%">Salir</a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        --%>
 
         <% } %>
         <% if (creaProveedor)
@@ -170,6 +88,18 @@
                         <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" required="true"></asp:TextBox>
                         <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
                     </div>
+                    <div id="nombreProveedor" class="form-text">
+                        <asp:Label ID="Label9" CssClass="form-label fw-bold" runat="server" Text="Nombre"></asp:Label>
+                        <asp:TextBox ID="TextBox7" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="apellidoProveedor" class="form-text">
+                        <asp:Label ID="Label10" CssClass="form-label fw-bold" runat="server" Text="Apellido"></asp:Label>
+                        <asp:TextBox ID="TextBox8" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="emailProveedor" class="form-text">
+                        <asp:Label ID="Label5" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
+                        <asp:TextBox ID="TextBox4" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
+                    </div>
 
                     <div id="passwordHelpBlockProveedor" class="form-text">
                         <asp:Label ID="Label3" CssClass="form-label fw-bold" runat="server" Text="Contraseña"></asp:Label>
@@ -179,139 +109,16 @@
                         <asp:Label ID="Label4" CssClass="form-label fw-bold" runat="server" Text="Repetir Contraseña"></asp:Label>
                         <asp:TextBox ID="TextBox3" CssClass="form-control" TextMode="Password" runat="server" required="true"></asp:TextBox>
                     </div>
-                    <div id="emailUsuarioProveedor" class="form-text">
-                        <asp:Label ID="Label5" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
-                        <asp:TextBox ID="TextBox4" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
-                    </div>
+
 
                     <div class="d-grid gap-2 p-4">
-                        <%-- <asp:Button ID="btnLogin" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="btnLogin_Click" />--%>
+                        <asp:Button ID="btnRegistrarProveedor" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="CrearProveedor" />
                         <button class="btn btn-success" type="submit">Registrar</button>
                     </div>
                     <asp:Label ID="Label6" runat="server"></asp:Label>
                 </div>
             </div>
         </form>
-        <%-- 
-        <div class="container-fluid" style="display: flex; align-items: center; justify-content: center">
-            <div class="container form-container" style="display: flex; align-items: center; justify-content: center">
-                <div class="card p-4 shadow-sm" style="width: 100%; max-width: 80%; background-color: darkorange; box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%)">
-                    <h2 class="card-title text-center">Alta de Proveedor</h2>
-                    <form>
-                        <h3>Datos Personales</h3>
-                        <hr />
-                        <div class="mb-3 row">
-                            <div class="col">
-                                <asp:Label runat="server" ID="label1" CssClass="form-label">Nombre</asp:Label>
-                                <asp:TextBox runat="server" ID="textBox1" CssClass="form-control" />
-                            </div>
-                            <div class="col">
-
-                                <asp:Label runat="server" ID="label2" CssClass="form-label">Apellido</asp:Label>
-                                <asp:TextBox ID="textBox2" runat="server" CssClass="form-control" />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-
-                                <asp:Label ID="label3" runat="server" CssClass="form-label">Email</asp:Label>
-                                <asp:TextBox ID="textBox3" runat="server" CssClass="form-control" TextMode="Email" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="label4" runat="server" CssClass="form-label">DNI</asp:Label>
-                                <asp:TextBox ID="textBox4" runat="server" CssClass="form-control" MaxLength="8" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="label5" runat="server" CssClass="form-label">Teléfono</asp:Label>
-                                <asp:TextBox ID="textBox5" runat="server" TextMode="Phone" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="label6" runat="server" CssClass="form-label">Fecha Nacimiento</asp:Label>
-                                <asp:TextBox ID="TextBox6" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                            </div>
-
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <asp:Label ID="Label7" runat="server" CssClass="form-label">Dirección Casa</asp:Label>
-                                <asp:TextBox ID="textBox7" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="label8" runat="server" CssClass="form-label">Altura de la Calle</asp:Label>
-                                <asp:TextBox ID="textBox8" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="label9" runat="server" CssClass="form-label">Piso</asp:Label>
-                                <asp:TextBox ID="textBox9" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Label ID="label10" runat="server" CssClass="form-label">Departamento</asp:Label>
-                                <asp:TextBox ID="textBox10" runat="server" CssClass="form-control" />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-md">
-                                <asp:Label ID="label11" runat="server" CssClass="form-label">Provincia</asp:Label>
-                                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-select" OnSelectedIndexChanged="pronvincia_SelectedIndexChanged">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="col-md">
-                                <asp:Label ID="label12" runat="server" CssClass="form-label">Ciudad</asp:Label>
-                                <select class="form-select" id="ciudad" required>
-                                    <option value="">Ciudad...</option>
-                                </select>
-                            </div>
-                            <div class="col-md">
-                                <asp:Label ID="label13" runat="server" CssClass="form-label">Barrio</asp:Label>
-                                <asp:TextBox ID="textBox11" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-sm-2">
-                                <asp:Label ID="label14" runat="server" CssClass="form-label">Codigo Postal</asp:Label>
-                                <asp:TextBox ID="textBox12" runat="server" CssClass="form-control" />
-                            </div>
-                        </div>
-                        <div class="container text-center">
-                            <div class="row">
-                                <div class="col">
-                                    <asp:Button ID="button2" runat="server" Text="Registrar" CssClass="btn btn-primary" Width="100%" />
-                                </div>
-                                <div class="col">
-                                    <a class="btn btn-danger" href="/Login.aspx" style="width: 100%">Salir</a>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <h3>Datos Profesionales</h3>
-                        <hr />
-                        <div class="mb-3 row">
-                            <div class="col-md-4">
-                                <asp:Label ID="labelRazonSocial" runat="server" CssClass="form-label">Razon Social</asp:Label>
-                                <asp:TextBox ID="textBoxRazonSocial" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="col-md-3">
-                                <asp:Label ID="labelCUIT" runat="server" CssClass="form-label">CUIT</asp:Label>
-                                <asp:TextBox ID="textBoxCUIT" runat="server" CssClass="form-control" MaxLength="11" />
-                            </div>
-                            <div class="col-md-5">
-                                <asp:Label ID="labelDireccionFac" runat="server" CssClass="form-label">Dirección Facturación</asp:Label>
-                                <asp:TextBox ID="textBoxDirFactura" runat="server" CssClass="form-control" />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <asp:Label ID="labelEspecialidad" runat="server" CssClass="form-label">Especialidad</asp:Label>
-                                <asp:DropDownList ID="dropDownEspecialidad" runat="server" CssClass="form-select" />
-                            </div>
-                            <div class="col-md-6">
-                                <asp:Label ID="labelMatricula" runat="server" CssClass="form-label">N° Matricula</asp:Label>
-                                <asp:TextBox ID="textBoxMatricula" runat="server" CssClass="form-control" />
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        --%>
         <% } %>
 
         <script type="text/javascript">
