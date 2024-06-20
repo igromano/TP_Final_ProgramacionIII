@@ -56,7 +56,7 @@
                             </ul>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 15px">
-                            <div class="btn btn-outline-light btn-lg">Registrarse</div>
+                            <a href="Registrar.aspx" class="btn btn-outline-light btn-lg">Registrarse</a>
                         </div>
                     </div>
                 </div>
