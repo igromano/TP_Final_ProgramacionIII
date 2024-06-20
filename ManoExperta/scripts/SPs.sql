@@ -45,3 +45,44 @@ begin
 	 end catch
 end
 
+--Update de Usuarios y/o Pesonas
+alter procedure SP_UpdateUser (
+@Id int = null, 
+@Usuario varchar(50),
+@Contrasenia varchar(50),
+@Email varchar(255),
+@Persona bit,
+@IdPersona bigint = null,
+@Nombre varchar(50) = null,
+@Apellido varchar(50) = null,
+@Sexo char(1) = null,
+@FechaNacimiento date = null,
+@Domicilio varchar(100) = null,
+@IDLocalidad smallint = null
+) as
+begin
+	begin try
+		if @Id is not null and @Persona = 0
+			begin 
+				update Usuarios set Usuario = @Usuario, Contrasenia = @Contrasenia, Email = @Email where ID = @Id
+				PRINT('Se edito solo el usuario')
+				RETURN
+			end
+		if @Id is not null and @Persona = 1 and @IdPersona is not null
+			begin
+				update Usuarios set Usuario = @Usuario, Contrasenia = @Contrasenia, Email = @Email where ID = @Id
+				update Personas set ID = @IdPersona, Nombre = @Nombre, Apellido = @Apellido, Sexo = @Sexo, 
+				FechaNacimiento = @FechaNacimiento, Domicilio = @Domicilio, IDLocalidad = @IDLocalidad
+				where IDUsuario = @Id
+				PRINT('Se edito usuario y persona')
+				RETURN
+			end
+		else
+			begin
+				RAISERROR('Datos insuficientes para realizar la actualización', 16, 0);
+			end
+	end try
+	BEGIN CATCH
+		PRINT ERROR_MESSAGE();
+	END CATCH
+end
