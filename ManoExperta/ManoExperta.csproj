@@ -69,6 +69,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EliminarCuenta.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
@@ -79,6 +80,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MisServicios.aspx" />
+    <Content Include="Preferencias.aspx" />
     <Content Include="Provee.aspx" />
     <Content Include="Registrar.aspx" />
     <Content Include="Resources\Images\errorFondo.jpg" />
@@ -97,6 +99,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EliminarCuenta.aspx.cs">
+      <DependentUpon>EliminarCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarCuenta.aspx.designer.cs">
+      <DependentUpon>EliminarCuenta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -149,6 +158,13 @@
     </Compile>
     <Compile Include="MisServicios.aspx.designer.cs">
       <DependentUpon>MisServicios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Preferencias.aspx.cs">
+      <DependentUpon>Preferencias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Preferencias.aspx.designer.cs">
+      <DependentUpon>Preferencias.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
