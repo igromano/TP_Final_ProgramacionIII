@@ -68,7 +68,7 @@ namespace ManoExperta
             modalOpciones = false;          
         }
 
-        void AltaProveedor(object obj, EventArgs e)
+        protected void AltaProveedor(object sender, EventArgs e)
         {
             string nombre = TextBoxNombreProveedor.Text;
             string email = TextBoxEmailProveedor.Text;
