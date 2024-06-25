@@ -9,6 +9,7 @@ namespace dominio
     public class Usuario : Persona
     {
 
+        public Usuario() { }    
         public Usuario(string userName, string contrasenia) {
             this.UserName = userName;
             this.Contrasenia = contrasenia;
@@ -22,5 +23,9 @@ namespace dominio
         public RolUsuario RolUsuario { get; set; }
 
         public string Email { get; set; }
+
+        public  DateTime FechaAlta { get; set; }
+
+        public bool Activo { get; set; }
     }
 }

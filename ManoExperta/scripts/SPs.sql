@@ -38,7 +38,8 @@ begin
 		BEGIN
 			RAISERROR ('Contraseña incorrecta', 16, 0)
 		END
-		SELECT u.iDRol FROM Usuarios U WHERE U.Usuario = @Usuario
+		--SELECT u.iDRol FROM Usuarios U WHERE U.Usuario = @Usuario
+		SELECT * FROM Usuarios U WHERE U.Usuario = @Usuario
 	 end try
 	 begin catch
 		PRINT ERROR_MESSAGE()
@@ -86,3 +87,82 @@ begin
 		PRINT ERROR_MESSAGE();
 	END CATCH
 end
+
+--Calculo de reputacion de un prestador
+CREATE OR ALTER PROCEDURE SP_CalculoReputacion (
+@IDPersona varchar(50)
+)AS
+BEGIN
+	BEGIN TRY
+		IF @IDPersona = (SELECT p.IDPersona FROM Personas1 p where p.IDPersona = @IDPersona)
+			BEGIN
+			SELECT p.idpersona, (SUM(r.calificacion) / 
+			(SELECT count(*) FROM resenias r
+			inner join ticket t ON r.idticket = t.id
+			WHERE t.idprestador = @IDPersona )) AS 'Reputacion' FROM ticket t
+			inner join resenias r ON t.ID = r.IDTicket
+			inner join Personas1 p ON t.idprestador = p.idpersona
+			WHERE t.IDPrestador = @IDPersona
+			GROUP BY p.idpersona
+		END
+		BEGIN
+			RAISERROR('El prestador no existe!', 16, 1)
+		END
+		END TRY
+	BEGIN CATCH
+		PRINT ERROR_MESSAGE()
+	END CATCH
+END
+exec SP_CalculoReputacion '1132235'
+select * from Ticket
+select * from Resenias
+/*
+	ID int identity(1,1),
+	Email varchar(255)  primary key,
+	Usuario varchar(50) not null unique,
+	Contrasenia varchar(50) not null,
+	iDRol smallint not null references Roles(ID),
+	FechaAlta date not null check(FechaAlta = GETDATE()), -- crear con SP
+	IDPersona varchar(50) not null, --DNI o CUIL segun corresponda
+	Nombre varchar(50) not null,
+	Apellido varchar(50) not null,
+	Sexo char not null check(Sexo = 'M' OR Sexo = 'm' OR Sexo = 'F' OR Sexo = 'f'),
+	FechaNacimiento DATE not null check(YEAR(FechaNacimiento) <= (YEAR(GETDATE()) - 18)),
+	Domicilio varchar(100) not null,
+	IDLocalidad smallint not null references Localidad(ID),
+	Activo bit not null --Por default se crea con 1
+*/
+--Creacion de un nuevo usuario
+CREATE OR ALTER procedure SP_NuevoUsuario1 (
+@Usuario varchar(50),
+@Contrasenia varchar(50),
+@IdRol smallint,
+@Email varchar(255),
+@IDPersona bigint,
+@Nombre varchar(50),
+@Apellido varchar(50),
+@Sexo char,
+@FechaNacimiento date,
+@Domicilio varchar(100),
+@IDLocalidad smallint
+)
+as
+begin
+declare @UsuarioExistente varchar(50)
+	BEGIN TRY
+	if @Usuario IN (SELECT u.Usuario from Personas1 u)
+	begin 
+		RAISERROR ('Este usuario ya existe', 16, 0)
+	end
+		if @Email IN (SELECT u.Email from Personas1 u)
+	begin 
+		RAISERROR ('Este usuario ya existe', 16, 0)
+	end
+		INSERT Personas1 values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email, @IDPersona, @Nombre, @Apellido, @Sexo, @FechaNacimiento, @Domicilio, @IDLocalidad, 1)
+	END TRY
+	BEGIN CATCH
+		PRINT ERROR_MESSAGE()
+	END CATCH
+end;
+
+exec SP_CalculoReputacion '11322355'

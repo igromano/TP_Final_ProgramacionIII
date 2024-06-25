@@ -8,7 +8,7 @@ namespace dominio
 {
     public class Persona
     {
-        public int IdPersona { get; set; }
+        public string IdPersona { get; set; }
 
         public string Nombre { get; set; }
 
@@ -21,5 +21,7 @@ namespace dominio
         public string Domicilio { get; set; }
 
         public int IdLocalidad { get; set; }
+
+
     }
 }
