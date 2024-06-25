@@ -69,7 +69,7 @@
 
 
                     <div class="d-grid gap-2 p-4">
-                        <asp:Button ID="btnRegistrarUsuario" CssClass="btn btn-success" runat="server" Text="Registrar" OnClick="CrearUsuario" />
+                        <asp:Button ID="btnRegistrarUsuario" CssClass="btn btn-success" runat="server" Text="Registrar" OnClick="AltaUsuario" />
                         <a href="Index.aspx" class="btn btn-danger">Cancelar</a>
 
                     </div>
@@ -113,7 +113,7 @@
 
 
                     <div class="d-grid gap-2 p-4">
-                        <asp:Button ID="btnRegistrarProveedor" CssClass="btn btn-success" runat="server" Text="Registrar" OnClick="CrearProveedor" />
+                        <asp:Button ID="btnRegistrarProveedor" CssClass="btn btn-success" runat="server" Text="Registrar" OnClick="AltaProveedor" />
                         <a href="Index.aspx" class="btn btn-danger">Cancelar</a>
                     </div>
                     <asp:Label ID="Label6" runat="server"></asp:Label>

@@ -52,7 +52,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-solid fa-user"></i> <%= usuarioTemp.UserName%></a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="Home.aspx">Home</a></li>
-                                <li><a class="dropdown-item" href="#">Preferencias</a></li>
+                                <li><a class="dropdown-item" href="Preferencias.aspx">Preferencias</a></li>
                                 <li>
                                     <hr class="dropdown-divider" />
                                 </li>
