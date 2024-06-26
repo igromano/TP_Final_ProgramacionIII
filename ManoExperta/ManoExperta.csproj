@@ -69,6 +69,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Detalle.aspx" />
     <Content Include="EliminarCuenta.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
@@ -99,6 +100,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Detalle.aspx.cs">
+      <DependentUpon>Detalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Detalle.aspx.designer.cs">
+      <DependentUpon>Detalle.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EliminarCuenta.aspx.cs">
       <DependentUpon>EliminarCuenta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

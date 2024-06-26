@@ -5,11 +5,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="Style/Home.css" rel="stylesheet" />
     <div class="container-fluid" id="MenuCentral" style="background-color: #80B9AD; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px;">
-        <div class="row" style="justify-content: center; text-align: center;">
-            <div class="col">
-                <h2>Bienvenido "NOMBRE DE USUARIO"</h2>
-            </div>
-        </div>
         <div id="SubMenuCentral" style="flex: 1; width: 100%; display: flex;">
             <div class="col-2" style="background-color: #B3E2A7; padding: 10px;">
                 <h3>Menú de Navegación</h3>
