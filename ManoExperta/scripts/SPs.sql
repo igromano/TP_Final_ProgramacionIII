@@ -23,7 +23,7 @@ declare @UsuarioExistente varchar(50)
 end;
 
 --Login en la aplicacion
-CREATE PROCEDURE SP_Login(
+ALTER PROCEDURE SP_Login(
 @Usuario varchar(50),
 @Contrasenia varchar(50)
 )
@@ -39,7 +39,7 @@ begin
 			RAISERROR ('Contraseña incorrecta', 16, 0)
 		END
 		--SELECT u.iDRol FROM Usuarios U WHERE U.Usuario = @Usuario
-		SELECT * FROM Usuarios U WHERE U.Usuario = @Usuario
+		SELECT U.ID, U.iDRol FROM Personas1 U WHERE U.Usuario = @Usuario
 	 end try
 	 begin catch
 		PRINT ERROR_MESSAGE()
@@ -47,7 +47,7 @@ begin
 end
 
 --Update de Usuarios y/o Pesonas
-alter procedure SP_UpdateUser (
+create procedure SP_UpdateUser (
 @Id int = null, 
 @Usuario varchar(50),
 @Contrasenia varchar(50),

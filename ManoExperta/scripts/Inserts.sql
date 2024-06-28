@@ -9,6 +9,7 @@ INSERT INTO Especialidades VALUES('ELECTRICIDAD')
 INSERT INTO Especialidades VALUES('GASISTA')
 INSERT INTO Especialidades VALUES('HERRERIA')
 
+
 --Agregar Usuarios
 INSERT INTO Usuarios values('JPerez', '123456', 1, getdate(), 'JPerez@ManoExperta.com')
 INSERT INTO Usuarios values('PGomez', '123456', 1, getdate(), 'PGomez@ManoExperta.com')
@@ -84,6 +85,9 @@ INSERT INTO Ticket VALUES('11111111', '1132235', 2, 7000, 2, '', '')
 INSERT INTO Ticket VALUES('11111111', '1132235', 2, 12000, 2, '', '')
 INSERT INTO Ticket VALUES('22222222', '3323235', 4, 800, 2, '', '')
 INSERT INTO Ticket VALUES('22222222', '1132235', 2, 5500, 2, '', '')
+INSERT INTO Ticket VALUES('22222222', NULL, NULL, 0, 2, '', '')
+
+update Ticket set IDPrestador = '1132235', IDEspecialidad = 4 where id = 1006
 
 --Se insertan reseñas
 INSERT INTO Resenias VALUES(1000, 'Es un croto, vino con olor a culo a trabajar', 3)
