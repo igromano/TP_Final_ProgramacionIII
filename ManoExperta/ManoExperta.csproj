@@ -69,6 +69,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CargaTicket.aspx" />
     <Content Include="Detalle.aspx" />
     <Content Include="EliminarCuenta.aspx" />
     <Content Include="Error.aspx" />
@@ -101,6 +102,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CargaTicket.aspx.cs">
+      <DependentUpon>CargaTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CargaTicket.aspx.designer.cs">
+      <DependentUpon>CargaTicket.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Detalle.aspx.cs">
       <DependentUpon>Detalle.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -20,6 +20,7 @@ namespace ManoExperta
             else {
                 Usuario usuariotemp = new Usuario();
                 usuariotemp = (Usuario)Session["usuario"];
+                string nombre = usuariotemp.Nombre;
                 if(usuariotemp.RolUsuario != RolUsuario.PRESTADOR)
                 {
                     Response.Redirect("Home.aspx", false);
