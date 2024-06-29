@@ -7,13 +7,13 @@
     <div class="container-fluid" id="MenuCentral" style="background-color: #80B9AD; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px;">
         <div id="SubMenuCentral" style="flex: 1; width: 100%; display: flex;">
             <div class="col-2" style="background-color: #B3E2A7; border-radius: 10px; padding: 20px; margin-right: 10px">
-                <h4>Nombre de Usuario</h4>
-                <h5>Email del Usuario</h5>
+                <h4><%= usuariotemp.Nombre %> <%= usuariotemp.Apellido %></h4>
+                <h5><%= usuariotemp.Email %></h5>
                 <hr />
                 <menu>
                     <li><a href="Preferencias.aspx" style="text-decoration: none; color: black; font-weight: bold;">Mis datos</a></li>
                     <li><a href="EliminarCuenta.aspx" style="text-decoration: none; color: black; font-weight: bold;">Eliminar Cuenta</a></li>
-                    <li><a href="#" style="text-decoration: none; color: black; font-weight: bold;">Cerrar Sesion</a></li>
+                    <li><a href="CerrarSesion.aspx" style="text-decoration: none; color: black; font-weight: bold;">Cerrar Sesion</a></li>
                 </menu>
 
 

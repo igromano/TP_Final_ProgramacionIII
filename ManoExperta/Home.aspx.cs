@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
+using ManoExperta.helpers;
 using negocio;
 namespace ManoExperta
 { 
@@ -14,9 +15,25 @@ namespace ManoExperta
         public Usuario usuarioTemp;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] != null)
-            userLoggeado = Session["usuario"] != null ? true : false;
-            usuarioTemp = (Usuario)Session["usuario"];
+            if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == true)
+            {
+                Usuario usuarioptemp = new Usuario();
+                usuarioptemp = (Usuario)Session["usuario"];
+
+                if(usuarioptemp.RolUsuario == RolUsuario.PRESTADOR)
+                {
+                    Response.Redirect("MisServicios.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+        }
+
+        protected void ButtonProblema_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CargaTicket.aspx?tipo=1", false);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace ManoExperta
 {
     public partial class Preferencias : System.Web.UI.Page
     {
+        public Usuario usuariotemp = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -19,7 +20,6 @@ namespace ManoExperta
             }
             else
             {
-                Usuario usuariotemp = new Usuario();
                 usuariotemp = (Usuario)Session["usuario"];
                 TextBoxUsuarioUsuario.Text = usuariotemp.UserName;
                 TextBoxUsuarioContrasenia.Text = usuariotemp.Contrasenia;
@@ -27,7 +27,7 @@ namespace ManoExperta
                 TextBoxApellidoUsuario.Text = usuariotemp.Apellido;
                 TextBoxDireccionCalle.Text = usuariotemp.Domicilio;
                 TextBoxDNI.Text = usuariotemp.IdPersona;
-                TextBoxEmailUsuario.Text = usuariotemp.Email;
+                TextBoxEmailUsuario.Text = (usuariotemp.Email).ToLower();
                 TextBoxFechaNacimiento.Text = usuariotemp.FechaNacimiento.ToString("yyyy-MM-dd");
                 
             }

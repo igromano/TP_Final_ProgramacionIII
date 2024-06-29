@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CargaTicket.aspx" />
+    <Content Include="CerrarSesion.aspx" />
     <Content Include="Detalle.aspx" />
     <Content Include="EliminarCuenta.aspx" />
     <Content Include="Error.aspx" />
@@ -108,6 +109,13 @@
     </Compile>
     <Compile Include="CargaTicket.aspx.designer.cs">
       <DependentUpon>CargaTicket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CerrarSesion.aspx.cs">
+      <DependentUpon>CerrarSesion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CerrarSesion.aspx.designer.cs">
+      <DependentUpon>CerrarSesion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Detalle.aspx.cs">
       <DependentUpon>Detalle.aspx</DependentUpon>

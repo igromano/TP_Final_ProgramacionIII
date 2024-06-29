@@ -45,26 +45,24 @@
                     <asp:TextBox ID="TextBoxProblema" CssClass="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
                 </div>
                 <hr />
-                <div class="row">
+                <%if (idTipo.Equals("2"))
+                    { %>
+                <div class="row" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
                     <div class="col" style="display: grid">
                         <label>Proveedor:</label>
-                        <label>Direccion:</label>
+                        <asp:TextBox ID="TextBoxProveedor" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
-                    <div class="col" style="display: grid">
-                        <label>Fecha trabajo:</label>
-                    </div>
-                    <label>Comentario proveedor: ...</label>
                 </div>
+                <% } %>
+
                 <div class="row">
-                    <div class="col" style="display:flex; justify-content:center">
+                    <div class="col" style="display: flex; justify-content: center">
                         <asp:Button ID="btnCargarPedido" CssClass="btn btn-success" runat="server" Text="Cargar Ticket" />
                     </div>
-                    <div class="col"style="display:flex; justify-content:center">
+                    <div class="col" style="display: flex; justify-content: center">
                         <asp:Button ID="btnCancelarPedido" CssClass="btn btn-danger" runat="server" Text="Cancelar Pedido" />
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

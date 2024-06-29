@@ -7,7 +7,7 @@
         <div id="SubMenuCentral" style="flex: 1; width: 100%; display: flex;">
             <div class="container" style="background-color: #B3E2A7; padding: 10px;">
                 <h3>Detalle</h3>
-                <h4>Numero de Pedido: numero...</h4>
+                <h4>Numero de Pedido: <%= idTicket %></h4>
                 <hr />
                 <hr />
                 <div class="row">
