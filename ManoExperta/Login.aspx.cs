@@ -30,17 +30,13 @@ namespace ManoExperta
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            //Usuario usuario = new Usuario(txtUser.Text, txtPass.Text);
             try
             {
-                //accesoExitoso = new UsuarioNegocio().login(usuario);
                 if (txtPass.Text.Length > 0 && txtUser.Text.Length > 0)
                 {
                     Usuario usuario = new UsuarioNegocio().login(new Usuario(txtUser.Text, txtPass.Text));
                     if (usuario != null)
-                    {
-                        //hacer redirect al home, validación exitosa
-                        
+                    {                                              
                         Session.Add("usuario", usuario); // guardo el objeto usuario en sesion con la clave
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
@@ -66,7 +62,6 @@ namespace ManoExperta
             {
                 throw new Exception("Se produjo un error al intentar iniciar sesión.", ex);
             }
-            //Session.Add("clientIp", Request.ServerVariables["REMOTE_ADDR"]);
         }
 
         async private void getClientLocation()
