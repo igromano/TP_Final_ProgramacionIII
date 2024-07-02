@@ -19,5 +19,11 @@ namespace ManoExperta
 
             }
         }
+
+        protected void LinkButtonCerrarSession_Click(object sender, EventArgs e)
+        {
+            Session.Remove("usuario");
+            Response.Redirect("Index.aspx", false);
+        }
     }
 }

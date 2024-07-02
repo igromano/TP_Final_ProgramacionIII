@@ -22,6 +22,12 @@
                 <div class="container" style="max-width: 1000px">
                     <h3>Eliminar Cuenta</h3>
                     <hr />
+                    <%if (!error.Equals(""))
+                        { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%=error %>
+                    </div>
+                    <% } %>
                     <h5>Es una lastima que te vayas. Esta opción es irreversible. Una vez que eliminás tu cuenta, se borran todos tus datos e historial de servicios. Si sos proveedor, perderás toda tu puntuación y reviews</h5>
                     <h5>¿Estás seguro que deseas contiunar?</h5>
                     <br />

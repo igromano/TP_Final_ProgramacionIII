@@ -23,7 +23,7 @@ declare @UsuarioExistente varchar(50)
 end;
 
 --Login en la aplicacion
-CREATE PROCEDURE SP_Login(
+ALTER PROCEDURE SP_Login(
 @Usuario varchar(50),
 @Contrasenia varchar(50)
 )
@@ -39,7 +39,7 @@ begin
 			RAISERROR ('Contraseña incorrecta', 16, 0)
 		END
 		--SELECT u.iDRol FROM Usuarios U WHERE U.Usuario = @Usuario
-		SELECT * FROM Usuarios U WHERE U.Usuario = @Usuario
+		SELECT U.ID, U.iDRol FROM Personas1 U WHERE U.Usuario = @Usuario
 	 end try
 	 begin catch
 		PRINT ERROR_MESSAGE()
@@ -47,7 +47,7 @@ begin
 end
 
 --Update de Usuarios y/o Pesonas
-alter procedure SP_UpdateUser (
+create procedure SP_UpdateUser (
 @Id int = null, 
 @Usuario varchar(50),
 @Contrasenia varchar(50),
@@ -116,22 +116,7 @@ END
 exec SP_CalculoReputacion '1132235'
 select * from Ticket
 select * from Resenias
-/*
-	ID int identity(1,1),
-	Email varchar(255)  primary key,
-	Usuario varchar(50) not null unique,
-	Contrasenia varchar(50) not null,
-	iDRol smallint not null references Roles(ID),
-	FechaAlta date not null check(FechaAlta = GETDATE()), -- crear con SP
-	IDPersona varchar(50) not null, --DNI o CUIL segun corresponda
-	Nombre varchar(50) not null,
-	Apellido varchar(50) not null,
-	Sexo char not null check(Sexo = 'M' OR Sexo = 'm' OR Sexo = 'F' OR Sexo = 'f'),
-	FechaNacimiento DATE not null check(YEAR(FechaNacimiento) <= (YEAR(GETDATE()) - 18)),
-	Domicilio varchar(100) not null,
-	IDLocalidad smallint not null references Localidad(ID),
-	Activo bit not null --Por default se crea con 1
-*/
+
 --Creacion de un nuevo usuario
 CREATE OR ALTER procedure SP_NuevoUsuario1 (
 @Usuario varchar(50),

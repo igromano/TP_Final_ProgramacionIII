@@ -1,17 +1,18 @@
-﻿using dominio;
-using ManoExperta.helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ManoExperta.helpers;
+using dominio;
+using negocio;
 
 namespace ManoExperta
 {
-    public partial class EliminarCuenta : System.Web.UI.Page
+    public partial class Detalle : System.Web.UI.Page
     {
-        public string error = "";
+        protected string idTicket = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -20,8 +21,16 @@ namespace ManoExperta
             }
             else
             {
-                
+                if (Request.QueryString["idTicket"] == null)
+                {
+                    Response.Redirect("Error.aspx", false);
+                }
+                else
+                {
+                    idTicket = Request.QueryString["idTicket"];
+                }
             }
+
         }
     }
 }
