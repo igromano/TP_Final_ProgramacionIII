@@ -13,17 +13,17 @@
             </div>
             --%>
         </div>
-    <div id="SubMenuCentral" style="flex: 1; width: 100%; display: flex;">
+    <div id="SubMenuCentral" style="flex: 1; width: 100%; height:100vh; display: flex;">
         <div class="col justify-content-center" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px;">
             <div class="row">
-                <h3>¿Qué estás necesitando hoy?</h3>
+                <h3>¡Hola <%= usuarioTemp.Nombre %>! ¿En que te podemos ayudar?</h3>
             </div>
             <div class="row" style="display: flex; justify-content: center">
                 <div class="col-auto">
                     <asp:Button ID="ButtonProblema" runat="server" CssClass="btn btn-secondary" OnClick="ButtonProblema_Click" Text="Tengo un problema..."/>
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-secondary">Quiero buscar un experto...</button>
+                    <asp:Button ID="ButtonBuscarProfesional" runat="server" CssClass="btn btn-secondary" OnClick="ButtonBuscarProfesional_Click" Text="Buscar profesional..."/>
                 </div>
             </div>
         </div>

@@ -1,36 +1,33 @@
-﻿using ManoExperta.helpers;
+﻿using dominio;
+using ManoExperta.helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using dominio;
 
 namespace ManoExperta
 {
-    public partial class ListadoTickets : System.Web.UI.Page
+    public partial class DetalleProveedor : System.Web.UI.Page
     {
-        public Usuario usuariotemp = new Usuario();
+        public string id = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
                 Response.Redirect("Login.aspx", false);
             }
             else
             {
-                if (!IsPostBack)
+                if (Request.QueryString["id"] == null)
                 {
-                    usuariotemp = (Usuario)Session["usuario"];
-                    string nombre = usuariotemp.Nombre;
-                    if (usuariotemp.RolUsuario != RolUsuario.PRESTADOR)
-                    {
-                        Response.Redirect("Home.aspx", false);
-                    }
+                    Response.Redirect("Error.aspx", false);
                 }
+                id = Request.QueryString["id"];
             }
-
 
         }
     }
