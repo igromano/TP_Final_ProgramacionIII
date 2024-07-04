@@ -81,21 +81,25 @@ create table Estados(
 
 create table Ticket(
 	ID bigint identity(1000, 1) primary key,
+	FechaSolicitado date not null,
+	FechaRealizado date,
 	IDUsuario varchar(50) foreign key references Personas1 (IDPersona),
 	IDPrestador varchar(50) foreign key references Personas1 (IDPersona),
 	IDEspecialidad int foreign key references Especialidades (ID),
 	Monto money check(Monto >= 0),
 	IDEstado smallint foreign key references Estados (ID),
 	ComentarioUsuario varchar(1000),
-	ComentarioPrestador varchar(1000)
+	ComentarioPrestador varchar(1000),
+	CONSTRAINT CK_ValidarFechas CHECK(FechaRealizado >= FechaSolicitado)
 )
 
 --Reseña (ID ticket, comentario del usuario)
 create table Resenias(
 	IDTicket bigint foreign key references Ticket (ID),
+	Fecha date not null,
 	Comentario varchar(1024),
 	Calificacion smallint not null,
-	primary key(IDTicket)
+	primary key(IDTicket),
 )
 drop table Resenias
 drop table Ticket
