@@ -32,19 +32,16 @@ namespace ManoExperta
         {
             try
             {
-                if (txtPass.Text.Length > 0 && txtUser.Text.Length > 0)
+
+                if (txtPass.Text.Length > 0 || txtUser.Text.Length > 0)
                 {
                     Usuario usuario = new UsuarioNegocio().login(new Usuario(txtUser.Text, txtPass.Text));
                     if (usuario != null)
-                    {                                              
-                        Session.Add("usuario", usuario); // guardo el objeto usuario en sesion con la clave
+                    {
+                        Session.Add("usuario", usuario);
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
-
-                        //PRUEBA DE TICKETS
-                        //TrabajoNegocio tickets = new TrabajoNegocio();
-                        //List<Ticket> lista = tickets.getTicketsPorPrestador("1132235");
-                        //Console.WriteLine(lista.ToString());
+               
                     }
                     else
                     {
@@ -52,10 +49,6 @@ namespace ManoExperta
                         txtUser.Text = "";
                         txtPass.Text = "";
                         error = "Los datos proporcionados son incorrectos";
-                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "Mifuncion", error);
-                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "Mifuncion", "errorMsg()", true);
-                        //}
-
                     }
                 }
                 else

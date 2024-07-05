@@ -47,10 +47,12 @@ INSERT INTO Especialidad_x_Prestador VALUES('1132235', 2)
 INSERT INTO Especialidad_x_Prestador VALUES('1233549', 2)
 
 --Agregar estados
-INSERT INTO Estados VALUES('EN PREOCESO')
+INSERT INTO Estados VALUES('EN PROCESO')
 INSERT INTO Estados VALUES('SOLICITADO')
 INSERT INTO Estados VALUES('CANCELADO')
 INSERT INTO Estados VALUES('REALIZADO')
+INSERT INTO Estados VALUES('A ASIGNAR')
+
 
 --Agregar Personas
 INSERT INTO Personas1 VALUES('JPerez', '123456', 1, getdate(), 'JPerez@ManoExperta.com', '2354564', 'Juan', 'Perez', 'M', '1990-02-15', 'Laverta 2231', 2, 1)
