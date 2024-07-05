@@ -21,15 +21,17 @@ namespace ManoExperta
             }
             else
             {
-                if(Request.QueryString["tipo"] == null)
+                if (Request.QueryString["tipo"] == null)
                 {
                     Response.Redirect("Error.aspx", false);
                 }
                 idTipo = Request.QueryString["tipo"];
+
                 if (Request.QueryString["proveedor"] == null && idTipo.Equals("2"))
                 {
                     Response.Redirect("Error.aspx", false);
                 }
+                idProveedor = Request.QueryString["proveedor"];
             }
         }
     }
