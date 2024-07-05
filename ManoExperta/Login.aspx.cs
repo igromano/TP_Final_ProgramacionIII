@@ -32,6 +32,7 @@ namespace ManoExperta
         {
             try
             {
+
                 if (txtPass.Text.Length > 0 || txtUser.Text.Length > 0)
                 {
                     Usuario usuario = new UsuarioNegocio().login(new Usuario(txtUser.Text, txtPass.Text));
@@ -40,11 +41,13 @@ namespace ManoExperta
                         Session.Add("usuario", usuario);
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
+               
                     }
                     else
                     {
                         accesoExitoso = false;
                         txtUser.Text = "";
+                        txtPass.Text = "";
                         error = "Los datos proporcionados son incorrectos";
                     }
                 }
@@ -55,7 +58,7 @@ namespace ManoExperta
                 }
             }catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Se produjo un error al intentar iniciar sesión.", ex);
             }
         }
 

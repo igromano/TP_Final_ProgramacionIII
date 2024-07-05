@@ -118,8 +118,10 @@ namespace negocio
                     listadoTickets.Add(tmpTicket);
                 }
 
+
                 return listadoTickets;
             }
+
             catch (Exception ex)
             {
 
