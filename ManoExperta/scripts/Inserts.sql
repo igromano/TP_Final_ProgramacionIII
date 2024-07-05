@@ -77,25 +77,40 @@ inner join Especialidad_x_Prestador ep on p.IDPersona = ep.ID_Persona
 inner join Especialidades e on ep.ID_Especialidad = e.ID
 delete ticket
 update ticket set Comentario = 'Trabajo finalizado' where IDPrestador = '1132235'
+/*
+	ID bigint identity(1000, 1) primary key,
+	FechaSolicitado date not null,
+	FechaRealizado date,
+	IDUsuario varchar(50) foreign key references Personas1 (IDPersona),
+	IDPrestador varchar(50) foreign key references Personas1 (IDPersona),
+	IDEspecialidad int foreign key references Especialidades (ID),
+	Monto money check(Monto >= 0),
+	IDEstado smallint foreign key references Estados (ID),
+	ComentarioUsuario varchar(1000),
+	ComentarioPrestador varchar(1000),
+*/
+--Se insertan tickets en estado SOLICITADO
+INSERT INTO Ticket (IDUsuario, FechaSolicitado, FechaRealizado, IDPrestador, IDEspecialidad, Monto, IDEstado, ComentarioUsuario, ComentarioPrestador) 
+VALUES('11111111', '2023-01-22', '2023-01-22', '1132235', 2, 2600, 2, '', ''),
+('11111111', '2023-01-22', NULL, '2354564', 1, 400, 2, '', ''),
+('11111111', '2023-01-22', NULL ,'1132235', 2, 7000, 2, '', ''),
+('11111111', '2023-01-22', '2023-03-12', '1132235', 2, 12000, 2, '', ''),
+('22222222', '2023-01-22', '2023-01-23', '3323235', 4, 800, 2, '', ''),
+('22222222', '2023-01-22', '2023-02-02', NULL, NULL, 0, 2, '', '')
 
 --Se insertan tickets en estado SOLICITADO
-INSERT INTO Ticket VALUES('11111111', '1132235', 2, 2600, 2, '', '')
-INSERT INTO Ticket VALUES('11111111', '2354564', 1, 400, 2, '', '')
-INSERT INTO Ticket VALUES('11111111', '1132235', 2, 7000, 2, '', '')
-INSERT INTO Ticket VALUES('11111111', '1132235', 2, 12000, 2, '', '')
-INSERT INTO Ticket VALUES('22222222', '3323235', 4, 800, 2, '', '')
-INSERT INTO Ticket VALUES('22222222', '1132235', 2, 5500, 2, '', '')
-INSERT INTO Ticket VALUES('22222222', NULL, NULL, 0, 2, '', '')
+INSERT INTO Ticket (IDUsuario, FechaSolicitado, IDEspecialidad, Monto, IDEstado, ComentarioUsuario, ComentarioPrestador) 
+VALUES('11111111', '2023-01-22', 2, 2600, 2, '', '')
 
 update Ticket set IDPrestador = '1132235', IDEspecialidad = 4 where id = 1006
 
 --Se insertan reseñas
-INSERT INTO Resenias VALUES(1000, 'Es un croto, vino con olor a culo a trabajar', 3)
-INSERT INTO Resenias VALUES(1001, 'Esta vez se baño, buen trabajo', 5)
-INSERT INTO Resenias VALUES(1002, 'Lo dejo peor que antes', 1)
-INSERT INTO Resenias VALUES(1003, 'Quedo solucionado!', 4)
-INSERT INTO Resenias VALUES(1004, 'Resuelto', 4)
-INSERT INTO Resenias VALUES(1005, 'todo OK', 5)
+INSERT INTO Resenias VALUES(1000, '2023-01-22', 'Es un croto, vino con olor a culo a trabajar', 3)
+INSERT INTO Resenias VALUES(1001, '2023-03-20', 'Esta vez se baño, buen trabajo', 5)
+INSERT INTO Resenias VALUES(1002, '2023-01-30', 'Lo dejo peor que antes', 1)
+INSERT INTO Resenias VALUES(1003, '2023-01-25', 'Quedo solucionado!', 4)
+INSERT INTO Resenias VALUES(1004, '2023-01-22', 'Resuelto', 4)
+INSERT INTO Resenias VALUES(1005, '2023-02-28', 'todo OK', 5)
 
 select * from ticket
 select * from resenias

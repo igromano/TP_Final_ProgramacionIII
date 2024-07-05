@@ -22,5 +22,14 @@ namespace ManoExperta.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Esto es una prueba de envs")]
+        public string PRUEBA {
+            get {
+                return ((string)(this["PRUEBA"]));
+            }
+        }
     }
 }

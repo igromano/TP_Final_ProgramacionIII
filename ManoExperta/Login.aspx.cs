@@ -40,6 +40,11 @@ namespace ManoExperta
                         Session.Add("usuario", usuario); // guardo el objeto usuario en sesion con la clave
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
+
+                        //PRUEBA DE TICKETS
+                        TrabajoNegocio tickets = new TrabajoNegocio();
+                        List<Ticket> lista = tickets.getTicketsPorPrestador("1132235");
+                        Console.WriteLine(lista.ToString());
                     }
                     else
                     {
