@@ -22,5 +22,16 @@ namespace ManoExperta
 
             }
         }
+
+        private void CargarTrabajosActivos()
+        {           
+            string idPrestador = Session["ID_Prestador"].ToString();
+
+            TicketNegocio ticketNegocio = new TicketNegocio();
+            List<Ticket> listaTickets = ticketNegocio.getTicketsPorPrestador(idPrestador);
+
+            repTrabajosActivos.DataSource = listaTickets;
+            repTrabajosActivos.DataBind();
+        }
     }
 }
