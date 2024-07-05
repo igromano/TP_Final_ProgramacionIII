@@ -14,37 +14,20 @@ namespace ManoExperta
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                if (Session["idUsuario"] != null)
-                {
-                    string idUsuario = Session["idUsuario"].ToString();
-
-                    TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
-                    List<Ticket> tickets = trabajoNegocio.getTicketsPorPrestador(idUsuario); 
-                    repTrabajosActivos.DataSource = tickets;
-                    repTrabajosActivos.DataBind();
-                }
-                else
-                {
-                    Response.Redirect("Login.aspx");
-                }
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {   
+                string idUsuario = Session["usuario"].ToString();
+                TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
+                List<Ticket> tickets = trabajoNegocio.getTicketsPorPrestador(idUsuario);
+                repTrabajosActivos.DataSource = tickets;
+                repTrabajosActivos.DataBind();
             }
         }
+    }
 
-
-
-        /*
-          private void CargarTrabajosActivos()
-          {           
-              string idPrestador = Session["ID_Prestador"].ToString();
-
-              TicketNegocio ticketNegocio = new TicketNegocio();
-              List<Ticket> listaTickets = ticketNegocio.getTicketsPorPrestador(idPrestador);
-
-              repTrabajosActivos.DataSource = listaTickets;
-              repTrabajosActivos.DataBind();
-          }
-        */
     }
 }
