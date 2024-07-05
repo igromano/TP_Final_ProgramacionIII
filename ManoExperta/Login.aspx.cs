@@ -42,9 +42,9 @@ namespace ManoExperta
                         Response.Redirect("Home.aspx", false);
 
                         //PRUEBA DE TICKETS
-                        TrabajoNegocio tickets = new TrabajoNegocio();
-                        List<Ticket> lista = tickets.getTicketsPorPrestador("1132235");
-                        Console.WriteLine(lista.ToString());
+                        //TrabajoNegocio tickets = new TrabajoNegocio();
+                        //List<Ticket> lista = tickets.getTicketsPorPrestador("1132235");
+                        //Console.WriteLine(lista.ToString());
                     }
                     else
                     {

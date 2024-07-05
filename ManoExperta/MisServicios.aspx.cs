@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using negocio;
 
 namespace ManoExperta
 {
@@ -13,25 +14,37 @@ namespace ManoExperta
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
+            if (!IsPostBack)
             {
-                Response.Redirect("Login.aspx", false);
-            }
-            else
-            {
+                if (Session["idUsuario"] != null)
+                {
+                    string idUsuario = Session["idUsuario"].ToString();
 
+                    TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
+                    List<Ticket> tickets = trabajoNegocio.getTicketsPorPrestador(idUsuario); 
+                    repTrabajosActivos.DataSource = tickets;
+                    repTrabajosActivos.DataBind();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
             }
         }
 
-        private void CargarTrabajosActivos()
-        {           
-            string idPrestador = Session["ID_Prestador"].ToString();
 
-            TicketNegocio ticketNegocio = new TicketNegocio();
-            List<Ticket> listaTickets = ticketNegocio.getTicketsPorPrestador(idPrestador);
 
-            repTrabajosActivos.DataSource = listaTickets;
-            repTrabajosActivos.DataBind();
-        }
+        /*
+          private void CargarTrabajosActivos()
+          {           
+              string idPrestador = Session["ID_Prestador"].ToString();
+
+              TicketNegocio ticketNegocio = new TicketNegocio();
+              List<Ticket> listaTickets = ticketNegocio.getTicketsPorPrestador(idPrestador);
+
+              repTrabajosActivos.DataSource = listaTickets;
+              repTrabajosActivos.DataBind();
+          }
+        */
     }
 }

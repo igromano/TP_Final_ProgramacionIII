@@ -25,14 +25,14 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="card-body">
-                                        <h5 class="card-title">Ticket: <%# Eval("numeroTicket") %></h5>
-                                        <p class="card-text"><small class="text-muted"><%# Eval("descripcionUsuario") %></small></p>
+                                        <h5 class="card-title">Ticket: <%# Eval("Id") %></h5>
+                                        <p class="card-text"><small class="text-muted"><%# Eval("ComentariosUsuario") %></small></p>
                                         <div class="row align-items-center justify-content-cente">
                                             <div class="col-md-3">
-                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("estadoTicket") %></span></small></p>
+                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado") %></span></small></p>
                                             </div>
                                             <div class="col-md-5">
-                                                <p class="card-text"><small class="text-muted">Presupuesto estimado: $<%# Eval("montoTicket") %></small></p>
+                                                <p class="card-text"><small class="text-muted">Presupuesto estimado: $<%# Eval("Monto") %></small></p>
                                             </div>
                                             <%-- 
                                             <div class="col-md-4">
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="card-body">
-                                        <h5 class="card-title"><%# Eval("nombrePrestador") %></h5>
+                                        <h5 class="card-title"><%# Eval("Prestador") %></h5>
                                         <p class="card-text"><small class="text-muted">Gasista</small></p>
                                         <div class="capsulaMatricula">Matriculado</div>
                                     </div>
