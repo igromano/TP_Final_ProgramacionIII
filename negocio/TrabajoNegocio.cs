@@ -63,10 +63,10 @@ namespace negocio
             {
                 if(usuario.RolUsuario == RolUsuario.USUARIO)
                 {
-                    datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE IDUsuario = @IdUsuario");
+                    datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Usuario = @IdUsuario");
                 }
                 
-                datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE IDPrestador = @IdUsuario");
+                datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Prestador = @IdUsuario");
                 datos.settearParametros("@IdUsuario", usuario.IdPersona);
                 datos.ejecutarConsulta();
 
@@ -90,8 +90,8 @@ namespace negocio
                     tmpPrestador.RolUsuario = RolUsuario.PRESTADOR;
                     tmpTicket.Prestador = tmpPrestador;
 
-                    tmpTicket.Especialidad = int.Parse(datos.lector["Especialidad"].ToString());
-                    tmpTicket.Estado = int.Parse(datos.lector["Estado"].ToString());
+                    tmpTicket.Especialidad = datos.lector["Especialidad"].ToString();
+                    tmpTicket.Estado = datos.lector["Estado"].ToString();
 
                     tmpTicket.ComentariosUsuario = datos.lector["Usr_Comentarios"].ToString();
                     tmpTicket.ComentariosPrestador = datos.lector["Pres_Comentarios"].ToString();
