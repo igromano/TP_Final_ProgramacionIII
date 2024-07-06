@@ -19,3 +19,4 @@ INNER JOIN Especialidades es ON t.IDEspecialidad = es.ID
 INNER JOIN Estados e ON t.IDEstado = e.ID
 LEFT JOIN Resenias re ON t.ID = re.IDTicket
 
+select * from VW_VerTickets where ID_Prestador = '1132235'

@@ -31,11 +31,11 @@ namespace dominio
 
         //public Especialidad Especialidad { get; set; }
 
-        public int  Especialidad { get; set; }
+        public string  Especialidad { get; set; }
         public double Monto { get; set; }
 
         //public Estado Estado { get; set; }
-        public int Estado { get; set; }
+        public string Estado { get; set; }
 
         public  string ComentariosUsuario { get; set; }
 
