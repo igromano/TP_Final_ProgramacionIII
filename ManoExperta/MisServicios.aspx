@@ -1,8 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="MisServicios.aspx.cs" Inherits="ManoExperta.MisServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
+        <script type="text/javascript">
+            window.onload = function () {
+                var divs = document.querySelectorAll(".capsulaEstadoTrabajo");
 
+                divs.forEach(function (div) {
+                    var texto = div.textContent || div.innerText;
+
+                    if (texto === "EN PROCESO") {
+                        div.style.backgroundColor = "#FFA500";
+                    } else if (texto === "REALIZADO") {
+                        div.style.backgroundColor = "#008000";
+                    } else if (texto === "SOLICITADO") {
+                        div.style.backgroundColor = "#0000FF";
+                    } else {
+                        div.style.backgroundColor = "#F44336";
+                    }
+                });
+            };
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="Style/Home.css" rel="stylesheet" />
