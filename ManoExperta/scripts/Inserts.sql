@@ -105,10 +105,6 @@ INSERT INTO Ticket (IDUsuario, FechaSolicitado, IDEspecialidad, Monto, IDEstado,
 VALUES('11111111', '2023-01-22', 2, 2600, 2, '', '')
 
 update Ticket set IDPrestador = '1132235', IDEspecialidad = 4 where id = 1006
-
---Se insertan rese�as
-INSERT INTO Resenias VALUES(1000, '2023-01-22', 'Es un croto, vino con olor a culo a trabajar', 3)
-INSERT INTO Resenias VALUES(1001, '2023-03-20', 'Esta vez se ba�o, buen trabajo', 5)
 INSERT INTO Resenias VALUES(1002, '2023-01-30', 'Lo dejo peor que antes', 1)
 INSERT INTO Resenias VALUES(1003, '2023-01-25', 'Quedo solucionado!', 4)
 INSERT INTO Resenias VALUES(1004, '2023-01-22', 'Resuelto', 4)

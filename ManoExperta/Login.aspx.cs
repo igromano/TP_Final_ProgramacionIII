@@ -41,7 +41,6 @@ namespace ManoExperta
                         Session.Add("usuario", usuario);
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
-               
                     }
                     else
                     {
