@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="card-body">
-                                        <h5 class="card-title"><%# Eval("Prestador") %></h5>
+                                        <h5 class="card-title"><%# Eval("Prestador.nombre") %> <%# Eval("Prestador.apellido") %></h5>
                                         <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
                                         <div class="capsulaMatricula">Matriculado</div>
                                     </div>
@@ -81,7 +81,7 @@
                 </asp:Repeater>
                 <hr />
                 <h3>Historial de trabajos</h3>
-                <asp:Repeater runat="server" ID="repHistorialTrabajos">
+                <asp:Repeater runat="server" ID="repHistorialTrabajos" OnItemCommand="TrabajosActivos_ItemCommand">
                     <ItemTemplate>
                         <div class="card mb-3" style="width: 100%;">
                             <div class="row no-gutters">
@@ -113,14 +113,14 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="card-body">
-                                        <h5 class="card-title">Carlos Gabriel Gimenez</h5>
-                                        <p class="card-text"><small class="text-muted">Gasista</small></p>
+                                        <h5 class="card-title"><%# Eval("Prestador.nombre") %> <%# Eval("Prestador.apellido") %></h5>
+                                        <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
                                         <div class="capsulaMatricula">Matriculado</div>
                                     </div>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
                                     <div class="row no-gutters" style="max-width: 80%">
-                                        <asp:Button ID="btnMasInfo" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
+                                        <asp:Button ID="btnMasInfo2" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
 
                                     </div>
                                 </div>
