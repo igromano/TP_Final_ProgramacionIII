@@ -1,8 +1,8 @@
 CREATE OR ALTER VIEW VW_VerTickets
 AS
 SELECT t.ID AS 'ID_Ticket', 
-t.IDUsuario AS 'ID_Usuario', pe.Apellido AS 'Usr_Apellido', pe.Nombre AS 'Usr_Nombre', 
-pr.IDPersona AS 'ID_Prestador', pr.Apellido AS 'Pres_Apellido', pr.Nombre AS 'Pres_Nombre',
+t.IDUsuario AS 'ID_Usuario', pe.ID AS 'ID_Usr_Cliente',pe.Apellido AS 'Usr_Apellido', pe.Nombre AS 'Usr_Nombre', 
+pr.ID AS 'ID_Usr_Prestador', pr.IDPersona AS 'ID_Prestador', pr.Apellido AS 'Pres_Apellido', pr.Nombre AS 'Pres_Nombre',
 es.ID AS 'ID_Especialidad', es.Nombre AS 'Especialidad',
 t.Monto,
 e.ID AS 'ID_Estado', e.Nombre AS 'Estado',
