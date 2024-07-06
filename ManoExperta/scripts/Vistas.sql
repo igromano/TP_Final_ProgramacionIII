@@ -19,3 +19,7 @@ INNER JOIN Especialidades es ON t.IDEspecialidad = es.ID
 INNER JOIN Estados e ON t.IDEstado = e.ID
 LEFT JOIN Resenias re ON t.ID = re.IDTicket
 
+
+select * from Personas1 where iDRol = 0
+select * from Estados
+

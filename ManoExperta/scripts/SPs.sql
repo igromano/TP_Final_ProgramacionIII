@@ -158,10 +158,19 @@ CREATE OR ALTER PROCEDURE SP_CrearTicket (
 @IdPrestador varchar(50),
 @IdEspecialidad int,
 @Monto money = null,
-@IdEstador smallint,
+@IdEstado smallint,
 @ComentarioUsuario varchar(1000)
 ) AS
 BEGIN
+	IF @IdPrestador = '0'
+		SET @IdPrestador = null
 	INSERT INTO Ticket(IDUsuario, IDPrestador, IDEspecialidad, Monto, IDEstado, ComentarioUsuario, FechaSolicitado) 
-	VALUES('11111111', '1132235', 4, 1700, 5, 'La reja de entrada se esta desoldando', getdate())
+	VALUES(@IdUsuario, @IdPrestador, @IdEspecialidad, @Monto, @IdEstado, @ComentarioUsuario, getdate())
+
 END
+
+exec SP_CrearTicket '11111111', '0', 3, 5500, 5,'Tiene el orto descocido'
+
+select * from Ticket
+
+delete Ticket where Monto = 7700
