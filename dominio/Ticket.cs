@@ -34,8 +34,8 @@ namespace dominio
         public string  Especialidad { get; set; }
         public double Monto { get; set; }
 
-        //public Estado Estado { get; set; }
-        public string Estado { get; set; }
+        public Estado Estado { get; set; }
+        //public string Estado { get; set; }
 
         public  string ComentariosUsuario { get; set; }
 
