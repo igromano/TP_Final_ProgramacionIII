@@ -42,10 +42,6 @@ namespace ManoExperta
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
 
-                        //PRUEBA NEGOCIO
-                        TrabajoNegocio trabajo = new TrabajoNegocio();
-                        /*int usrlst = */trabajo.registrarTrabajo("11111111", 1, 7700, 5, "Se tapo el inodoro con el señor mojon");
-               
                     }
                     else
                     {

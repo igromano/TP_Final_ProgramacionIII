@@ -19,8 +19,7 @@ INNER JOIN Especialidades es ON t.IDEspecialidad = es.ID
 INNER JOIN Estados e ON t.IDEstado = e.ID
 LEFT JOIN Resenias re ON t.ID = re.IDTicket
 
-select * from VW_VerTickets where ID_Prestador = '1132235'
-SELECT * FROM VW_VerTickets WHERE ID_Usuario = '11111111'
 
 select * from Personas1 where iDRol = 0
 select * from Estados
+
