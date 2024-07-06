@@ -148,5 +148,44 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Usuario> getUsuariosPorRol(RolUsuario rol)
+        {
+            AccesoADatos datos = new AccesoADatos();
+            Usuario usuario = new Usuario();
+            List<Usuario> listaUsuarios = new List<Usuario>();
+            try
+            {
+                datos.configurarConsulta("SELECT * FROM Personas1 WHERE iDRol = @IdRol");
+                datos.settearParametros("@IdRol", rol);
+                datos.ejecutarConsulta();
+
+                while (datos.lector.Read())
+                {
+                    usuario.Id = int.Parse(datos.lector["ID"].ToString());
+                    usuario.UserName = datos.lector["Usuario"].ToString();
+                    usuario.Contrasenia = datos.lector["Contrasenia"].ToString();
+                    usuario.RolUsuario = (RolUsuario)(Int16)datos.lector["iDRol"];
+                    usuario.FechaAlta = DateTime.Parse(datos.lector["FechaAlta"].ToString());
+                    usuario.Email = datos.lector["Email"].ToString();
+                    usuario.IdPersona = datos.lector["IDPersona"].ToString();
+                    usuario.Nombre = datos.lector["Nombre"].ToString();
+                    usuario.Apellido = datos.lector["Apellido"].ToString();
+                    usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
+                    usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
+                    usuario.Domicilio = datos.lector["Domicilio"].ToString();
+                    usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
+
+                    listaUsuarios.Add(usuario);
+                }
+
+                return listaUsuarios;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

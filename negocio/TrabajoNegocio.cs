@@ -4,25 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace negocio
 {
     public class TrabajoNegocio
     {
-        public int registrarTrabajo(int idUsuario, int idPrestador, int idEspecialidad, double monto, int idEstado)
+        public void registrarTrabajo(string idUsuario, int idEspecialidad, double monto, int idEstado, string comentarioUsuario, string idPrestador = "0")
         {
             AccesoADatos datos = new AccesoADatos();
             try
             {
-                datos.configurarConsulta("");
-                datos.settearParametros("@IDUsuario", idUsuario);
-                datos.settearParametros("@IDPrestador", idPrestador);
-                datos.settearParametros("@IDEspecialidad", idEspecialidad);
+                datos.configurarProcedimiento("SP_CrearTicket");
+                datos.settearParametros("@IdUsuario", idUsuario);
+                datos.settearParametros("@IdPrestador", idPrestador);
+                datos.settearParametros("@IdEspecialidad", idEspecialidad);
                 datos.settearParametros("@Monto", monto);
-                datos.settearParametros("@IDEstado", idEstado);
+                datos.settearParametros("@IdEstado", idEstado);
+                datos.settearParametros("@ComentarioUsuario", comentarioUsuario);
 
-                return datos.ejecutarAccion();
+                datos.ejecutarConsulta();                                   
             }
             catch (Exception ex)
             {
@@ -160,5 +162,7 @@ namespace negocio
             }
 
         }
+
+
     }
 }
