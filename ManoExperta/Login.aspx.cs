@@ -30,35 +30,24 @@ namespace ManoExperta
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            //Usuario usuario = new Usuario(txtUser.Text, txtPass.Text);
             try
             {
-                //accesoExitoso = new UsuarioNegocio().login(usuario);
+
                 if (txtPass.Text.Length > 0 || txtUser.Text.Length > 0)
                 {
                     Usuario usuario = new UsuarioNegocio().login(new Usuario(txtUser.Text, txtPass.Text));
                     if (usuario != null)
                     {
-                        //hacer redirect al home
-                        
                         Session.Add("usuario", usuario);
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
-
-                        //PRUEBA DE TICKETS
-                        TrabajoNegocio tickets = new TrabajoNegocio();
-                        List<Ticket> lista = tickets.getTicketsPorPrestador("1132235");
-                        Console.WriteLine(lista.ToString());
                     }
                     else
                     {
                         accesoExitoso = false;
                         txtUser.Text = "";
+                        txtPass.Text = "";
                         error = "Los datos proporcionados son incorrectos";
-                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "Mifuncion", error);
-                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "Mifuncion", "errorMsg()", true);
-                        //}
-
                     }
                 }
                 else
@@ -68,9 +57,8 @@ namespace ManoExperta
                 }
             }catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Se produjo un error al intentar iniciar sesión.", ex);
             }
-            //Session.Add("clientIp", Request.ServerVariables["REMOTE_ADDR"]);
         }
 
         async private void getClientLocation()

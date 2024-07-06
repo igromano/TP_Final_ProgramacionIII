@@ -6,11 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using negocio;
 
 namespace ManoExperta
 {
     public partial class MisServicios : System.Web.UI.Page
     {
+        Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -19,7 +21,11 @@ namespace ManoExperta
             }
             else
             {
-
+                usuario = (Usuario)Session["usuario"];
+                TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
+                List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
+                repTrabajosActivos.DataSource = tickets;
+                repTrabajosActivos.DataBind();
             }
         }
     }
