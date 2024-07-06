@@ -152,7 +152,6 @@ namespace negocio
         public List<Usuario> getUsuariosPorRol(RolUsuario rol)
         {
             AccesoADatos datos = new AccesoADatos();
-            Usuario usuario = new Usuario();
             List<Usuario> listaUsuarios = new List<Usuario>();
             try
             {
@@ -162,6 +161,7 @@ namespace negocio
 
                 while (datos.lector.Read())
                 {
+                    Usuario usuario = new Usuario();
                     usuario.Id = int.Parse(datos.lector["ID"].ToString());
                     usuario.UserName = datos.lector["Usuario"].ToString();
                     usuario.Contrasenia = datos.lector["Contrasenia"].ToString();
