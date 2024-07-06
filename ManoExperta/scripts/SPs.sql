@@ -151,3 +151,17 @@ declare @UsuarioExistente varchar(50)
 end;
 
 exec SP_CalculoReputacion '11322355'
+
+
+CREATE OR ALTER PROCEDURE SP_CrearTicket (
+@IdUsuario varchar(50),
+@IdPrestador varchar(50),
+@IdEspecialidad int,
+@Monto money = null,
+@IdEstador smallint,
+@ComentarioUsuario varchar(1000)
+) AS
+BEGIN
+	INSERT INTO Ticket(IDUsuario, IDPrestador, IDEspecialidad, Monto, IDEstado, ComentarioUsuario, FechaSolicitado) 
+	VALUES('11111111', '1132235', 4, 1700, 5, 'La reja de entrada se esta desoldando', getdate())
+END

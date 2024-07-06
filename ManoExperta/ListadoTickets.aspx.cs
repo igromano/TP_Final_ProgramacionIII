@@ -6,12 +6,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
+using negocio;
 
 namespace ManoExperta
 {
     public partial class ListadoTickets : System.Web.UI.Page
     {
         public Usuario usuariotemp = new Usuario();
+        public TrabajoNegocio trabajoTemp = new TrabajoNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -28,6 +30,8 @@ namespace ManoExperta
                     {
                         Response.Redirect("Home.aspx", false);
                     }
+                    repTrabajosActivos.DataSource = trabajoTemp.getTicketsPorPrestador("1132235");
+                    repTrabajosActivos.DataBind();
                 }
             }
 
