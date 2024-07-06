@@ -93,7 +93,7 @@ create table Ticket(
 	CONSTRAINT CK_ValidarFechas CHECK(FechaRealizado >= FechaSolicitado)
 )
 
---Reseña (ID ticket, comentario del usuario)
+--Reseï¿½a (ID ticket, comentario del usuario)
 create table Resenias(
 	IDTicket bigint foreign key references Ticket (ID),
 	Fecha date not null,

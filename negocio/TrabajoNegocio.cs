@@ -63,10 +63,10 @@ namespace negocio
             {
                 if(usuario.RolUsuario == RolUsuario.USUARIO)
                 {
-                    datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Usuario = @IdUsuario");
+                    datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE IDUsuario = @IdUsuario");
                 }
                 
-                datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Prestador = @IdUsuario");
+                datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE IDPrestador = @IdUsuario");
                 datos.settearParametros("@IdUsuario", usuario.IdPersona);
                 datos.ejecutarConsulta();
 
@@ -118,8 +118,10 @@ namespace negocio
                     listadoTickets.Add(tmpTicket);
                 }
 
+
                 return listadoTickets;
             }
+
             catch (Exception ex)
             {
 
