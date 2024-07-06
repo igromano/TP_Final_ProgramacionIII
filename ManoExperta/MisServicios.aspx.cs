@@ -22,10 +22,26 @@ namespace ManoExperta
             else
             {
                 usuario = (Usuario)Session["usuario"];
-                TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
-                List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
-                repTrabajosActivos.DataSource = tickets;
-                repTrabajosActivos.DataBind();
+                if (!IsPostBack)
+                {
+                    TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
+                    List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
+                    repTrabajosActivos.DataSource = tickets;
+                    repHistorialTrabajos.DataSource = tickets;
+                    repHistorialTrabajos.DataBind();
+                    repTrabajosActivos.DataBind();
+                    
+                }
+            }
+        }
+        
+        protected void TrabajosActivos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "MasInfo")
+            {
+                // Obtén el IdTicket desde CommandArgument
+                string idTicket = e.CommandArgument.ToString();
+                Response.Redirect("Detalle.aspx?idTicket=" + idTicket, false);
             }
         }
     }

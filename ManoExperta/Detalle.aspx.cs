@@ -27,7 +27,7 @@ namespace ManoExperta
                 }
                 else
                 {
-                    idTicket = Request.QueryString["idTicket"];
+                    idTicket = Request.QueryString["idTicket"];                  
                 }
             }
 

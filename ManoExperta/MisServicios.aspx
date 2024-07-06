@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="MisServicios.aspx.cs" Inherits="ManoExperta.MisServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="Style/Home.css" rel="stylesheet" />
@@ -16,7 +18,7 @@
             </div>
             <div class="col-10" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px;">
                 <h3>Trabajos activos</h3>
-                <asp:Repeater runat="server" ID="repTrabajosActivos">
+                <asp:Repeater runat="server" ID="repTrabajosActivos" OnItemCommand="TrabajosActivos_ItemCommand">
                     <ItemTemplate>
                         <div class="card mb-3" style="width: 100%;">
                             <div class="row no-gutters">
@@ -46,14 +48,14 @@
                                 <div class="col-md-3">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# Eval("Prestador") %></h5>
-                                        <p class="card-text"><small class="text-muted">Gasista</small></p>
+                                        <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
                                         <div class="capsulaMatricula">Matriculado</div>
                                     </div>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
                                     <div class="row no-gutters" style="max-width: 80%">
-                                        <button class="btn btn-secondary mb-2">Más información</button>
-                                        <button class="btn btn-danger">Cancelar Trabajo</button>
+                                        <asp:Button ID="btnMasInfo" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
+                                        <asp:Button ID="BtnCancelar" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" />
                                     </div>
                                 </div>
                             </div>
@@ -71,23 +73,21 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="card-body">
-                                        <h5 class="card-title">Ticket: <%# Eval("numeroTicket") %></h5>
-                                        <p class="card-text"><small class="text-muted"><%# Eval("descripcionUsuario") %></small></p>
+                                        <h5 class="card-title">Ticket: <%# Eval("Id") %></h5>
+                                        <p class="card-text"><small class="text-muted"><%# Eval("ComentariosUsuario") %></small></p>
                                         <div class="row align-items-center justify-content-cente">
                                             <div class="col-md-3">
-                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo" style="background-color: #6aa84f">Terminado</span></small></p>
+                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado") %></span></small></p>
                                             </div>
                                             <div class="col-md-5">
-                                                <p class="card-text"><small class="text-muted">Costo total: $<%# Eval("montoTicket") %></small></p>
+                                                <p class="card-text"><small class="text-muted">Costo total: $<%# Eval("Monto") %></small></p>
                                             </div>
                                             <div class="col-md-4">
                                                 <p class="card-text" style="margin-bottom: 2px"><small class="text-muted">Tu Puntuacion:</small></p>
                                                 <div class="puntuacionEstrellas">
-                                                    <% for (int i = 0; i < int.Parse(Eval("calificacionResenia").ToString()); i++)
-                                                        { %>
-                                                    <i class="fas fa-solid fa-star"></i>
-                                                    <% } %>
+                                                    <%# new string('★', int.Parse(Eval("Calificacion").ToString())) %>
                                                 </div>
+
                                             </div>
                                         </div>
 
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
                                     <div class="row no-gutters" style="max-width: 80%">
-                                        <button class="btn btn-secondary mb-2">Más información</button>
+                                        <asp:Button ID="btnMasInfo" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
 
                                     </div>
                                 </div>
