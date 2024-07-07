@@ -16,9 +16,11 @@ namespace negocio
             AccesoADatos datos = new AccesoADatos();
             try
             {
-                if(idEspecialidad == 0)
+                List<Especialidad> especialidades = new List<Especialidad>();
+                especialidades = Utils.Utils.getEspecialidades();
+                if (idEspecialidad == 0)
                 {
-                    idEspecialidad = Utils.Utils.getEspecialidades().Find(f => f.Nombre == "SIN ESPECIALIDAD").Id;
+                    idEspecialidad = especialidades.Find(f => f.Nombre == "SIN ESPECIALIDAD").Id;
                 }
                 datos.configurarProcedimiento("SP_CrearTicket");
                 datos.settearParametros("@IdUsuario", idUsuario);   
