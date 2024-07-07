@@ -10,28 +10,29 @@
                 <h3>Detalle</h3>
                 <h4>Numero de Pedido: <%= idTicket %></h4>
                 <hr />
+                <div class="row">
+                    <div class="col" style="display: grid">
+                        <asp:TextBox ID="TextBoxNombre_Cliente" CssClass="form-control" runat="server" ReadOnly="true">Solicitado por: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxDireccion" CssClass="form-control   " runat="server" ReadOnly="true">Direccion: </asp:TextBox>
+                    </div>
+                    <div class="col" style="display: grid">
+                        <asp:TextBox ID="TextBoxFecha_Solicitado" CssClass="form-control" runat="server" ReadOnly="true">Fecha solicitado: </asp:TextBox>
+                    </div>
+                </div>
+                <asp:TextBox ID="TextBoxComentario" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine" >Comentario problema: </asp:TextBox>
+
                 <hr />
                 <div class="row">
                     <div class="col" style="display: grid">
-                        <asp:TextBox ID="TextBoxNombre_Cliente" runat="server" ReadOnly="true">Solicitado por: </asp:TextBox>
-                        <asp:TextBox ID="TextBoxDireccion" runat="server" ReadOnly="true">Direccion: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxProveedor" CssClass="form-control" runat="server" ReadOnly="true">Proveedor: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxDireccion_Prov" CssClass="form-control" runat="server" ReadOnly="true">Direccion: </asp:TextBox>
                     </div>
                     <div class="col" style="display: grid">
-                        <asp:TextBox ID="TextBoxFecha_Solicitado" runat="server" ReadOnly="true">Fecha solicitado: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxFecha_Trabajo" CssClass="form-control" runat="server" ReadOnly="true">Fecha trabajo: </asp:TextBox>
                     </div>
-                    <asp:TextBox ID="TextBoxComentario" runat="server" ReadOnly="true">Comentario problema: </asp:TextBox>
                 </div>
-                <hr />
-                <div class="row">
-                    <div class="col" style="display: grid">
-                        <asp:TextBox ID="TextBoxProveedor" runat="server" ReadOnly="true">Proveedor: </asp:TextBox>
-                        <asp:TextBox ID="TextBoxDireccion_Prov" runat="server" ReadOnly="true">Direccion: </asp:TextBox>
-                    </div>
-                    <div class="col" style="display: grid">
-                        <asp:TextBox ID="TextBoxFecha_Trabajo" runat="server" ReadOnly="true">Fecha trabajo: </asp:TextBox>
-                    </div>
-                    <asp:TextBox ID="TextBoxComentario_Proveedor" runat="server" ReadOnly="true">Comentario proveedor: </asp:TextBox>
-                </div>
+                <asp:TextBox ID="TextBoxComentario_Proveedor" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine" >Comentario proveedor: </asp:TextBox>
+
 
                 <div class="row" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
                     <div class="col">
