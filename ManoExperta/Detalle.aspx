@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Detalle.aspx.cs" Inherits="ManoExperta.Detalle" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid" id="MenuCentral" style="background-color: #80B9AD; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px;">
@@ -12,28 +13,33 @@
                 <hr />
                 <div class="row">
                     <div class="col" style="display: grid">
-                        <asp:Label ID="lblNombre_Cliente" runat="server">Solicitado por: </asp:Label>
-                        <asp:Label ID="lblDireccion" runat="server">Direccion: </asp:Label>
+                        <asp:TextBox ID="TextBoxNombre_Cliente" runat="server" ReadOnly="true">Solicitado por: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxDireccion" runat="server" ReadOnly="true">Direccion: </asp:TextBox>
                     </div>
                     <div class="col" style="display: grid">
-                        <asp:Label ID="lblFecha_Solicitado" runat="server" Text="Label">Fecha solicitado: </asp:Label>
+                        <asp:TextBox ID="TextBoxFecha_Solicitado" runat="server" ReadOnly="true">Fecha solicitado: </asp:TextBox>
                     </div>
-                    <asp:Label ID="lblComentario" runat="server" Text="Label">Comentario problema: </asp:Label>
+                    <asp:TextBox ID="TextBoxComentario" runat="server" ReadOnly="true">Comentario problema: </asp:TextBox>
                 </div>
                 <hr />
                 <div class="row">
                     <div class="col" style="display: grid">
-                        <asp:Label ID="lblProveedor" runat="server" Text="Label">Proveedor: </asp:Label>
-                        <asp:Label ID="lblDireccionProv" runat="server" Text="Label">Direccion: </asp:Label>
+                        <asp:TextBox ID="TextBoxProveedor" runat="server" ReadOnly="true">Proveedor: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxDireccion_Prov" runat="server" ReadOnly="true">Direccion: </asp:TextBox>
                     </div>
                     <div class="col" style="display: grid">
-                        <asp:Label ID="lblFechaTrabajo" runat="server" Text="Label">Fecha trabajo: </asp:Label>
+                        <asp:TextBox ID="TextBoxFecha_Trabajo" runat="server" ReadOnly="true">Fecha trabajo: </asp:TextBox>
                     </div>
-                    <asp:Label ID="lblComentarioProveedor" runat="server" Text="Label">Comentario proveedor: </asp:Label>
+                    <asp:TextBox ID="TextBoxComentario_Proveedor" runat="server" ReadOnly="true">Comentario proveedor: </asp:TextBox>
                 </div>
+
                 <div class="row" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
-                    <asp:Button ID="btnActualizarDatos" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" />
+                    <div class="col">
+                        <asp:Button ID="btnActualizarDatos" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" />
+                        <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" />
+                    </div>
                 </div>
+
 
 
             </div>
