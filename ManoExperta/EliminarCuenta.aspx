@@ -50,7 +50,7 @@
                         </div>
                         <br />
                         <div class="row">
-                            <asp:Button ID="btnEliminarCuenta" CssClass="btn btn-danger" runat="server" Text="Eliminar Cuenta" />
+                            <asp:Button ID="btnEliminarCuenta" CssClass="btn btn-danger" runat="server" Text="Eliminar Cuenta" OnClick="btnEliminarCuenta_Click"/>
                         </div>
                     </div>
                 </div>

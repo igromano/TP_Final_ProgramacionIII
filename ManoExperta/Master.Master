@@ -41,12 +41,16 @@
                 </div>
                 <% } %>
                 <% else
-                    { %>
+                    {%>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <span style="display: flex; align-items: center">
                             <a class="nav-link" href="Login.aspx" role="button" aria-expanded="false">
                                 <i class="fas fa-solid fa-headphones"></i> Ayuda</a>
+                            <%if (esProveedor) { %>
+                            <a class="nav-link" href="ListadoTickets.aspx" role="button" aria-expanded="false">
+                                <i class="fas fa-solid fa-briefcase"></i> Tickets Disponibles</a>
+                            <% } %>
                             <a class="nav-link" href="MisServicios.aspx" role="button" aria-expanded="false">
                                 <i class="fas fa-solid fa-handshake"></i> Mis Servicios</a>
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-solid fa-user"></i> <%= usuarioTemp.UserName%></a>

@@ -49,20 +49,17 @@
                                     <div class="card-body">
                                         <h5 style="margin-bottom: 20px">Calificacion:
                                         <div class="puntuacionEstrellas">
-                                            <% for (int i = 0; i < 4; i++)
-                                                { %>
-                                            <i class="fas fa-solid fa-star"></i>
-                                            <% } %>
+                                            <%-- <%# new string('★', int.Parse(Eval("Calificacion").ToString())) %> --%>
                                         </div>
                                         </h5>
-                                        <h5> Gasista</h5>
+                                        <h5>Gasista</h5>
                                         <div class="capsulaMatricula">Matriculado</div>
                                     </div>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
                                     <div class="card-body">
                                         <div class="row no-gutters" style="max-width: 80%">
-                                            <button class="btn btn-secondary mb-2">Más información</button>
+                                            <asp:Button ID="buttonMasInformacion" runat="server" CssClass="btn btn-secondary mb-2" Text="Más información" CommandArgument='<%#Eval("ID")%>' CommandName="ProveedorID" OnClick="buttonMasInformacion_Click" />
                                             <button class="btn btn-success">Solicitar Trabajo</button>
                                         </div>
                                     </div>

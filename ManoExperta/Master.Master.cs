@@ -11,12 +11,16 @@ namespace ManoExperta
     public partial class Master : System.Web.UI.MasterPage
     {
         public Usuario usuarioTemp;
+        public bool esProveedor = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] != null)
             {
                 usuarioTemp = (Usuario)Session["usuario"];
-
+                if (usuarioTemp.RolUsuario == RolUsuario.PRESTADOR)
+                {
+                    esProveedor = true;
+                }
             }
         }
 
