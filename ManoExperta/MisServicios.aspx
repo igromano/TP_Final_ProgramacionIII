@@ -48,7 +48,7 @@
                                         <p class="card-text"><small class="text-muted"><%# Eval("ComentariosUsuario") %></small></p>
                                         <div class="row align-items-center justify-content-cente">
                                             <div class="col-md-3">
-                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado") %></span></small></p>
+                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado.Nombre") %></span></small></p>
                                             </div>
                                             <div class="col-md-5">
                                                 <p class="card-text"><small class="text-muted">Presupuesto estimado: $<%# Eval("Monto") %></small></p>
@@ -94,7 +94,7 @@
                                         <p class="card-text"><small class="text-muted"><%# Eval("ComentariosUsuario") %></small></p>
                                         <div class="row align-items-center justify-content-cente">
                                             <div class="col-md-3">
-                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado") %></span></small></p>
+                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado.Nombre") %></span></small></p>
                                             </div>
                                             <div class="col-md-5">
                                                 <p class="card-text"><small class="text-muted">Costo total: $<%# Eval("Monto") %></small></p>

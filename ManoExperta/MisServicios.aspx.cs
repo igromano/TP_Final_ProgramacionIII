@@ -26,8 +26,12 @@ namespace ManoExperta
                 {
                     TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
                     List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
-                    repTrabajosActivos.DataSource = tickets;
-                    repHistorialTrabajos.DataSource = tickets;
+                    Session.Add("tickets", tickets);
+
+                    var trabajosActivos = tickets.Where(t => t.Estado.Id == 2).ToList();
+                    repTrabajosActivos.DataSource = trabajosActivos;
+                    var historialTrabajos = tickets.Where(t => t.Estado.Id == 3 || t.Estado.Id ==4).ToList();
+                    repHistorialTrabajos.DataSource = historialTrabajos;
                     repHistorialTrabajos.DataBind();
                     repTrabajosActivos.DataBind();
                     
@@ -38,8 +42,7 @@ namespace ManoExperta
         protected void TrabajosActivos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "MasInfo")
-            {
-                // Obtén el IdTicket desde CommandArgument
+            {              
                 string idTicket = e.CommandArgument.ToString();
                 Response.Redirect("Detalle.aspx?idTicket=" + idTicket, false);
             }
