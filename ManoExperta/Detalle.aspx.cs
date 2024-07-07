@@ -40,11 +40,11 @@ namespace ManoExperta
                     {
 
                         TextBoxNombre_Cliente.Text = "Solicitado por: " + ticket.Usuario.Nombre + " " + ticket.Usuario.Apellido;
-                        //TextBoxDireccion.Text = "Dirección: " + ticket.Usuario.Direccion;
+                        TextBoxDireccion.Text = "Dirección: " + ticket.Usuario.Domicilio;
                         TextBoxFecha_Solicitado.Text = "Fecha solicitado: " + ticket.FechaSolicitado.ToShortDateString();
                         TextBoxComentario.Text = "Comentario problema: " + ticket.ComentariosUsuario;
                         TextBoxProveedor.Text = "Proveedor: " + ticket.Prestador.Nombre + " " + ticket.Prestador.Apellido;
-                        //TextBoxDireccion_Prov.Text = "Dirección: " + ticket.Prestador.Direccion;
+                        TextBoxDireccion_Prov.Text = "Dirección: " + ticket.Prestador.Domicilio;
                         TextBoxFecha_Trabajo.Text = "Fecha trabajo: " + ticket.FechaRealizado.ToShortDateString();
                         TextBoxComentario_Proveedor.Text = "Comentario proveedor: " + ticket.ComentariosPrestador;
                     }
