@@ -67,7 +67,7 @@ namespace negocio
                 {
                     datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Usuario = @IdUsuario");
                 }
-                else if(usuario.RolUsuario == RolUsuario.PRESTADOR) 
+                else
                 {
                     datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Prestador = @IdUsuario");
 
