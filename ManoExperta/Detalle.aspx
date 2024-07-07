@@ -12,24 +12,24 @@
                 <hr />
                 <div class="row">
                     <div class="col" style="display: grid">
-                        <asp:TextBox ID="TextBoxNombre_Cliente" runat="server">Solicitado por: </asp:TextBox>
-                        <asp:TextBox ID="TextBoxDireccion" runat="server">Direccion: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxNombre_Cliente" runat="server" Readonly="true">Solicitado por: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxDireccion" runat="server" Readonly="true">Direccion: </asp:TextBox>
                     </div>
                     <div class="col" style="display: grid">
-                        <asp:TextBox ID="TextBoxFecha_Solicitado" runat="server">Fecha solicitado: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxFecha_Solicitado" runat="server" Readonly="true">Fecha solicitado: </asp:TextBox>
                     </div>
-                    <asp:TextBox ID="TextBoxComentario" runat="server">Comentario problema: </asp:TextBox>
+                    <asp:TextBox ID="TextBoxComentario" runat="server" Readonly="true">Comentario problema: </asp:TextBox>
                 </div>
                 <hr />
                 <div class="row">
                     <div class="col" style="display: grid">
-                        <asp:TextBox ID="TextBoxProveedor" runat="server">Proveedor: </asp:TextBox>
-                        <asp:TextBox ID="TextBoxDireccion_Prov" runat="server">Direccion: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxProveedor" runat="server" Readonly="true">Proveedor: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxDireccion_Prov" runat="server" Readonly="true">Direccion: </asp:TextBox>
                     </div>
                     <div class="col" style="display: grid">
-                        <asp:TextBox ID="TextBoxFecha_Trabajo" runat="server">Fecha trabajo: </asp:TextBox>
+                        <asp:TextBox ID="TextBoxFecha_Trabajo" runat="server" Readonly="true">Fecha trabajo: </asp:TextBox>
                     </div>
-                    <asp:TextBox ID="TextBoxComentario_Proveedor" runat="server">Comentario proveedor: </asp:TextBox>
+                    <asp:TextBox ID="TextBoxComentario_Proveedor" runat="server" Readonly="true">Comentario proveedor: </asp:TextBox>
                 </div>
                 <div class="row" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
                     <asp:Button ID="btnActualizarDatos" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" />
