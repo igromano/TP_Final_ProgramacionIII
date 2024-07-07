@@ -41,6 +41,7 @@ namespace ManoExperta
                         Session.Add("usuario", usuario);
                         accesoExitoso = true;
                         Response.Redirect("Home.aspx", false);
+
                     }
                     else
                     {
@@ -63,8 +64,8 @@ namespace ManoExperta
 
         async private void getClientLocation()
         {
-            ServiciosExternos service = new ServiciosExternos();
-            Locacion locacion = await service.getLocacion();
+            //ServiciosExternos service = new ServiciosExternos();
+            //Locacion locacion = await service.getLocacion();
         }
     }
 }

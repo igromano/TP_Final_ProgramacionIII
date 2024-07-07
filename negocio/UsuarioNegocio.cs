@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using accesoDatos;
 using dominio;
-using negocio;
+
 
 namespace negocio
 {
@@ -22,12 +23,12 @@ namespace negocio
                 datos.settearParametros("@Contrasenia", usuario.Contrasenia);
                 datos.settearParametros("@IdRol", usuario.RolUsuario);
                 datos.settearParametros("@Email", usuario.Email);
-                datos.settearParametros("@Activo", usuario.Activo);
+                datos.settearParametros("@IDPersona", usuario.IdPersona);
                 datos.ejecutarConsulta();
             }
             catch (Exception ex)
             {
-
+                throw new Exception("Error al crear usuario en DB - Error: " + ex);
             }
             finally
             {
@@ -52,8 +53,10 @@ namespace negocio
                         return getUsuario(int.Parse(datos.lector["ID"].ToString()));
                     }
                 }
-                //return null;
                 datos.cerrarConexion();
+
+                
+
                 return null;
             }
             catch (Exception ex)
@@ -76,7 +79,7 @@ namespace negocio
             Usuario usuario = new Usuario();
             try
             {
-                datos.configurarConsulta("SELECT * FROM Personas1 where ID = @idUsuario");
+                datos.configurarConsulta("SELECT * FROM Personas where ID = @idUsuario");
                 datos.settearParametros("@idUsuario", idUsuario);
                 datos.ejecutarConsulta();
                 while (datos.lector.Read())
@@ -90,10 +93,20 @@ namespace negocio
                     usuario.IdPersona = datos.lector["IDPersona"].ToString();
                     usuario.Nombre = datos.lector["Nombre"].ToString();
                     usuario.Apellido = datos.lector["Apellido"].ToString();
-                    usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
-                    usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
-                    usuario.Domicilio = datos.lector["Domicilio"].ToString();
-                    usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
+
+                    usuario.Sexo = (datos.lector["Sexo"] is DBNull) ? char.Parse("") : char.Parse(datos.lector["Sexo"].ToString());
+
+                    usuario.FechaNacimiento = datos.lector["FechaNacimiento"] is DBNull 
+                        ? DateTime.Parse("1900-01-01") 
+                        : DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
+
+                    usuario.Domicilio = datos.lector["Domicilio"] is DBNull
+                        ? ""
+                        : datos.lector["Domicilio"].ToString();
+
+                    usuario.IdLocalidad = (datos.lector["IDLocalidad"] is DBNull) ? 0 : int.Parse(datos.lector["IDLocalidad"].ToString());
+                    usuario.Telefono = (datos.lector["Telefono"]) is DBNull ? "" : datos.lector["Telefono"].ToString();
+
                 }
                 return usuario;
             }
@@ -116,24 +129,25 @@ namespace negocio
             }
             bool persona = false;
             AccesoADatos datos = new AccesoADatos();
-            if (usuario.IdPersona != null || usuario.IdPersona.Length > 0)
-            {
-                persona = true;
-            }
+            //if (usuario.IdPersona != null || usuario.IdPersona.Length > 0)
+            //{
+            //    persona = true;
+            //}
             try
             {
                 datos.configurarProcedimiento("SP_UpdateUser");
                 datos.settearParametros("@Id", usuario.Id);
                 datos.settearParametros("@Usuario", usuario.UserName);
-                datos.settearParametros("@Contrasenia", usuario.Contrasenia);
+                //datos.settearParametros("@Contrasenia", usuario.Contrasenia);
                 datos.settearParametros("@Email", usuario.Email);
-                datos.settearParametros("@Persona", persona);
+                //datos.settearParametros("@Persona", persona);
                 datos.settearParametros("@IdPersona", usuario.IdPersona);
                 datos.settearParametros("@Nombre", usuario.Nombre);
                 datos.settearParametros("@Apellido", usuario.Apellido);
                 datos.settearParametros("@Sexo", usuario.Sexo);
                 datos.settearParametros("@FechaNacimiento", usuario.FechaNacimiento);
                 datos.settearParametros("@IDLocalidad", usuario.IdLocalidad);
+                datos.settearParametros("@Telefono", usuario.Telefono);
 
                 datos.ejecutarConsulta();
 
@@ -146,6 +160,50 @@ namespace negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public List<Usuario> getUsuariosPorRol(RolUsuario rol)
+        {
+            AccesoADatos datos = new AccesoADatos();
+            List<Usuario> listaUsuarios = new List<Usuario>();
+            try
+            {
+                datos.configurarConsulta("SELECT * FROM Personas WHERE iDRol = @IdRol");
+                datos.settearParametros("@IdRol", rol);
+                datos.ejecutarConsulta();
+
+                while (datos.lector.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Id = int.Parse(datos.lector["ID"].ToString());
+                    usuario.UserName = datos.lector["Usuario"].ToString();
+                    usuario.Contrasenia = datos.lector["Contrasenia"].ToString();
+                    usuario.RolUsuario = (RolUsuario)(Int16)datos.lector["iDRol"];
+                    usuario.FechaAlta = DateTime.Parse(datos.lector["FechaAlta"].ToString());
+                    usuario.Email = datos.lector["Email"].ToString();
+                    usuario.IdPersona = datos.lector["IDPersona"].ToString();
+                    usuario.Nombre = datos.lector["Nombre"].ToString();
+                    usuario.Apellido = datos.lector["Apellido"].ToString();
+                    usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
+                    usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
+                    usuario.Domicilio = datos.lector["Domicilio"].ToString();
+                    usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
+
+                    if(usuario.RolUsuario == RolUsuario.PRESTADOR)
+                    {
+                        //usuario.Calificacion = int.Parse()
+                    }
+
+                    listaUsuarios.Add(usuario);
+                }
+
+                return listaUsuarios;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
     }

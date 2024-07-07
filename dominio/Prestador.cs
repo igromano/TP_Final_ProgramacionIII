@@ -16,6 +16,6 @@ namespace dominio
 
         public string Apellido { get; set; }
 
-        public KeyValuePair<int, string> Especialidades { get; set; }
+        public int Calificacion { get; set; }
     }
 }

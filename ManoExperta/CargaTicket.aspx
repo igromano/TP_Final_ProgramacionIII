@@ -57,10 +57,10 @@
 
                 <div class="row">
                     <div class="col" style="display: flex; justify-content: center">
-                        <asp:Button ID="btnCargarPedido" CssClass="btn btn-success" runat="server" Text="Cargar Ticket" />
+                        <asp:Button ID="btnCargarPedido" CssClass="btn btn-success" runat="server" Text="Cargar Ticket" OnClick="btnCargarPedido_Click" />
                     </div>
                     <div class="col" style="display: flex; justify-content: center">
-                        <asp:Button ID="btnCancelarPedido" CssClass="btn btn-danger" runat="server" Text="Cancelar Pedido" />
+                        <asp:Button ID="btnCancelarPedido" CssClass="btn btn-danger" runat="server" Text="Cancelar Pedido" OnClick="btnCancelarPedido_Click"/>
                     </div>
                 </div>
             </div>

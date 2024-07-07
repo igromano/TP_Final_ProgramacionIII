@@ -34,8 +34,8 @@ namespace dominio
         public string  Especialidad { get; set; }
         public double Monto { get; set; }
 
-        //public Estado Estado { get; set; }
-        public string Estado { get; set; }
+        public Estado Estado { get; set; }
+        //public string Estado { get; set; }
 
         public  string ComentariosUsuario { get; set; }
 
@@ -50,7 +50,7 @@ namespace dominio
         public DateTime FechaRealizado
         {
             get { return fechaRealizado; }
-            set { if (value > fechaSolicitado) fechaRealizado = value; }
+            set { if (value > fechaSolicitado) fechaRealizado = value;}
         }
 
         public DateTime FechaResenia {
