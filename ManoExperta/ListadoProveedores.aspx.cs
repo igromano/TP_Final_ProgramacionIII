@@ -1,5 +1,6 @@
 ﻿using dominio;
 using ManoExperta.helpers;
+using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace ManoExperta
     {
         public Usuario usuariotemp = new Usuario();
         public List<Usuario> proveedores = new List<Usuario>();
+        public UsuarioNegocio usuarioNegocioTemp = new UsuarioNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -28,12 +30,20 @@ namespace ManoExperta
                     {
                         Response.Redirect("Home.aspx", false);
                     }
+                    proveedores = usuarioNegocioTemp.getUsuariosPorRol(RolUsuario.PRESTADOR);
+                    repListadoProfesionales.DataSource = proveedores;
+                    repListadoProfesionales.DataBind();
                 }
-                repListadoProfesionales.DataSource = proveedores;
-                repListadoProfesionales.DataBind();
+
             }
 
 
+        }
+
+        protected void buttonMasInformacion_Click(object sender, EventArgs e)
+        {
+            string id = ((Button)sender).CommandArgument;
+            Response.Redirect("DetalleProveedor.aspx?id=" + id, false);
         }
     }
 }

@@ -66,15 +66,7 @@ namespace ManoExperta
 
         protected void btnCargarPedido_Click(object sender, EventArgs e)
         {
-            if (usuarioProveedor.IdPersona == null)
-            {
-                //trabajoNegocioTemp.registrarTrabajo(int.Parse(usuarioTemp.IdPersona), 0, TextBoxProblema.Text);
-            }
-            else
-            {
-                //trabajoNegocioTemp.registrarTrabajo(int.Parse(usuarioTemp.IdPersona), int.Parse(usuarioProveedor.IdPersona), TextBoxProblema.Text);
-            }
-
+            trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0,0,5,TextBoxProblema.Text);
         }
     }
 }

@@ -30,8 +30,10 @@ namespace ManoExperta
                     {
                         Response.Redirect("Home.aspx", false);
                     }
+
                     repTrabajosActivos.DataSource = trabajoTemp.getTicketsPorRol(usuariotemp);
                     repTrabajosActivos.DataBind();
+
                 }
             }
 
