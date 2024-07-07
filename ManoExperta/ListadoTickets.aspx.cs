@@ -30,9 +30,10 @@ namespace ManoExperta
                     {
                         Response.Redirect("Home.aspx", false);
                     }
-                    
-                    //repTrabajosActivos.DataSource = trabajoTemp.getTicketsPorPrestador("1132235");
-                    //repTrabajosActivos.DataBind();
+
+                    repTrabajosActivos.DataSource = trabajoTemp.getTicketsPorRol(usuariotemp);
+                    repTrabajosActivos.DataBind();
+
                 }
             }
 

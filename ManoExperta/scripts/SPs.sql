@@ -1,7 +1,7 @@
 --Creacion de SPs
 
 --Creacion de un nuevo usuario
-CREATE procedure SP_NuevoUsuario (
+/*CREATE OR ALTER PROCEDURE SP_NuevoUsuario (
 @Usuario varchar(50),
 @Contrasenia varchar(50),
 @IdRol smallint,
@@ -11,16 +11,16 @@ as
 begin
 declare @UsuarioExistente varchar(50)
 	BEGIN TRY
-	if @Usuario IN (SELECT u.Usuario from Usuarios u)
+	if @Usuario IN (SELECT u.Usuario from Personas u)
 	begin 
 		RAISERROR ('Este usuario ya existe', 16, 0)
 	end
-		INSERT Usuarios values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email)
+		INSERT Personas values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email)
 	END TRY
 	BEGIN CATCH
 		PRINT ERROR_MESSAGE()
 	END CATCH
-end;
+end;*/
 
 --Login en la aplicacion
 ALTER PROCEDURE SP_Login(
@@ -30,57 +30,50 @@ ALTER PROCEDURE SP_Login(
 as
 begin
 	begin try
-		IF @Usuario NOT IN (SELECT U.Usuario from Usuarios U)
+		IF @Usuario NOT IN (SELECT U.Usuario from Personas U)
 		BEGIN
 			RAISERROR ('Usuario inexistente', 16, 0)
 		END
-		IF @Contrasenia != (SELECT U.Contrasenia from Usuarios U Where U.Usuario = @Usuario)
+		IF @Contrasenia != (SELECT U.Contrasenia from Personas U Where U.Usuario = @Usuario)
 		BEGIN
 			RAISERROR ('Contraseña incorrecta', 16, 0)
 		END
-		--SELECT u.iDRol FROM Usuarios U WHERE U.Usuario = @Usuario
-		SELECT U.ID, U.iDRol FROM Personas1 U WHERE U.Usuario = @Usuario
+		SELECT U.ID, U.iDRol FROM Personas U WHERE U.Usuario = @Usuario
 	 end try
 	 begin catch
 		PRINT ERROR_MESSAGE()
 	 end catch
 end
 
+---------------
+SELECT * FROM Personas
+exec SP_UpdateUser 1,'DMeltrozo', 'DMeltrozo@user.com', '777777', 'Deborah', 'Meltrozo', 'F', '1990-10-10', 'Los Troncos 123', 2, '54115566-4455'
+---------------
 --Update de Usuarios y/o Pesonas
-create procedure SP_UpdateUser (
+CREATE OR ALTER PROCEDURE SP_UpdateUser (
 @Id int = null, 
 @Usuario varchar(50),
-@Contrasenia varchar(50),
+--@Contrasenia varchar(50),
 @Email varchar(255),
-@Persona bit,
-@IdPersona bigint = null,
-@Nombre varchar(50) = null,
-@Apellido varchar(50) = null,
-@Sexo char(1) = null,
-@FechaNacimiento date = null,
-@Domicilio varchar(100) = null,
-@IDLocalidad smallint = null
+--@Persona bit,
+@IdPersona varchar(50),
+@Nombre varchar(50),
+@Apellido varchar(50),
+@Sexo char(1),
+@FechaNacimiento date,
+@Domicilio varchar(100),
+@IDLocalidad smallint,
+@Telefono varchar(100)
 ) as
 begin
 	begin try
-		if @Id is not null and @Persona = 0
-			begin 
-				update Usuarios set Usuario = @Usuario, Contrasenia = @Contrasenia, Email = @Email where ID = @Id
-				PRINT('Se edito solo el usuario')
-				RETURN
-			end
-		if @Id is not null and @Persona = 1 and @IdPersona is not null
 			begin
-				update Usuarios set Usuario = @Usuario, Contrasenia = @Contrasenia, Email = @Email where ID = @Id
-				update Personas set ID = @IdPersona, Nombre = @Nombre, Apellido = @Apellido, Sexo = @Sexo, 
-				FechaNacimiento = @FechaNacimiento, Domicilio = @Domicilio, IDLocalidad = @IDLocalidad
-				where IDUsuario = @Id
-				PRINT('Se edito usuario y persona')
+				update Personas set IDPersona = @IdPersona, Nombre = @Nombre, Apellido = @Apellido, Sexo = @Sexo, 
+				FechaNacimiento = @FechaNacimiento, Domicilio = @Domicilio, IDLocalidad = @IDLocalidad,
+				Telefono = @Telefono
+				where ID = @Id
+				PRINT('Se actualizo el usuario')
 				RETURN
-			end
-		else
-			begin
-				RAISERROR('Datos insuficientes para realizar la actualización', 16, 0);
 			end
 	end try
 	BEGIN CATCH
@@ -94,14 +87,14 @@ CREATE OR ALTER PROCEDURE SP_CalculoReputacion (
 )AS
 BEGIN
 	BEGIN TRY
-		IF @IDPersona = (SELECT p.IDPersona FROM Personas1 p where p.IDPersona = @IDPersona)
+		IF @IDPersona = (SELECT p.IDPersona FROM Personas p where p.IDPersona = @IDPersona)
 			BEGIN
 			SELECT p.idpersona, (SUM(r.calificacion) / 
 			(SELECT count(*) FROM resenias r
 			inner join ticket t ON r.idticket = t.id
 			WHERE t.idprestador = @IDPersona )) AS 'Reputacion' FROM ticket t
 			inner join resenias r ON t.ID = r.IDTicket
-			inner join Personas1 p ON t.idprestador = p.idpersona
+			inner join Personas p ON t.idprestador = p.idpersona
 			WHERE t.IDPrestador = @IDPersona
 			GROUP BY p.idpersona
 		END
@@ -113,37 +106,42 @@ BEGIN
 		PRINT ERROR_MESSAGE()
 	END CATCH
 END
+---------------
 exec SP_CalculoReputacion '1132235'
 select * from Ticket
 select * from Resenias
+select * from Personas
+---------------------
+
+exec SP_NuevoUsuario 'DMeltrozo', '123456', 2, 'DMeltrozo@user.com', '777777'
 
 --Creacion de un nuevo usuario
-CREATE OR ALTER procedure SP_NuevoUsuario1 (
+CREATE OR ALTER procedure SP_NuevoUsuario (
 @Usuario varchar(50),
 @Contrasenia varchar(50),
 @IdRol smallint,
 @Email varchar(255),
 @IDPersona bigint,
-@Nombre varchar(50),
-@Apellido varchar(50),
-@Sexo char,
-@FechaNacimiento date,
-@Domicilio varchar(100),
-@IDLocalidad smallint
+@Nombre varchar(50) = '',
+@Apellido varchar(50) = '',
+@Sexo char = '',
+@FechaNacimiento date = '1900-01-01',
+@Domicilio varchar(100) = '',
+@IDLocalidad smallint = null
 )
 as
 begin
 declare @UsuarioExistente varchar(50)
 	BEGIN TRY
-	if @Usuario IN (SELECT u.Usuario from Personas1 u)
+	if @Usuario IN (SELECT u.Usuario from Personas u)
 	begin 
 		RAISERROR ('Este usuario ya existe', 16, 0)
 	end
-		if @Email IN (SELECT u.Email from Personas1 u)
+		if @Email IN (SELECT u.Email from Personas u)
 	begin 
 		RAISERROR ('Este usuario ya existe', 16, 0)
 	end
-		INSERT Personas1 values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email, @IDPersona, @Nombre, @Apellido, @Sexo, @FechaNacimiento, @Domicilio, @IDLocalidad, 1)
+		INSERT Personas values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email, @IDPersona, @Nombre, @Apellido, @Sexo, @FechaNacimiento, @Domicilio, @IDLocalidad, null ,1)
 	END TRY
 	BEGIN CATCH
 		PRINT ERROR_MESSAGE()
@@ -164,13 +162,33 @@ CREATE OR ALTER PROCEDURE SP_CrearTicket (
 BEGIN
 	IF @IdPrestador = '0'
 		SET @IdPrestador = null
+	IF @IdEspecialidad = 0
+		SET @IdEspecialidad = null
 	INSERT INTO Ticket(IDUsuario, IDPrestador, IDEspecialidad, Monto, IDEstado, ComentarioUsuario, FechaSolicitado) 
 	VALUES(@IdUsuario, @IdPrestador, @IdEspecialidad, @Monto, @IdEstado, @ComentarioUsuario, getdate())
 
 END
+
+CREATE OR ALTER PROCEDURE SP_ListaDeUsuarios (@)
+AS
+BEGIN
+	DECLARE @IdRol
+	SELECT @RolId =  FROM Personas
+END
+
 
 exec SP_CrearTicket '11111111', '0', 3, 5500, 5,'Tiene el orto descocido'
 
 select * from Ticket
 
 delete Ticket where Monto = 7700
+select *  from Especialidades
+select * from Personas
+exec SP_CalculoReputacion '1132235'
+--Listado de Reputacion de prestadores 
+SELECT (select avg(re.Calificacion) from Ticket t 
+	inner join Resenias re on t.ID = re.IDTicket
+	where t.IDPrestador = p.IDPersona
+), p.Apellido, p.IDPersona
+FROM Personas p WHERE iDRol = 1
+
