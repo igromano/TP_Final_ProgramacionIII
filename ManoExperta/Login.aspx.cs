@@ -64,8 +64,8 @@ namespace ManoExperta
 
         async private void getClientLocation()
         {
-            ServiciosExternos service = new ServiciosExternos();
-            Locacion locacion = await service.getLocacion();
+            //ServiciosExternos service = new ServiciosExternos();
+            //Locacion locacion = await service.getLocacion();
         }
     }
 }
