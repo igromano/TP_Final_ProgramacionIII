@@ -39,5 +39,11 @@ namespace ManoExperta
 
 
         }
+
+        protected void buttonMasInformacion_Click(object sender, EventArgs e)
+        {
+            string id = ((Button)sender).CommandArgument;
+            Response.Redirect("Detalle.aspx?idTicket=" + id, false);
+        }
     }
 }
