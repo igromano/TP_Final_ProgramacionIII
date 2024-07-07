@@ -11,7 +11,7 @@ namespace negocio
 {
     public class TrabajoNegocio
     {
-        public void registrarTrabajo(string idUsuario, int idEspecialidad, double monto, int idEstado, string comentarioUsuario, string idPrestador = "0")
+        public void registrarTrabajo(string idUsuario, double monto, int idEstado, string comentarioUsuario, string idPrestador = "0", int idEspecialidad = 0)
         {
             AccesoADatos datos = new AccesoADatos();
             try
