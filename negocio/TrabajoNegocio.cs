@@ -17,7 +17,7 @@ namespace negocio
             try
             {
                 datos.configurarProcedimiento("SP_CrearTicket");
-                datos.settearParametros("@IdUsuario", idUsuario);
+                datos.settearParametros("@IdUsuario", idUsuario);   
                 datos.settearParametros("@IdPrestador", idPrestador);
                 datos.settearParametros("@IdEspecialidad", idEspecialidad);
                 datos.settearParametros("@Monto", monto);

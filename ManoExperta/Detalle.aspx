@@ -12,26 +12,26 @@
                 <hr />
                 <div class="row">
                     <div class="col" style="display: grid">
-                        <label>Solicitado por:</label>
-                        <label>Direccion:</label>
+                        <asp:Label ID="lblNombre_Cliente" runat="server">Solicitado por: </asp:Label>
+                        <asp:Label ID="lblDireccion" runat="server">Direccion: </asp:Label>
                     </div>
                     <div class="col" style="display: grid">
-                        <label>Fecha solicitado:</label>
+                        <asp:Label ID="lblFecha_Solicitado" runat="server" Text="Label">Fecha solicitado: </asp:Label>
                     </div>
-                    <label>Comentario problema: ....</label>
+                    <asp:Label ID="lblComentario" runat="server" Text="Label">Comentario problema: </asp:Label>
                 </div>
                 <hr />
                 <div class="row">
                     <div class="col" style="display: grid">
-                        <label>Proveedor:</label>
-                        <label>Direccion:</label>
+                        <asp:Label ID="lblProveedor" runat="server" Text="Label">Proveedor: </asp:Label>
+                        <asp:Label ID="lblDireccionProv" runat="server" Text="Label">Direccion: </asp:Label>
                     </div>
                     <div class="col" style="display: grid">
-                        <label>Fecha trabajo:</label>
+                        <asp:Label ID="lblFechaTrabajo" runat="server" Text="Label">Fecha trabajo: </asp:Label>
                     </div>
-                    <label>Comentario proveedor: ...</label>
+                    <asp:Label ID="lblComentarioProveedor" runat="server" Text="Label">Comentario proveedor: </asp:Label>
                 </div>
-                <div class="row" style="margin-left: 50px;margin-right:50px;margin-top:20px">
+                <div class="row" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
                     <asp:Button ID="btnActualizarDatos" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" />
                 </div>
 
