@@ -4,6 +4,7 @@ INSERT Roles values(1, 'PRESTADOR')
 INSERT Roles values(2, 'USUARIO')
 
 --Agregar Espcialidades
+INSERT INTO Especialidades VALUES('SIN ESPECIALIDAD')
 INSERT INTO Especialidades VALUES('PLOMERIA')
 INSERT INTO Especialidades VALUES('ELECTRICIDAD')
 INSERT INTO Especialidades VALUES('GASISTA')

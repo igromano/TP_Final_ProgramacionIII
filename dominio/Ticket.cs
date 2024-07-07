@@ -50,7 +50,7 @@ namespace dominio
         public DateTime FechaRealizado
         {
             get { return fechaRealizado; }
-            set { if (value > fechaSolicitado) fechaRealizado = value; }
+            set { if (value > fechaSolicitado) fechaRealizado = value;}
         }
 
         public DateTime FechaResenia {
