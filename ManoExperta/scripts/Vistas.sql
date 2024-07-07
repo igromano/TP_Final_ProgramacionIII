@@ -10,7 +10,6 @@ t.ComentarioUsuario AS 'Usr_Comentarios', t.ComentarioPrestador AS 'Pres_Comenta
 t.fechaSolicitado AS 'Fecha_Solicitado', t.FechaRealizado AS 'Fecha_Realizado',
 re.Comentario AS 'Res_Comentario', --re.Calificacion AS 'Calificacion',
 CASE  WHEN re.Calificacion IS NULL THEN 0 ELSE re.Calificacion END AS 'Calificacion',
-
 re.fecha AS 'Fecha_Res'
 FROM Ticket t
 INNER JOIN Personas1 pe ON t.IDUsuario = pe.IDPersona

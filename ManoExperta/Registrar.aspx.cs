@@ -38,12 +38,14 @@ namespace ManoExperta
             string email = TextBoxEmailUsuario.Text;
             string userName = TextBoxUsuarioUsuario.Text;
             string contrasenia = TextBoxUsuarioContrasenia.Text;
+            string dni = TextBoxDNI.Text;
 
             Usuario nuevoUsuario = new Usuario(userName, contrasenia); // instancia del objeto usuario
 
             nuevoUsuario.Email = email; // asigno los valores a las propiedades del obj usuario
             nuevoUsuario.UserName = userName;
             nuevoUsuario.Nombre = nombre;
+            nuevoUsuario.IdPersona = dni;
             nuevoUsuario.RolUsuario = RolUsuario.USUARIO;
 
 
@@ -79,12 +81,14 @@ namespace ManoExperta
             string email = TextBoxEmailProveedor.Text;
             string userName = TextBoxUsuarioProveedor.Text;
             string contrasenia = TextBoxProveedorContrasenia.Text;
+            string cuil = TextBoxCUIL.Text;
 
             Usuario nuevoProveedor = new Usuario(userName, contrasenia); // crea instancia de nuevo prov
 
             nuevoProveedor.Email = email;
             nuevoProveedor.UserName = userName;
             nuevoProveedor.Nombre = nombre;
+            nuevoProveedor.IdPersona = cuil;
             nuevoProveedor.RolUsuario = RolUsuario.PRESTADOR;
 
 

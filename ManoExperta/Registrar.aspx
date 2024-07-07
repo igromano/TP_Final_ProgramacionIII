@@ -48,6 +48,10 @@
                         <asp:Label ID="Label8" CssClass="form-label fw-bold" runat="server" Text="Apellido"></asp:Label>
                         <asp:TextBox ID="TextBoxApellidoUsuario" CssClass="form-control" runat="server" required="true"></asp:TextBox>
                     </div>
+                    <div id="DNIUsuario" class="form-text">
+                        <asp:Label ID="Label12" CssClass="form-label fw-bold" runat="server" Text="DNI"></asp:Label>
+                        <asp:TextBox ID="TextBoxDNI" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                    </div>
                     <div id="emailUsuario" class="form-text">
                         <asp:Label ID="Label16" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>
                         <asp:TextBox ID="TextBoxEmailUsuario" CssClass="form-control" TextMode="Email" runat="server" required="true"></asp:TextBox>
@@ -91,6 +95,10 @@
                     <div id="apellidoProveedor" class="form-text">
                         <asp:Label ID="Label10" CssClass="form-label fw-bold" runat="server" Text="Apellido"></asp:Label>
                         <asp:TextBox ID="TextBoxApellidoProveedor" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                    </div>
+                    <div id="CUILProveedor" class="form-text">
+                        <asp:Label ID="Label11" CssClass="form-label fw-bold" runat="server" Text="CUIL"></asp:Label>
+                        <asp:TextBox ID="TextBoxCUIL" CssClass="form-control" runat="server" required="true"></asp:TextBox>
                     </div>
                     <div id="emailProveedor" class="form-text">
                         <asp:Label ID="Label5" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>

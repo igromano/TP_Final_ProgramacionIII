@@ -76,7 +76,7 @@ namespace negocio
             Usuario usuario = new Usuario();
             try
             {
-                datos.configurarConsulta("SELECT * FROM Personas1 where ID = @idUsuario");
+                datos.configurarConsulta("SELECT * FROM Personas where ID = @idUsuario");
                 datos.settearParametros("@idUsuario", idUsuario);
                 datos.ejecutarConsulta();
                 while (datos.lector.Read())
@@ -94,6 +94,7 @@ namespace negocio
                     usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
                     usuario.Domicilio = datos.lector["Domicilio"].ToString();
                     usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
+                    usuario.Telefono = datos.lector["Telefono"].ToString();
                 }
                 return usuario;
             }
@@ -116,24 +117,25 @@ namespace negocio
             }
             bool persona = false;
             AccesoADatos datos = new AccesoADatos();
-            if (usuario.IdPersona != null || usuario.IdPersona.Length > 0)
-            {
-                persona = true;
-            }
+            //if (usuario.IdPersona != null || usuario.IdPersona.Length > 0)
+            //{
+            //    persona = true;
+            //}
             try
             {
                 datos.configurarProcedimiento("SP_UpdateUser");
                 datos.settearParametros("@Id", usuario.Id);
                 datos.settearParametros("@Usuario", usuario.UserName);
-                datos.settearParametros("@Contrasenia", usuario.Contrasenia);
+                //datos.settearParametros("@Contrasenia", usuario.Contrasenia);
                 datos.settearParametros("@Email", usuario.Email);
-                datos.settearParametros("@Persona", persona);
+                //datos.settearParametros("@Persona", persona);
                 datos.settearParametros("@IdPersona", usuario.IdPersona);
                 datos.settearParametros("@Nombre", usuario.Nombre);
                 datos.settearParametros("@Apellido", usuario.Apellido);
                 datos.settearParametros("@Sexo", usuario.Sexo);
                 datos.settearParametros("@FechaNacimiento", usuario.FechaNacimiento);
                 datos.settearParametros("@IDLocalidad", usuario.IdLocalidad);
+                datos.settearParametros("@Telefono", usuario.Telefono);
 
                 datos.ejecutarConsulta();
 
@@ -155,7 +157,7 @@ namespace negocio
             List<Usuario> listaUsuarios = new List<Usuario>();
             try
             {
-                datos.configurarConsulta("SELECT * FROM Personas1 WHERE iDRol = @IdRol");
+                datos.configurarConsulta("SELECT * FROM Personas WHERE iDRol = @IdRol");
                 datos.settearParametros("@IdRol", rol);
                 datos.ejecutarConsulta();
 
@@ -175,6 +177,11 @@ namespace negocio
                     usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
                     usuario.Domicilio = datos.lector["Domicilio"].ToString();
                     usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
+
+                    if(usuario.RolUsuario == RolUsuario.PRESTADOR)
+                    {
+                        //usuario.Calificacion = int.Parse()
+                    }
 
                     listaUsuarios.Add(usuario);
                 }

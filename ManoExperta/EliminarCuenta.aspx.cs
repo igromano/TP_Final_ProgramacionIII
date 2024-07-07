@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
+using negocio;
 
 namespace ManoExperta
 {
@@ -22,6 +24,16 @@ namespace ManoExperta
             {
                 
             }
+        }
+
+        protected void btnEliminarCuenta_Click(object sender, EventArgs e)
+        {
+            Usuario usuarioTemp = new Usuario();
+            UsuarioNegocio usuarioNegocioTemp = new UsuarioNegocio();
+            usuarioTemp = (Usuario)Session["usuario"];
+            usuarioTemp.Activo = false;
+            usuarioNegocioTemp.updateUsuario(usuarioTemp);
+            Response.Redirect("Index.aspx", false);
         }
     }
 }
