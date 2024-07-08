@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
                                     <div class="row no-gutters" style="max-width: 80%">
-                                        <button class="btn btn-secondary mb-2">Más información</button>
+                                        <asp:Button ID="buttonMasInformacion" runat="server" CssClass="btn btn-secondary mb-2" CommandArgument=<%# Eval("Id") %> CommandName="IdTicket" OnClick="buttonMasInformacion_Click" Text="Más Información"/>
                                         <button class="btn btn-success">Tomar Trabajo</button>
                                     </div>
                                 </div>

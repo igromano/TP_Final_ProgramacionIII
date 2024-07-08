@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using accesoDatos;
 using dominio;
-using negocio;
+
 
 namespace negocio
 {
@@ -22,12 +23,12 @@ namespace negocio
                 datos.settearParametros("@Contrasenia", usuario.Contrasenia);
                 datos.settearParametros("@IdRol", usuario.RolUsuario);
                 datos.settearParametros("@Email", usuario.Email);
-                datos.settearParametros("@Activo", usuario.Activo);
+                datos.settearParametros("@IDPersona", usuario.IdPersona);
                 datos.ejecutarConsulta();
             }
             catch (Exception ex)
             {
-
+                throw new Exception("Error al crear usuario en DB - Error: " + ex);
             }
             finally
             {
@@ -52,8 +53,10 @@ namespace negocio
                         return getUsuario(int.Parse(datos.lector["ID"].ToString()));
                     }
                 }
-                //return null;
                 datos.cerrarConexion();
+
+                
+
                 return null;
             }
             catch (Exception ex)
@@ -90,11 +93,20 @@ namespace negocio
                     usuario.IdPersona = datos.lector["IDPersona"].ToString();
                     usuario.Nombre = datos.lector["Nombre"].ToString();
                     usuario.Apellido = datos.lector["Apellido"].ToString();
-                    usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
-                    usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
-                    usuario.Domicilio = datos.lector["Domicilio"].ToString();
-                    usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
-                    usuario.Telefono = datos.lector["Telefono"].ToString();
+
+                    usuario.Sexo = (datos.lector["Sexo"] is DBNull) ? char.Parse("") : char.Parse(datos.lector["Sexo"].ToString());
+
+                    usuario.FechaNacimiento = datos.lector["FechaNacimiento"] is DBNull 
+                        ? DateTime.Parse("1900-01-01") 
+                        : DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
+
+                    usuario.Domicilio = datos.lector["Domicilio"] is DBNull
+                        ? ""
+                        : datos.lector["Domicilio"].ToString();
+
+                    usuario.IdLocalidad = (datos.lector["IDLocalidad"] is DBNull) ? 0 : int.Parse(datos.lector["IDLocalidad"].ToString());
+                    usuario.Telefono = (datos.lector["Telefono"]) is DBNull ? "" : datos.lector["Telefono"].ToString();
+
                 }
                 return usuario;
             }

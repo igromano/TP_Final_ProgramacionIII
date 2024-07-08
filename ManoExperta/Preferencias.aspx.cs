@@ -29,6 +29,7 @@ namespace ManoExperta
                 TextBoxDNI.Text = usuariotemp.IdPersona;
                 TextBoxEmailUsuario.Text = (usuariotemp.Email).ToLower();
                 TextBoxFechaNacimiento.Text = usuariotemp.FechaNacimiento.ToString("yyyy-MM-dd");
+                TextBoxTelefono.Text = usuariotemp.Telefono;
                 
             }
         }
