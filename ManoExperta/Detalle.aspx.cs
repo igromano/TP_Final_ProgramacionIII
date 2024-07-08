@@ -70,11 +70,11 @@ namespace ManoExperta
                 Ticket ticket = tickets.Find(x => x.Id == idTicket);
 
                 if (ticket != null)
-                {                    
-                    trabajoNegocio.cambiarEstado(ticket.Id, ticket.Estado.Id);               
+                {                       
+                    trabajoNegocio.cambiarEstado(ticket.Id, 3);               
                     Session["tickets"] = tickets;                    
                     Response.Redirect("MisServicios.aspx", false);
-
+                    Console.WriteLine("Se cambió el estado correctamente");
                 }
                 else
                 {
@@ -87,5 +87,35 @@ namespace ManoExperta
             }
         }
 
+        protected void btnPasar_A_Finalizado(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Usuario usuario = (Usuario)Session["usuario"];
+
+                TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
+
+                List<Ticket> tickets = (List<Ticket>)Session["tickets"];
+
+                Ticket ticket = tickets.Find(x => x.Id == idTicket);
+
+                if (ticket != null)
+                {
+                    trabajoNegocio.cambiarEstado(ticket.Id, 4);
+                    Session["tickets"] = tickets;
+                    Response.Redirect("MisServicios.aspx", false);
+                    Console.WriteLine("Se cambió el estado correctamente");
+                }
+                else
+                {
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+        }
     }
 }

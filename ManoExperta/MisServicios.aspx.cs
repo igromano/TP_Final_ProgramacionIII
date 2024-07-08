@@ -47,5 +47,7 @@ namespace ManoExperta
                 Response.Redirect("Detalle.aspx?idTicket=" + idTicket, false);
             }
         }
+
+
     }
 }

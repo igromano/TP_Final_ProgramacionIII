@@ -37,7 +37,7 @@
                 <div class="row" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
                     <div class="col">
                         <asp:Button ID="btnActualizarDatos" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" OnClick="btnCancelar_Trabajo" />
-                        <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" />
+                        <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" onClick="btnPasar_A_Finalizado"/>
                         <asp:Button ID="BtnPasarAAsignar" CssClass="btn btn-success ml-2"  runat="server" Text="Pasar a A Asignar" />                                              
                     </div>
                 </div>

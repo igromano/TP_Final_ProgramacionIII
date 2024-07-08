@@ -64,7 +64,7 @@
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
                                     <div class="row no-gutters" style="max-width: 80%">
                                         <asp:Button ID="btnMasInfo" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
-                                        <asp:Button ID="BtnCancelar" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" />
+                                        <asp:Button ID="BtnCancelar2" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo"/>
                                     </div>
                                 </div>
                             </div>
