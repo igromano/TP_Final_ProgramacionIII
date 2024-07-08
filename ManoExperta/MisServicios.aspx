@@ -25,6 +25,23 @@
     <link href="Style/Home.css" rel="stylesheet" />
     <div class="container-fluid" id="MenuCentral" style="background-color: #80B9AD; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px;">
         <div id="SubMenuCentral" style="flex: 1; width: 100%; display: flex;">
+            <div class="col-2" style="background-color: #B3E2A7; padding: 10px;">
+                <h3>Filtros</h3>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label>Por especialidad:</label>
+                        <asp:DropDownList ID="DropDownListaEspecialidadFiltro" CssClass="form-select form-select-sm" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="col-12">
+                        <label>Por Provincia:</label>
+                        <asp:DropDownList ID="DropDownListProvinciaFiltro" CssClass="form-select form-select-sm" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="col-12">
+                        <label>Por Localidad:</label>
+                        <asp:DropDownList ID="DropDownListLocalidadFiltro" CssClass="form-select form-select-sm" runat="server"></asp:DropDownList>
+                    </div>
+                </div>
+            </div>
             <div class="col-10" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px;">
                 <h3>Trabajos activos</h3>
                 <asp:Repeater runat="server" ID="repTrabajosActivos" OnItemCommand="TrabajosActivos_ItemCommand">
@@ -62,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
-                                    <div class="row no-gutters" style="max-width: 80%">
+                                    <div class="row no-gutters" style="max-width: 90%">
                                         <asp:Button ID="btnMasInfo" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
                                         <asp:Button ID="BtnCancelar2" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo"/>
                                     </div>
@@ -111,7 +128,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
-                                    <div class="row no-gutters" style="max-width: 80%">
+                                    <div class="row no-gutters" style="max-width: 90%">
                                         <asp:Button ID="btnMasInfo2" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
 
                                     </div>
