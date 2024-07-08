@@ -28,7 +28,7 @@ namespace ManoExperta
                     List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
                     Session.Add("tickets", tickets);
 
-                    var trabajosActivos = tickets.Where(t => t.Estado.Id == 2).ToList();
+                    var trabajosActivos = tickets.Where(t => t.Estado.Id == 2 || t.Estado.Id == 1).ToList();
                     repTrabajosActivos.DataSource = trabajosActivos;
                     var historialTrabajos = tickets.Where(t => t.Estado.Id == 3 || t.Estado.Id ==4).ToList();
                     repHistorialTrabajos.DataSource = historialTrabajos;
