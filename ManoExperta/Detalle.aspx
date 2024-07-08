@@ -74,12 +74,14 @@
                     </div>
                 </div>
                 <hr />
+                <% if (estadoActual == "SOLICITADO") { %>
                 <div class="row" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
                     <div class="col">
                         <asp:Button ID="btnCancelarTrabajo" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" OnClientClick="showToast('Trabajo cancelado con éxito.'); return false;" CommandArgument="cancelar" OnClick="btnAccionTrabajo" />
                         <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" OnClientClick="showToast('Trabajo pasado a realizado con éxito.'); return false;" CommandArgument="finalizar" OnClick="btnAccionTrabajo" />
                     </div>
                 </div>
+                <% } %>
             </div>
         </div>
     </div>
