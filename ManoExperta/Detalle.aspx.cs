@@ -55,5 +55,37 @@ namespace ManoExperta
                 }
             }
         }
+
+        protected void btnCancelar_Trabajo(object sender, EventArgs e)
+        {
+            try
+            {
+              
+                Usuario usuario = (Usuario)Session["usuario"];
+               
+                TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
+                
+                List<Ticket> tickets = (List<Ticket>)Session["tickets"];
+                
+                Ticket ticket = tickets.Find(x => x.Id == idTicket);
+
+                if (ticket != null)
+                {                    
+                    trabajoNegocio.cambiarEstado(ticket.Id, ticket.Estado.Id);               
+                    Session["tickets"] = tickets;                    
+                    Response.Redirect("MisServicios.aspx", false);
+
+                }
+                else
+                {
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
     }
 }

@@ -19,7 +19,7 @@
                         <asp:TextBox ID="TextBoxFecha_Solicitado" CssClass="form-control" runat="server" ReadOnly="true">Fecha solicitado: </asp:TextBox>
                     </div>
                 </div>
-                <asp:TextBox ID="TextBoxComentario" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine" >Comentario problema: </asp:TextBox>
+                <asp:TextBox ID="TextBoxComentario" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine">Comentario problema: </asp:TextBox>
 
                 <hr />
                 <div class="row">
@@ -31,13 +31,14 @@
                         <asp:TextBox ID="TextBoxFecha_Trabajo" CssClass="form-control" runat="server" ReadOnly="true">Fecha trabajo: </asp:TextBox>
                     </div>
                 </div>
-                <asp:TextBox ID="TextBoxComentario_Proveedor" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine" >Comentario proveedor: </asp:TextBox>
+                <asp:TextBox ID="TextBoxComentario_Proveedor" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine">Comentario proveedor: </asp:TextBox>
 
 
                 <div class="row" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
                     <div class="col">
-                        <asp:Button ID="btnActualizarDatos" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" />
+                        <asp:Button ID="btnActualizarDatos" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" OnClick="btnCancelar_Trabajo" />
                         <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" />
+                        <asp:Button ID="BtnPasarAAsignar" CssClass="btn btn-success ml-2"  runat="server" Text="Pasar a A Asignar" />                                              
                     </div>
                 </div>
 

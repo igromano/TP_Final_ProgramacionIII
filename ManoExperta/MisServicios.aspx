@@ -25,14 +25,6 @@
     <link href="Style/Home.css" rel="stylesheet" />
     <div class="container-fluid" id="MenuCentral" style="background-color: #80B9AD; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px;">
         <div id="SubMenuCentral" style="flex: 1; width: 100%; display: flex;">
-            <div class="col-2" style="background-color: #B3E2A7; padding: 10px;">
-                <h3>Menú de Navegación</h3>
-                <ul>
-                    <li><a href="#" style="text-decoration: none; color: black;">Opción 1</a></li>
-                    <li><a href="#" style="text-decoration: none; color: black;">Opción 2</a></li>
-                    <li><a href="#" style="text-decoration: none; color: black;">Opción 3</a></li>
-                </ul>
-            </div>
             <div class="col-10" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px;">
                 <h3>Trabajos activos</h3>
                 <asp:Repeater runat="server" ID="repTrabajosActivos" OnItemCommand="TrabajosActivos_ItemCommand">
