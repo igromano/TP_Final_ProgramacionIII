@@ -15,6 +15,7 @@ namespace ManoExperta
         Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
                 Response.Redirect("Login.aspx", false);
@@ -48,6 +49,12 @@ namespace ManoExperta
             }
         }
 
+        
+      
+        
+
 
     }
+
+    
 }
