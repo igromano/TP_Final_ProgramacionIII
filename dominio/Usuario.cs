@@ -31,5 +31,7 @@ namespace dominio
         public int Calificacion { get; set; }
 
         public bool Activo { get; set; }
+
+        public Especialidad Especialidad { get; set; }
     }
 }
