@@ -45,10 +45,14 @@ namespace ManoExperta
                         TextBoxDireccion.Text = ticket.Usuario.Domicilio;
                         TextBoxFecha_Solicitado.Text = ticket.FechaSolicitado.ToShortDateString();
                         TextBoxComentario.Text = ticket.ComentariosUsuario;
-                        TextBoxProveedor.Text = ticket.Prestador.Nombre + " " + ticket.Prestador.Apellido;
-                        TextBoxDireccion_Prov.Text = ticket.Prestador.Domicilio;
-                        TextBoxFecha_Trabajo.Text = ticket.FechaRealizado.ToShortDateString();
-                        TextBoxComentario_Proveedor.Text = ticket.ComentariosPrestador;
+                        if (ticket.Prestador != null)
+                        {
+                            TextBoxProveedor.Text = ticket.Prestador.Nombre + " " + ticket.Prestador.Apellido;
+                            TextBoxDireccion_Prov.Text = ticket.Prestador.Domicilio;
+                            TextBoxFecha_Trabajo.Text = ticket.FechaRealizado.ToShortDateString();
+                            TextBoxComentario_Proveedor.Text = ticket.ComentariosPrestador;
+
+                        }
                     }
                     else
                     {
@@ -73,11 +77,11 @@ namespace ManoExperta
                     string action = ((Button)sender).CommandArgument;
                     if (action == "cancelar")
                     {
-                        trabajoNegocio.cambiarEstado(ticket.Id, 3);                        
+                        trabajoNegocio.cambiarEstado(ticket.Id, 3);
                     }
                     else if (action == "finalizar")
                     {
-                        trabajoNegocio.cambiarEstado(ticket.Id, 4);                        
+                        trabajoNegocio.cambiarEstado(ticket.Id, 4);
                     }
                     Session["tickets"] = tickets;
                     Response.Redirect("MisServicios.aspx", false);
