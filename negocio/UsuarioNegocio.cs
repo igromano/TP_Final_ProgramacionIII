@@ -24,6 +24,9 @@ namespace negocio
                 datos.settearParametros("@IdRol", usuario.RolUsuario);
                 datos.settearParametros("@Email", usuario.Email);
                 datos.settearParametros("@IDPersona", usuario.IdPersona);
+                datos.settearParametros("@Nombre", usuario.Nombre);
+                datos.settearParametros("@Apellido", usuario.Apellido);
+
                 datos.ejecutarConsulta();
             }
             catch (Exception ex)
@@ -55,7 +58,7 @@ namespace negocio
                 }
                 datos.cerrarConexion();
 
-                
+
 
                 return null;
             }
@@ -71,7 +74,7 @@ namespace negocio
 
         public Usuario getUsuario(int idUsuario)
         {
-            if(idUsuario < 0)
+            if (idUsuario < 0)
             {
                 return null;
             }
@@ -79,7 +82,9 @@ namespace negocio
             Usuario usuario = new Usuario();
             try
             {
-                datos.configurarConsulta("SELECT * FROM Personas where ID = @idUsuario");
+                datos.configurarConsulta("SELECT * FROM Personas p " +
+                    "INNER JOIN Especialidad_x_Prestador ep ON p.IDPersona = ep.ID_Persona " +
+                    "where p.ID = @idUsuario");
                 datos.settearParametros("@idUsuario", idUsuario);
                 datos.ejecutarConsulta();
                 while (datos.lector.Read())
@@ -96,8 +101,8 @@ namespace negocio
 
                     usuario.Sexo = (datos.lector["Sexo"] is DBNull) ? char.Parse("") : char.Parse(datos.lector["Sexo"].ToString());
 
-                    usuario.FechaNacimiento = datos.lector["FechaNacimiento"] is DBNull 
-                        ? DateTime.Parse("1900-01-01") 
+                    usuario.FechaNacimiento = datos.lector["FechaNacimiento"] is DBNull
+                        ? DateTime.Parse("1900-01-01")
                         : DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
 
                     usuario.Domicilio = datos.lector["Domicilio"] is DBNull
@@ -107,6 +112,18 @@ namespace negocio
                     usuario.IdLocalidad = (datos.lector["IDLocalidad"] is DBNull) ? 0 : int.Parse(datos.lector["IDLocalidad"].ToString());
                     usuario.Telefono = (datos.lector["Telefono"]) is DBNull ? "" : datos.lector["Telefono"].ToString();
 
+                    Especialidad especialidad = new Especialidad();
+                    especialidad.Id = datos.lector["ID_Especialidad"] is DBNull ? 0
+                        : int.Parse(datos.lector["ID_Especialidad"].ToString());
+                    usuario.Especialidad = especialidad;
+                    if (usuario.Especialidad.Id != 0)
+                    {
+                        usuario.Especialidad.Nombre = Utils.Utils.getEspecialidades().Find(e => e.Id == usuario.Especialidad.Id).Nombre;
+                    }
+                    else
+                    {
+                        usuario.Especialidad.Nombre = "SIN ESPECIALIDAD";
+                    }
                 }
                 return usuario;
             }
@@ -149,6 +166,11 @@ namespace negocio
                 datos.settearParametros("@IDLocalidad", usuario.IdLocalidad);
                 datos.settearParametros("@Telefono", usuario.Telefono);
 
+                if (usuario.RolUsuario == RolUsuario.PRESTADOR)
+                {
+                    datos.settearParametros("@IDEspecialidad", usuario.Especialidad.Id);
+                }
+
                 datos.ejecutarConsulta();
 
             }
@@ -185,17 +207,20 @@ namespace negocio
                     usuario.IdPersona = datos.lector["IDPersona"].ToString();
                     usuario.Nombre = datos.lector["Nombre"].ToString();
                     usuario.Apellido = datos.lector["Apellido"].ToString();
-                    usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
                     usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
-                    usuario.Domicilio = datos.lector["Domicilio"].ToString();
-                    usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
 
-                    if(usuario.RolUsuario == RolUsuario.PRESTADOR)
+                    if (!(datos.lector["Sexo"] is DBNull))
                     {
-                        //usuario.Calificacion = int.Parse()
-                    }
+                        usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
+                        usuario.Domicilio = datos.lector["Domicilio"].ToString();
+                        usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
 
-                    listaUsuarios.Add(usuario);
+                        if (usuario.RolUsuario == RolUsuario.PRESTADOR)
+                        {
+                            //usuario.Calificacion = int.Parse()
+                        }
+                        listaUsuarios.Add(usuario);
+                    }
                 }
 
                 return listaUsuarios;
