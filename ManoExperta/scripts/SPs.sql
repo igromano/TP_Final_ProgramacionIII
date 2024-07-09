@@ -44,9 +44,10 @@ begin
 		PRINT ERROR_MESSAGE()
 	 end catch
 end
-
+exec SP_Login 'mamador', '123456'
 ---------------
 SELECT * FROM Personas
+exec SP_UpdateUser 2, 'Mamador', 'Mamador@Prestador.com', '123456', 'Marcelo', 'Amador', 'M', '1985-02-10', 'Larreta 456', 2, '54117889-5564'
 exec SP_UpdateUser 1,'DMeltrozo', 'DMeltrozo@user.com', '777777', 'Deborah', 'Meltrozo', 'F', '1990-10-10', 'Los Troncos 123', 2, '54115566-4455'
 ---------------
 --Update de Usuarios y/o Pesonas
@@ -113,7 +114,7 @@ select * from Resenias
 select * from Personas
 ---------------------
 
-exec SP_NuevoUsuario 'DMeltrozo', '123456', 2, 'DMeltrozo@user.com', '777777'
+exec SP_NuevoUsuario 'Mamador', '123456', 1, 'Mamador@Prestador.com', '123456'
 
 --Creacion de un nuevo usuario
 CREATE OR ALTER procedure SP_NuevoUsuario (
@@ -166,24 +167,22 @@ BEGIN
 		SET @IdEspecialidad = null
 	INSERT INTO Ticket(IDUsuario, IDPrestador, IDEspecialidad, Monto, IDEstado, ComentarioUsuario, FechaSolicitado) 
 	VALUES(@IdUsuario, @IdPrestador, @IdEspecialidad, @Monto, @IdEstado, @ComentarioUsuario, getdate())
-
 END
 
-CREATE OR ALTER PROCEDURE SP_ListaDeUsuarios (@)
-AS
-BEGIN
-	DECLARE @IdRol
-	SELECT @RolId =  FROM Personas
-END
-
-
-exec SP_CrearTicket '11111111', '0', 3, 5500, 5,'Tiene el orto descocido'
+exec SP_CrearTicket '777777', '123456', null, 0, 5,'hay olor a gas'
 
 select * from Ticket
 
 delete Ticket where Monto = 7700
 select *  from Especialidades
 select * from Personas
+select * from Estados
+select * from Localidad
+select * from Provincia
+
+SELECT l.ID AS 'ID_Localidad', l.Nombre AS 'Nombre', p.ID AS 'ID_Provincia', p.Nombre AS 'Nombre_Provincia' FROM Localidad l
+inner join Provincia p ON l.IDProvincia = p.ID
+
 exec SP_CalculoReputacion '1132235'
 --Listado de Reputacion de prestadores 
 SELECT (select avg(re.Calificacion) from Ticket t 

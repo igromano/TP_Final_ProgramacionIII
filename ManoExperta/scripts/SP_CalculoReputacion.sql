@@ -22,3 +22,7 @@ BEGIN
 		PRINT ERROR_MESSAGE()
 	END CATCH
 END
+
+exec SP_CalculoReputacion '123456'
+select * from Personas
+select * from ticket

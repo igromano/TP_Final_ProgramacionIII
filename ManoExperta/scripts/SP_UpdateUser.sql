@@ -9,7 +9,8 @@ CREATE OR ALTER PROCEDURE SP_UpdateUser (
 @FechaNacimiento date,
 @Domicilio varchar(100),
 @IDLocalidad smallint,
-@Telefono varchar(100)
+@Telefono varchar(100),
+@IDEspecialidad int = 0
 ) as
 begin
 	begin try
@@ -18,6 +19,10 @@ begin
 				FechaNacimiento = @FechaNacimiento, Domicilio = @Domicilio, IDLocalidad = @IDLocalidad,
 				Telefono = @Telefono
 				where ID = @Id
+				IF @IDEspecialidad != 0 AND @IdPersona NOT IN(SELECT ep.ID_Persona FROM Especialidad_x_Prestador ep)
+					BEGIN
+						INSERT INTO Especialidad_x_Prestador VALUES(@IdPersona, @IDEspecialidad)
+					END
 				PRINT('Se actualizo el usuario')
 				RETURN
 			end

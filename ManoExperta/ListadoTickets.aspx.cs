@@ -14,6 +14,8 @@ namespace ManoExperta
     {
         public Usuario usuariotemp = new Usuario();
         public TrabajoNegocio trabajoTemp = new TrabajoNegocio();
+        public ServicioNegocio servicioNegocioTemp = new ServicioNegocio();
+        public List<Estado> estadosTemp = new List<Estado>();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -30,8 +32,8 @@ namespace ManoExperta
                     {
                         Response.Redirect("Home.aspx", false);
                     }
-
-                    repTrabajosActivos.DataSource = trabajoTemp.getTicketsPorRol(usuariotemp);
+                    estadosTemp = servicioNegocioTemp.getEstados();
+                    repTrabajosActivos.DataSource = trabajoTemp.getTicketsPorEstado(estadosTemp.Find(es => es.Nombre.Equals("A ASIGNAR")));
                     repTrabajosActivos.DataBind();
 
                 }

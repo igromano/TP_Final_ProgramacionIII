@@ -20,7 +20,7 @@ create table Roles (
 	NombreRol varchar(20) not null
 )
 GO
-drop table Usuarios
+
 create table Usuarios(
 	ID int identity(1,1),
 	Usuario varchar(50) not null,
@@ -78,6 +78,7 @@ create table Ticket(
 	IDEstado smallint foreign key references Estados (ID),
 	ComentarioUsuario varchar(1000),
 	ComentarioPrestador varchar(1000),
+	IDUsrAprobacion varchar(50) foreign key references Personas (IDPersona), -- Usuario que paso a aprobacion el ticket
 	CONSTRAINT CK_ValidarFechas CHECK(FechaRealizado >= FechaSolicitado)
 )
 
