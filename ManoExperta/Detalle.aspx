@@ -43,10 +43,6 @@
                         <asp:TextBox ID="TextBoxNombre_Cliente" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label>Direccion:</label>
-                        <asp:TextBox ID="TextBoxDireccion" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                    </div>
-                    <div class="col-md-6 mb-3">
                         <label>Fecha solicitado:</label>
                         <asp:TextBox ID="TextBoxFecha_Solicitado" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
@@ -61,22 +57,34 @@
                         <asp:TextBox ID="TextBoxProveedor" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label>Direccion:</label>
-                        <asp:TextBox ID="TextBoxDireccion_Prov" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                        <label>CUIL:</label>
+                        <asp:TextBox ID="TextBoxCuil_Prov" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Fecha trabajo:</label>
-                        <asp:TextBox ID="TextBoxFecha_Trabajo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                    </div>
+                </div>
+                <hr />
+                <div class="row" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
                     <div class="col-md-6 mb-3">
                         <label>Comentario proveedor:</label>
                         <asp:TextBox ID="TextBoxComentario_Proveedor" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine"></asp:TextBox>
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Monto del trabajo:</label>
+                        <asp:TextBox ID="TextBoxMonto_Trabajo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Domicilio del trabajo:</label>
+                        <asp:TextBox ID="TextBoxDireccion" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Fecha estimativa del trabajo:</label>
+                        <asp:TextBox ID="TextBoxFecha_Trabajo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
                 </div>
                 <hr />
-                <% if (estadoActual == "SOLICITADO" || estadoActual == "EN PROCESO") { %>
-                <div class="row" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
-                    <div class="col">
+                <% if (estadoActual == "SOLICITADO" || estadoActual == "EN PROCESO" || estadoActual == "A ASIGNAR")
+                    { %>
+                <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 20px; justify-content: flex-end;">
+                    <div class="col text-right">
                         <asp:Button ID="btnCancelarTrabajo" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" OnClientClick="showToast('Trabajo cancelado con éxito.'); return false;" CommandArgument="cancelar" OnClick="btnAccionTrabajo" />
                         <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" OnClientClick="showToast('Trabajo pasado a realizado con éxito.'); return false;" CommandArgument="finalizar" OnClick="btnAccionTrabajo" />
                     </div>

@@ -77,8 +77,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card-body">
-                                    <%if(Usuario) %>
+                                <div class="card-body">                                   
                                     <h5 class="card-title"><%# Eval("Prestador.nombre") %> <%# Eval("Prestador.apellido") %></h5>
                                     <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
                                     <div class="capsulaMatricula">Matriculado</div>

@@ -24,15 +24,6 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxNombre_Cliente;
 
         /// <summary>
-        /// Control TextBoxDireccion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxDireccion;
-
-        /// <summary>
         /// Control TextBoxFecha_Solicitado.
         /// </summary>
         /// <remarks>
@@ -60,22 +51,13 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxProveedor;
 
         /// <summary>
-        /// Control TextBoxDireccion_Prov.
+        /// Control TextBoxCuil_Prov.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxDireccion_Prov;
-
-        /// <summary>
-        /// Control TextBoxFecha_Trabajo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFecha_Trabajo;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxCuil_Prov;
 
         /// <summary>
         /// Control TextBoxComentario_Proveedor.
@@ -85,6 +67,33 @@ namespace ManoExperta
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxComentario_Proveedor;
+
+        /// <summary>
+        /// Control TextBoxMonto_Trabajo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxMonto_Trabajo;
+
+        /// <summary>
+        /// Control TextBoxDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDireccion;
+
+        /// <summary>
+        /// Control TextBoxFecha_Trabajo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxFecha_Trabajo;
 
         /// <summary>
         /// Control btnCancelarTrabajo.
