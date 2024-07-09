@@ -39,7 +39,7 @@
                                         <h6 class="card-text"><small class="text-muted"><%# Eval("ComentariosUsuario") %></small></h6>
                                         <div class="row align-items-center justify-content-cente">
                                             <div class="col-md-3">
-                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado") %></span></small></p>
+                                                <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado.Nombre") %></span></small></p>
                                             </div>
                                         </div>
 
