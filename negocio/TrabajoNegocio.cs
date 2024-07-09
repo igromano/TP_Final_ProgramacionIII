@@ -145,7 +145,6 @@ namespace negocio
                     listadoTickets.Add(tmpTicket);
                 }
 
-
                 return listadoTickets;
             }
 
@@ -162,7 +161,6 @@ namespace negocio
 
         public List<Ticket> getTicketsPorEstado(Estado estado)
         {
-
             List<Ticket> listadoTickets = new List<Ticket>();
             AccesoADatos datos = new AccesoADatos();
             try
@@ -224,12 +222,12 @@ namespace negocio
                     tmpTicket.FechaResenia = datos.lector["Fecha_Res"] is DBNull ?
                         DateTime.Parse("1900-01-01") :
                         DateTime.Parse(datos.lector["Fecha_Res"].ToString());
-
-
+                    tmpTicket.DomicilioTrabajo = datos.lector["Usr_Domicilio"].ToString();
+                    tmpTicket.IdLocalidad = int.Parse(datos.lector["ID_Localidad_Trabajo"].ToString());
+                    tmpTicket.IdProvincia = int.Parse(datos.lector["ID_Provincia_Trabajo"].ToString());
 
                     listadoTickets.Add(tmpTicket);
                 }
-
 
                 return listadoTickets;
             }
