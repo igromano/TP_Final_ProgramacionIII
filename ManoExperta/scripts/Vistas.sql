@@ -12,13 +12,13 @@ re.Comentario AS 'Res_Comentario', --re.Calificacion AS 'Calificacion',
 CASE  WHEN re.Calificacion IS NULL THEN 0 ELSE re.Calificacion END AS 'Calificacion',
 re.fecha AS 'Fecha_Res'
 FROM Ticket t
-INNER JOIN Personas1 pe ON t.IDUsuario = pe.IDPersona
-INNER JOIN Personas1 pr ON t.IDPrestador = pr.IDPersona
-INNER JOIN Especialidades es ON t.IDEspecialidad = es.ID
+INNER JOIN Personas pe ON t.IDUsuario = pe.IDPersona
+LEFT JOIN Personas pr ON t.IDPrestador = pr.IDPersona
+LEFT JOIN Especialidades es ON t.IDEspecialidad = es.ID
 INNER JOIN Estados e ON t.IDEstado = e.ID
 LEFT JOIN Resenias re ON t.ID = re.IDTicket
 
 
-select * from Personas1 where iDRol = 0
+select * from Personas where iDRol = 0
 select * from Estados
 

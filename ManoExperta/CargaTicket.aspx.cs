@@ -82,6 +82,7 @@ namespace ManoExperta
                 trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0,2,TextBoxProblema.Text);
 
             }
+
         }
     }
 }

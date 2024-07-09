@@ -23,7 +23,7 @@ namespace negocio
                     idEspecialidad = especialidades.Find(f => f.Nombre == "SIN ESPECIALIDAD").Id;
                 }
                 datos.configurarProcedimiento("SP_CrearTicket");
-                datos.settearParametros("@IdUsuario", idUsuario);   
+                datos.settearParametros("@IdUsuario", idUsuario);
                 datos.settearParametros("@IdPrestador", idPrestador);
                 datos.settearParametros("@IdEspecialidad", idEspecialidad);
                 datos.settearParametros("@Monto", monto);
@@ -42,15 +42,23 @@ namespace negocio
             }
         }
 
-        public void cambiarEstado(int idTrabajo, int idEstado)
+        public void cambiarEstado(int idTrabajo, int idEstado, Usuario usuario = null)
         {
             AccesoADatos datos = new AccesoADatos();
 
             try
             {
-                datos.configurarConsulta("UPDATE Ticket set IDEstado = @IDEstado where ID = @IDTrabajo");
+                datos.configurarConsulta("UPDATE Ticket set IDEstado = @IDEstado, IDUsrAprobacion = @IDUsrAprobacion where ID = @IDTrabajo");
                 datos.settearParametros("@IDEstado", idEstado);
                 datos.settearParametros("@IDTrabajo", idTrabajo);
+                if (usuario != null)
+                {
+                    datos.settearParametros("@IDUsrAprobacion", usuario.IdPersona);
+                }
+                else
+                {
+                    datos.settearParametros("@IDUsrAprobacion", null);
+                }
 
                 datos.ejecutarConsulta();
             }
@@ -75,7 +83,6 @@ namespace negocio
                 else
                 {
                     datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Prestador = @IdUsuario");
-
                 }
 
                 datos.settearParametros("@IdUsuario", usuario.IdPersona);
@@ -176,12 +183,15 @@ namespace negocio
                     tmpUsuario.Id = int.Parse(datos.lector["ID_Usr_Cliente"].ToString());
                     tmpTicket.Usuario = tmpUsuario;
 
-                    tmpPrestador.IdPersona = datos.lector["ID_Prestador"].ToString();
-                    tmpPrestador.Nombre = datos.lector["Pres_Nombre"].ToString();
-                    tmpPrestador.Apellido = datos.lector["Pres_Apellido"].ToString();
-                    tmpPrestador.RolUsuario = RolUsuario.PRESTADOR;
-                    tmpPrestador.Id = int.Parse(datos.lector["ID_Usr_Prestador"].ToString());
-                    tmpTicket.Prestador = tmpPrestador;
+                    if (!(datos.lector["ID_Prestador"] is DBNull))
+                    {
+                        tmpPrestador.IdPersona = datos.lector["ID_Prestador"].ToString();
+                        tmpPrestador.Nombre = datos.lector["Pres_Nombre"].ToString();
+                        tmpPrestador.Apellido = datos.lector["Pres_Apellido"].ToString();
+                        tmpPrestador.RolUsuario = RolUsuario.PRESTADOR;
+                        tmpPrestador.Id = int.Parse(datos.lector["ID_Usr_Prestador"].ToString());
+                        tmpTicket.Prestador = tmpPrestador;
+                    }
 
                     Estado tmpEstado = new Estado();
 
@@ -211,6 +221,8 @@ namespace negocio
                     tmpTicket.FechaResenia = datos.lector["Fecha_Res"] is DBNull ?
                         DateTime.Parse("1900-01-01") :
                         DateTime.Parse(datos.lector["Fecha_Res"].ToString());
+
+
 
                     listadoTickets.Add(tmpTicket);
                 }

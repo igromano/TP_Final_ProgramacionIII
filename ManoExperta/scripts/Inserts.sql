@@ -9,6 +9,14 @@ INSERT INTO Especialidades VALUES('PLOMERIA')
 INSERT INTO Especialidades VALUES('ELECTRICIDAD')
 INSERT INTO Especialidades VALUES('GASISTA')
 INSERT INTO Especialidades VALUES('HERRERIA')
+INSERT INTO Especialidades VALUES('JARDINERIA')
+INSERT INTO Especialidades VALUES('COMPUTACION')
+INSERT INTO Especialidades VALUES('ALBAÑILERIA')
+INSERT INTO Especialidades VALUES('REFRIGERACION')
+INSERT INTO Especialidades VALUES('ELECTRODOMESTICOS')
+INSERT INTO Especialidades VALUES('CERRAJERIA')
+INSERT INTO Especialidades VALUES('CARPINTERIA')
+INSERT INTO Especialidades VALUES('MECANICA GENERAL')
 
 
 --Agregar Usuarios
@@ -67,7 +75,7 @@ INSERT INTO Personas1 VALUES('admin', 'admin', 0, getdate(), 'admin@ManoExperta.
 INSERT INTO Personas1 VALUES('user', 'user', 1, getdate(), 'user@ManoExperta.com', '11111111', 'user', 'user', 'M', '1990-02-06', 'San Pedro 452', 2, 1)
 INSERT INTO Personas1 VALUES('user1', 'user1', 1, getdate(), 'user1@ManoExperta.com', '22222222', 'user1', 'user1', 'M', '1990-02-07', 'Josecito 11', 2, 1)
 
-delete Personas1 where email like '%manoexperta%'
+--delete Personas1 where email like '%manoexperta%'
 
 select * from ticket
 select * from estados
@@ -78,8 +86,8 @@ select * from Personas1
 select p.idpersona, p.nombre, p.apellido, e.Nombre, e.ID  from Personas1 p
 inner join Especialidad_x_Prestador ep on p.IDPersona = ep.ID_Persona
 inner join Especialidades e on ep.ID_Especialidad = e.ID
-delete ticket
-update ticket set Comentario = 'Trabajo finalizado' where IDPrestador = '1132235'
+--delete ticket
+--update ticket set Comentario = 'Trabajo finalizado' where IDPrestador = '1132235'
 /*
 	ID bigint identity(1000, 1) primary key,
 	FechaSolicitado date not null,
@@ -122,4 +130,9 @@ inner join resenias r ON t.ID = r.IDTicket
 inner join Personas1 p ON t.idprestador = p.idpersona
 WHERE t.IDPrestador = '1'
 GROUP BY p.idpersona
+
+SELECT * FROM Personas p
+INNER JOIN Especialidad_x_Prestador ep ON p.IDPersona = ep.ID_Persona
+--INNER JOIN Especialidades e ON ep.ID_Especialidad = e.ID
+where p.ID = 2
 

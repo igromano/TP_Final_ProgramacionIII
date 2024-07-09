@@ -50,7 +50,7 @@ namespace negocio
                     " FROM Localidad l inner join Provincia p ON l.IDProvincia = p.ID");
                 datos.ejecutarConsulta();
 
-                while (!datos.lector.Read())
+                while (datos.lector.Read())
                 {
                     Locacion locacion = new Locacion();
                     locacion.Id = int.Parse(datos.lector["ID_Localidad"].ToString());
@@ -79,7 +79,7 @@ namespace negocio
                 datos.configurarConsulta("SELECT * FROM Especialidades");
                 datos.ejecutarConsulta();
 
-                while (!datos.lector.Read())
+                while (datos.lector.Read())
                 {
                     Especialidad especialidad = new Especialidad();
                     especialidad.Id = int.Parse(datos.lector["ID"].ToString());

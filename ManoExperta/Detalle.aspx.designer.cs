@@ -87,13 +87,13 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxComentario_Proveedor;
 
         /// <summary>
-        /// Control btnActualizarDatos.
+        /// Control btnCancelarTrabajo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnActualizarDatos;
+        protected global::System.Web.UI.WebControls.Button btnCancelarTrabajo;
 
         /// <summary>
         /// Control btnPasarRealizado.

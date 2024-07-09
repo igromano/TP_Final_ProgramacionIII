@@ -4,7 +4,7 @@ CREATE OR ALTER PROCEDURE SP_CrearTicket (
 @IdEspecialidad int,
 @Monto money = null,
 @IdEstado smallint,
-@ComentarioUsuario varchar(1000)
+@ComentarioUsuario varchar(1000) = ''
 ) AS
 BEGIN
 	IF @IdPrestador = '0'
