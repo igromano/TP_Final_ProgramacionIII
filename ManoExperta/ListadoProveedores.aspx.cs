@@ -45,5 +45,11 @@ namespace ManoExperta
             string id = ((Button)sender).CommandArgument;
             Response.Redirect("DetalleProveedor.aspx?id=" + id, false);
         }
+
+        protected void buttonSolicitarTrabajo_Click(object sender, EventArgs e)
+        {
+            string id = ((Button)sender).CommandArgument;
+            Response.Redirect("CargaTicket.aspx?tipo=2&proveedor=" + id, false);
+        }
     }
 }

@@ -41,6 +41,9 @@ namespace ManoExperta
                     trabajos = ticketsTemp.Count();
                     repListadoResenias.DataSource = ticketsTemp;
                     repListadoResenias.DataBind();
+                    textBoxDireccion.Text = usuarioTemp.Domicilio;
+                    textBoxLocalidad.Text = usuarioTemp.IdLocalidad.ToString();
+
                 }
 
             }

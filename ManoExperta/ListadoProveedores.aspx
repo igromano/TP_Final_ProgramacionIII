@@ -60,7 +60,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters" style="max-width: 80%">
                                             <asp:Button ID="buttonMasInformacion" runat="server" CssClass="btn btn-secondary mb-2" Text="Más información" CommandArgument='<%#Eval("ID")%>' CommandName="ProveedorID" OnClick="buttonMasInformacion_Click" />
-                                            <button class="btn btn-success">Solicitar Trabajo</button>
+                                            <asp:Button ID="buttonSolicitarTrabajo" runat="server" CssClass="btn btn-success mb-2" Text="Solicitar Trabajo" CommandArgument='<%#Eval("ID")%>' CommandName="ProveedorID" OnClick="buttonSolicitarTrabajo_Click"/>
                                         </div>
                                     </div>
                                 </div>

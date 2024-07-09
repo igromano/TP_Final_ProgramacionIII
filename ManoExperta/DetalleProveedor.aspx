@@ -13,8 +13,10 @@
                 <hr />
                 <div class="row">
                     <div class="col" style="display: grid">
-                        <label>Direccion: <%= usuarioTemp.Domicilio %></label>
-                        <label>Localidad: <%= usuarioTemp.IdLocalidad %></label>
+                        <label>Direccion:</label>
+                        <asp:TextBox ID="textBoxDireccion" runat="server" CssClass="form-control"/>
+                        <label>Localidad:</label>
+                        <asp:TextBox ID="textBoxLocalidad" runat="server" CssClass="form-control"/>
                     </div>
                     <div class="col" style="display: grid">
                         <label>Especialidad:</label>
@@ -30,6 +32,10 @@
                 <hr />
                 <div class="row" style="margin: 10px">
                     <h5>Reseñas:</h5>
+                    <% if (ticketsTemp.Count == 0) { %>
+                        <h3> Este proveedor todavía no tiene reseñas. ¡Dale una oportunidad y pedile un trabajo!</h3>
+                        <% } %>
+                    <% else {  %>
                     <asp:Repeater runat="server" ID="repListadoResenias">
                         <ItemTemplate>
                             <div class="card mb-3" style="width: 100%;">
@@ -37,15 +43,26 @@
                                     <div class="col-md-2">
                                         <img src="Resources/Images/comentario.png" class="img-fluid rounded-start" alt="..." style="max-height: 100px">
                                     </div>
+
+                                    <div class="col-md-7">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%#Eval("Usuario.Nombre") %> <%#Eval("Usuario.Apellido") %></h5>
+                                            <p><%# Eval("ComentarioResenia") %></p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="card-body">
+                                            <p>
+                                                Puntuación: <%# Eval("Calificacion")%>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h5 class="card-title"><%#Eval("Usuario.Nombre") %> <%#Eval("Usuario.Apellido") %></h5>
-                                <p><%# Eval("ComentarioResenia") %></p>
-                                <p>
-                                    Puntuación: <%# Eval("Calificacion")%>
-                                </p>
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
+                <% } %>
                 </div>
 
 

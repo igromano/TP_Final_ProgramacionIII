@@ -15,6 +15,24 @@ namespace ManoExperta
     {
 
         /// <summary>
+        /// Control textBoxDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textBoxDireccion;
+
+        /// <summary>
+        /// Control textBoxLocalidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textBoxLocalidad;
+
+        /// <summary>
         /// Control repListadoResenias.
         /// </summary>
         /// <remarks>
