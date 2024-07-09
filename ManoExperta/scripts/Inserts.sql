@@ -121,18 +121,22 @@ INSERT INTO Resenias VALUES(1005, '2023-02-28', 'todo OK', 5)
 
 select * from ticket
 select * from resenias
+select * from personas
+select * from Estados
+update Personas set Contrasenia = 'Mama'  where id = 2
+
 --Query para calcular la reputacion del prestador
 SELECT p.idpersona, (SUM(r.calificacion) / 
 (SELECT count(*) FROM resenias r
 inner join ticket t ON r.idticket = t.id
 WHERE t.idprestador = '1' )) AS 'Reputacion' FROM ticket t
 inner join resenias r ON t.ID = r.IDTicket
-inner join Personas1 p ON t.idprestador = p.idpersona
-WHERE t.IDPrestador = '1'
+inner join Personas p ON t.idprestador = p.idpersona
+WHERE t.IDPrestador = '2'
 GROUP BY p.idpersona
 
 SELECT * FROM Personas p
-INNER JOIN Especialidad_x_Prestador ep ON p.IDPersona = ep.ID_Persona
+LEFT JOIN Especialidad_x_Prestador ep ON p.IDPersona = ep.ID_Persona
 --INNER JOIN Especialidades e ON ep.ID_Especialidad = e.ID
-where p.ID = 2
+where p.ID = 1
 

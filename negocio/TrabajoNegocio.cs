@@ -103,12 +103,15 @@ namespace negocio
                     tmpUsuario.Id = int.Parse(datos.lector["ID_Usr_Cliente"].ToString());
                     tmpTicket.Usuario = tmpUsuario;
 
-                    tmpPrestador.IdPersona = datos.lector["ID_Prestador"].ToString();
-                    tmpPrestador.Nombre = datos.lector["Pres_Nombre"].ToString();
-                    tmpPrestador.Apellido = datos.lector["Pres_Apellido"].ToString();
-                    tmpPrestador.RolUsuario = RolUsuario.PRESTADOR;
-                    tmpPrestador.Id = int.Parse(datos.lector["ID_Usr_Prestador"].ToString());
-                    tmpTicket.Prestador = tmpPrestador;
+                    if (!(datos.lector["ID_Prestador"] is DBNull))
+                    {
+                        tmpPrestador.IdPersona = datos.lector["ID_Prestador"].ToString();
+                        tmpPrestador.Nombre = datos.lector["Pres_Nombre"].ToString();
+                        tmpPrestador.Apellido = datos.lector["Pres_Apellido"].ToString();
+                        tmpPrestador.RolUsuario = RolUsuario.PRESTADOR;
+                        tmpPrestador.Id = int.Parse(datos.lector["ID_Usr_Prestador"].ToString());
+                        tmpTicket.Prestador = tmpPrestador;
+                    }
 
                     Estado estado = new Estado();
 
