@@ -188,6 +188,6 @@ exec SP_CalculoReputacion '1132235'
 SELECT (select avg(re.Calificacion) from Ticket t 
 	inner join Resenias re on t.ID = re.IDTicket
 	where t.IDPrestador = p.IDPersona
-), p.Apellido, p.IDPersona
-FROM Personas p WHERE iDRol = 1
+) AS 'Calificacion', *
+FROM Personas p WHERE iDRol = 1 AND p.ID = 2
 

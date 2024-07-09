@@ -218,7 +218,7 @@ namespace negocio
                     usuario.Apellido = datos.lector["Apellido"].ToString();
                     usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
 
-                    if (!(datos.lector["Sexo"] is DBNull))
+                    if (!(datos.lector["Sexo"].ToString()).Equals("X"))
                     {
                         usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
                         usuario.Domicilio = datos.lector["Domicilio"].ToString();
