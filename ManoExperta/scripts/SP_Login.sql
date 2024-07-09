@@ -13,7 +13,7 @@ begin
 		BEGIN
 			RAISERROR ('Contraseña incorrecta', 16, 0)
 		END
-		SELECT U.ID, U.iDRol FROM Personas U WHERE U.Usuario = @Usuario
+		SELECT U.ID, U.iDRol, u.Contrasenia FROM Personas U WHERE U.Usuario = @Usuario
 	 end try
 	 begin catch
 		PRINT ERROR_MESSAGE()
