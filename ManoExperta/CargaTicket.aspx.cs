@@ -41,21 +41,28 @@ namespace ManoExperta
                     Response.Redirect("Error.aspx", false);
                 }
                 else
-                if (idTipo.Equals("1"))
                 {
                     usuarioTemp = (Usuario)Session["usuario"];
-                    TextBoxUsuarioSolicitante.Text = usuarioTemp.UserName;
-                    TextBoxNombreApellidoSolicitante.Text = usuarioTemp.Nombre + " " + usuarioTemp.Apellido;
-                    TextBoxEmailSolicitante.Text = usuarioTemp.Email;
-                    TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
-                    TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
-                }
-                else
-                {
-                    idProveedor = Request.QueryString["proveedor"];
-                    //usuarioProveedor = usuarioNegocioTemp.getPrestador(int.Parse(idProveedor));
-                    TextBoxProveedor.Text = usuarioProveedor.Nombre + " " + usuarioProveedor.Apellido;
+                    if (idTipo.Equals("1"))
+                    {
+                        TextBoxUsuarioSolicitante.Text = usuarioTemp.UserName;
+                        TextBoxNombreApellidoSolicitante.Text = usuarioTemp.Nombre + " " + usuarioTemp.Apellido;
+                        TextBoxEmailSolicitante.Text = usuarioTemp.Email;
+                        TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
+                        TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
+                    }
+                    else
+                    {
+                        idProveedor = Request.QueryString["proveedor"];   
+                        TextBoxUsuarioSolicitante.Text = usuarioTemp.UserName;
+                        TextBoxNombreApellidoSolicitante.Text = usuarioTemp.Nombre + " " + usuarioTemp.Apellido;
+                        TextBoxEmailSolicitante.Text = usuarioTemp.Email;
+                        TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
+                        TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
+                        usuarioProveedor = usuarioNegocioTemp.getUsuario(int.Parse(idProveedor));
+                        TextBoxProveedor.Text = usuarioProveedor.Nombre + " " + usuarioProveedor.Apellido;
 
+                    }
                 }
             }
         }
@@ -66,7 +73,16 @@ namespace ManoExperta
 
         protected void btnCargarPedido_Click(object sender, EventArgs e)
         {
-           // trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0,0,5,TextBoxProblema.Text);
+            if(usuarioProveedor.IdPersona != null)
+            {
+                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, 2, TextBoxProblema.Text, usuarioProveedor.IdPersona.ToString());
+            }
+            else
+            {
+                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0,2,TextBoxProblema.Text);
+
+            }
+
         }
     }
 }
