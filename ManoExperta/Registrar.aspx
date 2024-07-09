@@ -38,8 +38,14 @@
             { %>
         <form class="row g-3 needs-validation" novalidate>
             <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-                <div id="registrarUsuario" class="container opacity-85" style="--bs-bg-opacity: .5; max-width: 400px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
+                <div id="registrarUsuario" class="container opacity-85" style="--bs-bg-opacity: .5; max-width: 400px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <%if (errorBool)
+                        { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%:error %>
+                    </div>
+                    <%} %>
                     <div id="nombreUsuario" class="form-text">
                         <asp:Label ID="Label7" CssClass="form-label fw-bold" runat="server" Text="Nombre"></asp:Label>
                         <asp:TextBox ID="TextBoxNombreUsuario" CssClass="form-control" runat="server" required="true"></asp:TextBox>
