@@ -3,10 +3,10 @@ CREATE OR ALTER procedure SP_NuevoUsuario (
 @Contrasenia varchar(50),
 @IdRol smallint,
 @Email varchar(255),
-@IDPersona bigint,
+@IDPersona varchar(50),
 @Nombre varchar(50) = '',
 @Apellido varchar(50) = '',
-@Sexo char = '',
+@Sexo char = 'X',
 @FechaNacimiento date = '1900-01-01',
 @Domicilio varchar(100) = '',
 @IDLocalidad smallint = null

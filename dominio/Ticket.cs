@@ -29,13 +29,10 @@ namespace dominio
 
         public Usuario Prestador { get; set; }
 
-        //public Especialidad Especialidad { get; set; }
-
         public string  Especialidad { get; set; }
         public double Monto { get; set; }
 
         public Estado Estado { get; set; }
-        //public string Estado { get; set; }
 
         public  string ComentariosUsuario { get; set; }
 
@@ -46,6 +43,12 @@ namespace dominio
         public  int Calificacion { get; set; }
 
         public DateTime FechaSolicitado { get; set; }
+
+        public string DomicilioTrabajo { get; set; }
+
+        public int IdLocalidad { get; set; }
+
+        public int IdProvincia { get; set; }
 
         public DateTime FechaRealizado
         {
