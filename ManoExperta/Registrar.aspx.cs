@@ -14,8 +14,12 @@ namespace ManoExperta
         protected bool creaUsuario;
         protected bool creaProveedor;
         protected bool modalOpciones;
+        public bool errorBool = false;
+        public bool registroExitoso;
+        public string error;
         protected void Page_Load(object sender, EventArgs e)
         {
+            errorBool = false;
             if (!IsPostBack)
             {
                 modalOpciones = false;
@@ -28,43 +32,55 @@ namespace ManoExperta
             creaUsuario = true;
             creaProveedor = false;
             modalOpciones = false;
-           
-            
+
+
         }
 
         protected void AltaUsuario(object sender, EventArgs e)
         {
             string nombre = TextBoxNombreUsuario.Text;
+            string apellido = TextBoxApellidoUsuario.Text;
             string email = TextBoxEmailUsuario.Text;
             string userName = TextBoxUsuarioUsuario.Text;
             string contrasenia = TextBoxUsuarioContrasenia.Text;
+            string contraseniaRepetir = TextBoxUsuarioContraseniaConfirmar.Text;
             string dni = TextBoxDNI.Text;
+
+            if (!contrasenia.Equals(contraseniaRepetir))
+            {
+                errorBool = true;
+                error = "Las contraseñas no son iguales";
+                
+            }
 
             Usuario nuevoUsuario = new Usuario(userName, contrasenia); // instancia del objeto usuario
 
             nuevoUsuario.Email = email; // asigno los valores a las propiedades del obj usuario
             nuevoUsuario.UserName = userName;
             nuevoUsuario.Nombre = nombre;
+            nuevoUsuario.Apellido = apellido;
             nuevoUsuario.IdPersona = dni;
             nuevoUsuario.RolUsuario = RolUsuario.USUARIO;
 
-
+            if (!errorBool)
+            {
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio(); // creo una instancia de usuarioNegocio
-            bool registroExitoso = usuarioNegocio.registrarUsuario(nuevoUsuario); // llamada a metodo registrarUsuario(nacho)
+            registroExitoso = usuarioNegocio.registrarUsuario(nuevoUsuario); // llamada a metodo registrarUsuario(nacho)
+
+            }
+
 
 
             if (registroExitoso)
             {
                 // mostrar un mensaje de registro exitoso
+                error = "";
                 Response.Redirect("Login.aspx");
 
             }
             else
             {
-                // AGREGAR LBL EN EL FRONT
-
-                //lblMensajeDeError.Text = "No se pudo registrar el usuario. Por favor, intente denuevo.";
-                //lblMensajeError.Visible = true;
+                error = "Hubo un error en el registro";
             }
         }
 
@@ -72,15 +88,17 @@ namespace ManoExperta
         {
             creaUsuario = false;
             creaProveedor = true;
-            modalOpciones = false;          
+            modalOpciones = false;
         }
 
         protected void AltaProveedor(object sender, EventArgs e)
         {
             string nombre = TextBoxNombreProveedor.Text;
+            string apellido = TextBoxApellidoProveedor.Text;
             string email = TextBoxEmailProveedor.Text;
             string userName = TextBoxUsuarioProveedor.Text;
             string contrasenia = TextBoxProveedorContrasenia.Text;
+            string contraseniaRepetida = TextBoxUsuarioContraseniaConfirmar.Text;
             string cuil = TextBoxCUIL.Text;
 
             Usuario nuevoProveedor = new Usuario(userName, contrasenia); // crea instancia de nuevo prov
@@ -88,26 +106,35 @@ namespace ManoExperta
             nuevoProveedor.Email = email;
             nuevoProveedor.UserName = userName;
             nuevoProveedor.Nombre = nombre;
+            nuevoProveedor.Apellido = apellido;
             nuevoProveedor.IdPersona = cuil;
             nuevoProveedor.RolUsuario = RolUsuario.PRESTADOR;
 
-
-            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            bool registroExitoso = usuarioNegocio.registrarUsuario(nuevoProveedor);
-
-
-            if (registroExitoso)
+            try
             {
-                // mostrar un mensaje de registro exitoso
-                Response.Redirect("Login.aspx");
-            }
-            else
-            {
-                // AGREGAR ESTOS LBL EN EL FRONT
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                bool registroExitoso = usuarioNegocio.registrarUsuario(nuevoProveedor);
+                if (registroExitoso)
+                {
+                    // mostrar un mensaje de registro exitoso
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    // AGREGAR ESTOS LBL EN EL FRONT
 
-                //lblMensajeDeError.Text = "No se pudo registrar el usuario. Por favor, intente denuevo.";
-                //lblMensajeError.Visible = true;
+                    //lblMensajeDeError.Text = "No se pudo registrar el usuario. Por favor, intente denuevo.";
+                    //lblMensajeError.Visible = true;
+                }
+
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+
 
         }
 
