@@ -53,12 +53,17 @@ namespace negocio
                     datos.ejecutarConsulta();
                     while (datos.lector.Read())
                     {
-                        return getUsuario(int.Parse(datos.lector["ID"].ToString()));
+                        string pass = (datos.lector["Contrasenia"] is DBNull) ?
+                             "" :
+                             datos.lector["Contrasenia"].ToString();
+                        if (pass.Length > 0 && pass.Equals(usuario.Contrasenia))
+                        {
+                            return getUsuario(int.Parse(datos.lector["ID"].ToString()));
+                        }
                     }
                 }
+
                 datos.cerrarConexion();
-
-
 
                 return null;
             }
@@ -83,7 +88,7 @@ namespace negocio
             try
             {
                 datos.configurarConsulta("SELECT * FROM Personas p " +
-                    "INNER JOIN Especialidad_x_Prestador ep ON p.IDPersona = ep.ID_Persona " +
+                    "LEFT JOIN Especialidad_x_Prestador ep ON p.IDPersona = ep.ID_Persona " +
                     "where p.ID = @idUsuario");
                 datos.settearParametros("@idUsuario", idUsuario);
                 datos.ejecutarConsulta();
@@ -144,20 +149,15 @@ namespace negocio
             {
                 throw new Exception("El usuario provisto no es valido");
             }
-            bool persona = false;
             AccesoADatos datos = new AccesoADatos();
-            //if (usuario.IdPersona != null || usuario.IdPersona.Length > 0)
-            //{
-            //    persona = true;
-            //}
+
             try
             {
                 datos.configurarProcedimiento("SP_UpdateUser");
                 datos.settearParametros("@Id", usuario.Id);
                 datos.settearParametros("@Usuario", usuario.UserName);
-                //datos.settearParametros("@Contrasenia", usuario.Contrasenia);
+                datos.settearParametros("@Contrasenia", usuario.Contrasenia);
                 datos.settearParametros("@Email", usuario.Email);
-                //datos.settearParametros("@Persona", persona);
                 datos.settearParametros("@IdPersona", usuario.IdPersona);
                 datos.settearParametros("@Nombre", usuario.Nombre);
                 datos.settearParametros("@Apellido", usuario.Apellido);
@@ -191,7 +191,16 @@ namespace negocio
             List<Usuario> listaUsuarios = new List<Usuario>();
             try
             {
-                datos.configurarConsulta("SELECT * FROM Personas WHERE iDRol = @IdRol");
+                switch (rol)
+                {
+                    case RolUsuario.PRESTADOR:
+                        datos.configurarConsulta("SELECT (SELECT avg(re.Calificacion) from Ticket t inner join Resenias re on t.ID = re.IDTicket where t.IDPrestador = p.IDPersona) AS 'Calificacion', * FROM Personas p WHERE iDRol = @IdRol");
+                        break;
+                    case RolUsuario.USUARIO:
+                        datos.configurarConsulta("SELECT * FROM Personas WHERE iDRol = @IdRol");
+                    break;
+                }
+
                 datos.settearParametros("@IdRol", rol);
                 datos.ejecutarConsulta();
 

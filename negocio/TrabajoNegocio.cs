@@ -164,7 +164,7 @@ namespace negocio
             AccesoADatos datos = new AccesoADatos();
             try
             {
-                datos.configurarConsulta("SELECT * FROM Tickets WHERE IdEstado = @IdEstado");
+                datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Estado = @IdEstado");
                 datos.settearParametros("@IdEstado", estado.Id);
                 datos.ejecutarConsulta();
 
