@@ -64,7 +64,7 @@ namespace ManoExperta
                     else
                     {
                         Response.Redirect("Error.aspx", false);
-                    }
+                    }   
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace ManoExperta
                 Response.Redirect("Error.aspx", false);
             }
         }
-        /*
+        
         protected void btnCancelar_Trabajo(object sender, EventArgs e)
         {
             try
@@ -134,8 +134,8 @@ namespace ManoExperta
                 Response.Redirect("Error.aspx", false);
             }
         }
-        */
-        /*
+        
+        
         protected void btnPasar_A_Finalizado(object sender, EventArgs e)
         {
             try
@@ -164,6 +164,6 @@ namespace ManoExperta
                 Response.Redirect("Error.aspx", false);
             }
         }
-        */
+        
     }
 }

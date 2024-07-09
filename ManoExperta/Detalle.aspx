@@ -85,8 +85,8 @@
                     { %>
                 <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 20px; justify-content: flex-end;">
                     <div class="col text-right">
-                        <asp:Button ID="btnCancelarTrabajo" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" OnClientClick="showToast('Trabajo cancelado con éxito.'); return false;" CommandArgument="cancelar" OnClick="btnAccionTrabajo" />
-                        <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" OnClientClick="showToast('Trabajo pasado a realizado con éxito.'); return false;" CommandArgument="finalizar" OnClick="btnAccionTrabajo" />
+                        <asp:Button ID="btnCancelarTrabajo" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" CommandArgument="cancelar" OnClick="btnAccionTrabajo" />
+                        <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" CommandArgument="finalizar" OnClick="btnAccionTrabajo" />
                     </div>
                 </div>
                 <% } %>
