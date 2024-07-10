@@ -15,6 +15,15 @@ namespace ManoExperta
     {
 
         /// <summary>
+        /// Control scriptManagerPreferencias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptManagerPreferencias;
+
+        /// <summary>
         /// Control lblUser.
         /// </summary>
         /// <remarks>
@@ -40,24 +49,6 @@ namespace ManoExperta
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblValidateUser;
-
-        /// <summary>
-        /// Control lblPass.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPass;
-
-        /// <summary>
-        /// Control TextBoxUsuarioContrasenia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxUsuarioContrasenia;
 
         /// <summary>
         /// Control Label7.
@@ -186,49 +177,31 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxDireccionCalle;
 
         /// <summary>
-        /// Control labelAlturaCalle.
+        /// Control labelLocalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelAlturaCalle;
+        protected global::System.Web.UI.WebControls.Label labelLocalidad;
 
         /// <summary>
-        /// Control TextBoxAlturaCalle.
+        /// Control DropDownListLocalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxAlturaCalle;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListLocalidad;
 
         /// <summary>
-        /// Control labelDropBarrio.
+        /// Control labelProvincia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelDropBarrio;
-
-        /// <summary>
-        /// Control DropDownBarrio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownBarrio;
-
-        /// <summary>
-        /// Control labelDropProvincia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelDropProvincia;
+        protected global::System.Web.UI.WebControls.Label labelProvincia;
 
         /// <summary>
         /// Control DropDownListProvincia.
@@ -240,24 +213,6 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.DropDownList DropDownListProvincia;
 
         /// <summary>
-        /// Control labelCodigoPostal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelCodigoPostal;
-
-        /// <summary>
-        /// Control TextBoxCodigoPostal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxCodigoPostal;
-
-        /// <summary>
         /// Control btnActualizarDatos.
         /// </summary>
         /// <remarks>
@@ -265,5 +220,14 @@ namespace ManoExperta
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnActualizarDatos;
+
+        /// <summary>
+        /// Control btnDescartar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDescartar;
     }
 }
