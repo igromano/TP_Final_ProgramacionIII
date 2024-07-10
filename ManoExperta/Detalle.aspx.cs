@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using ManoExperta.helpers;
 using dominio;
 using negocio;
+using negocio.Utils;
 
 namespace ManoExperta
 {
@@ -29,25 +30,21 @@ namespace ManoExperta
                 else
                 {
                     idTicket = Convert.ToInt32(Request.QueryString["idTicket"]);
-
-                    Usuario usuario = (Usuario)Session["usuario"];
-                    //TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
-                    //List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
+                    Usuario usuario = (Usuario)Session["usuario"];                 
                     List<Ticket> tickets = (List<Ticket>)Session["tickets"];
-
                     Ticket ticket = tickets.Find(x => x.Id == idTicket);
 
                     if (ticket != null)
-                    {
-                        
+                    {                        
                         UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                         Usuario usuarioCreador;
-                        usuarioCreador = usuarioNegocio.getUsuario(ticket.Usuario.Id);
-                        
-                        estadoActual = ticket.Estado.Nombre;
-                        
+                        usuarioCreador = usuarioNegocio.getUsuario(ticket.Usuario.Id);                        
+                        estadoActual = ticket.Estado.Nombre;                       
                         TextBoxNombre_Cliente.Text = ticket.Usuario.Nombre + " " + ticket.Usuario.Apellido;
                         TextBoxDireccion.Text = usuarioCreador.Domicilio; // cambiar cuando nacho lo agregue a la carga en getTicketsPorRol
+                        List<Locacion> provinciasUnicas = Utils.getLocaciones().GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
+                        TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuario.IdLocalidad).NombreProvincia;
+                        TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuario.IdLocalidad).Nombre;
                         TextBoxFecha_Solicitado.Text = ticket.FechaSolicitado.ToShortDateString();
                         TextBoxComentario.Text = ticket.ComentariosUsuario;
                         
@@ -104,7 +101,14 @@ namespace ManoExperta
                 Response.Redirect("Error.aspx", false);
             }
         }
-        
+
+        protected void btnAgregar_Resenia(object sender, EventArgs e)
+        {
+
+        }
+
+
+        /*
         protected void btnCancelar_Trabajo(object sender, EventArgs e)
         {
             try
@@ -165,6 +169,9 @@ namespace ManoExperta
                 Response.Redirect("Error.aspx", false);
             }
         }
-        
+        */
+
+
+
     }
 }

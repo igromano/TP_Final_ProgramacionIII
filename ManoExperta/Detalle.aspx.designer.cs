@@ -78,13 +78,13 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxLocalidad;
 
         /// <summary>
-        /// Control TextBox1.
+        /// Control TextBoxProvincia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxProvincia;
 
         /// <summary>
         /// Control TextBoxFecha_Trabajo.
@@ -130,5 +130,14 @@ namespace ManoExperta
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPasarRealizado;
+
+        /// <summary>
+        /// Control btnGuardarReseña.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnGuardarReseña;
     }
 }

@@ -51,7 +51,6 @@
                         <asp:TextBox ID="TextBoxComentario" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine"></asp:TextBox>
                     </div>
                     <hr />
-                    <hr />
                     <h4>Datos del proveedor:</h4>
                     <div class="col-md-6 mb-3">
                         <label>Proveedor:</label>
@@ -75,7 +74,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Provincia:</label>
-                        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxProvincia" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Fecha estimativa del trabajo:</label>
@@ -88,18 +87,39 @@
                     <div class="col-12 mb-3">
                         <label>Comentario proveedor:</label>
                         <asp:TextBox ID="TextBoxComentario_Proveedor" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine"></asp:TextBox>
-                    </div>                
-                <% if (estadoActual == "SOLICITADO" || estadoActual == "EN PROCESO" || estadoActual == "A ASIGNAR")
-                    { %>
-                <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 20px; justify-content: flex-end;">
-                    <div class="col text-right">
-                        <asp:Button ID="btnCancelarTrabajo" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" CommandArgument="cancelar" OnClick="btnAccionTrabajo" />
-                        <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" CommandArgument="finalizar" OnClick="btnAccionTrabajo" />
+                    </div>
+
+                    <% if (estadoActual == "SOLICITADO" || estadoActual == "EN PROCESO" || estadoActual == "A ASIGNAR")
+                        { %>
+                    <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 20px; justify-content: flex-end;">
+                        <div class="col text-right">
+                            <asp:Button ID="btnCancelarTrabajo" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" CommandArgument="cancelar" OnClick="btnAccionTrabajo" />
+                            <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Pasar a Realizado" CommandArgument="finalizar" OnClick="btnAccionTrabajo" />
+                            <button type="button" class="btn btn-success ml-2" data-bs-toggle="modal" data-bs-target="#myModal">
+                                Agregar Reseña      
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+                    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">Ingrese su Reseña</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">                                    
+                                    <textarea class="form-control" id="reseñaTextArea" rows="5" placeholder="Escriba su reseña aquí..."></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                                    <button type="button" class="btn btn-success ml-2" id="btnGuardarReseña" runat="server" onclick="btnGuardarReseña_Click">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <% } %>
             </div>
         </div>
-    </div>
 </asp:Content>
 
