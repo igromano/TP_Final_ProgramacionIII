@@ -50,7 +50,7 @@ namespace ManoExperta
             {
                 errorBool = true;
                 error = "Las contraseñas no son iguales";
-                
+
             }
 
             Usuario nuevoUsuario = new Usuario(userName, contrasenia); // instancia del objeto usuario
@@ -64,8 +64,8 @@ namespace ManoExperta
 
             if (!errorBool)
             {
-            UsuarioNegocio usuarioNegocio = new UsuarioNegocio(); // creo una instancia de usuarioNegocio
-            registroExitoso = usuarioNegocio.registrarUsuario(nuevoUsuario); // llamada a metodo registrarUsuario(nacho)
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio(); // creo una instancia de usuarioNegocio
+                registroExitoso = usuarioNegocio.registrarUsuario(nuevoUsuario); // llamada a metodo registrarUsuario(nacho)
 
             }
 
@@ -74,8 +74,9 @@ namespace ManoExperta
             if (registroExitoso)
             {
                 // mostrar un mensaje de registro exitoso
+                Session.Add("usuario", nuevoUsuario);
                 error = "";
-                Response.Redirect("Login.aspx");
+                Response.Redirect("Home.aspx");
 
             }
             else
@@ -116,8 +117,9 @@ namespace ManoExperta
                 bool registroExitoso = usuarioNegocio.registrarUsuario(nuevoProveedor);
                 if (registroExitoso)
                 {
-                    // mostrar un mensaje de registro exitoso
-                    Response.Redirect("Login.aspx");
+                    Session.Add("usuario", nuevoProveedor);
+                    error = "";
+                    Response.Redirect("Home.aspx");
                 }
                 else
                 {

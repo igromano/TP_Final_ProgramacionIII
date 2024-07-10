@@ -24,44 +24,43 @@ namespace ManoExperta
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("Login.aspx", true);
+            }
+
+            if (!IsPostBack)
+            {
+                usuariotemp = (Usuario)Session["usuario"];
+                string nombre = usuariotemp.Nombre;
+                if (usuariotemp.RolUsuario != RolUsuario.PRESTADOR)
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+
+                ticketsTemp = trabajoTemp.getTicketsPorEstado(Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")));
+                Session["tickets"] = ticketsTemp;
+
+                DropDownListLocalidadFiltro.DataSource = Utils.getLocaciones();
+                DropDownListLocalidadFiltro.DataTextField = "Nombre";
+                DropDownListLocalidadFiltro.DataValueField = "Id";
+                DropDownListLocalidadFiltro.DataBind();
+                DropDownListLocalidadFiltro.SelectedValue = usuariotemp.IdLocalidad.ToString();
+
+                ticketsFiltro = new List<Ticket>(ticketsTemp);
+                repTrabajosActivos.DataSource = ticketsFiltro.FindAll(tck => tck.IdLocalidad == usuariotemp.IdLocalidad);
+                repTrabajosActivos.DataBind();
+
+                provinciasUnicas = Utils.getLocaciones().GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
+
+                DropDownListProvinciaFiltro.DataSource = provinciasUnicas;
+                DropDownListProvinciaFiltro.DataTextField = "NombreProvincia";
+                DropDownListProvinciaFiltro.DataValueField = "IdProvincia";
+                DropDownListProvinciaFiltro.DataBind();
             }
             else
             {
-                if (!IsPostBack)
-                {
-                    usuariotemp = (Usuario)Session["usuario"];
-                    string nombre = usuariotemp.Nombre;
-                    if (usuariotemp.RolUsuario != RolUsuario.PRESTADOR)
-                    {
-                        Response.Redirect("Home.aspx", false);
-                    }
-
-                    ticketsTemp = trabajoTemp.getTicketsPorEstado(Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")));
-                    Session["tickets"] = ticketsTemp;
-                    
-                    DropDownListLocalidadFiltro.DataSource = Utils.getLocaciones();
-                    DropDownListLocalidadFiltro.DataTextField = "Nombre";
-                    DropDownListLocalidadFiltro.DataValueField = "Id";
-                    DropDownListLocalidadFiltro.DataBind();
-                    DropDownListLocalidadFiltro.SelectedValue = usuariotemp.IdLocalidad.ToString();
-
-                    ticketsFiltro = new List<Ticket>(ticketsTemp);
-                    repTrabajosActivos.DataSource = ticketsFiltro.FindAll(tck => tck.IdLocalidad == usuariotemp.IdLocalidad);
-                    repTrabajosActivos.DataBind();
-
-                    provinciasUnicas = Utils.getLocaciones().GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
-
-                    DropDownListProvinciaFiltro.DataSource = provinciasUnicas;
-                    DropDownListProvinciaFiltro.DataTextField = "NombreProvincia";
-                    DropDownListProvinciaFiltro.DataValueField = "IdProvincia";
-                    DropDownListProvinciaFiltro.DataBind();
-                }
-                else
-                {
-                    ticketsTemp = (List<Ticket>)Session["tickets"];
-                }
+                ticketsTemp = (List<Ticket>)Session["tickets"];
             }
+
 
 
         }

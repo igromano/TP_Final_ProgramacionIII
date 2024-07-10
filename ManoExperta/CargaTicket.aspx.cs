@@ -24,55 +24,54 @@ namespace ManoExperta
 
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("Login.aspx", true);
+            }
+
+            if (Request.QueryString["tipo"] == null)
+            {
+                Response.Redirect("Error.aspx", true);
             }
             else
             {
-                if (Request.QueryString["tipo"] == null)
+                idTipo = Request.QueryString["tipo"];
+
+            }
+            if (Request.QueryString["proveedor"] == null && idTipo.Equals("2"))
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+            else
+            {
+
+                usuarioTemp = (Usuario)Session["usuario"];
+                if (idTipo.Equals("1"))
                 {
-                    Response.Redirect("Error.aspx", false);
+
+
+                    TextBoxUsuarioSolicitante.Text = usuarioTemp.UserName;
+                    TextBoxNombreApellidoSolicitante.Text = usuarioTemp.Nombre + " " + usuarioTemp.Apellido;
+                    TextBoxEmailSolicitante.Text = usuarioTemp.Email;
+                    TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
+                    TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
+                    TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
+                    TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
                 }
                 else
                 {
-                    idTipo = Request.QueryString["tipo"];
+                    idProveedor = Request.QueryString["proveedor"];
+                    TextBoxUsuarioSolicitante.Text = usuarioTemp.UserName;
+                    TextBoxNombreApellidoSolicitante.Text = usuarioTemp.Nombre + " " + usuarioTemp.Apellido;
+                    TextBoxEmailSolicitante.Text = usuarioTemp.Email;
+                    TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
+                    TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
+                    usuarioProveedor = usuarioNegocioTemp.getUsuario(int.Parse(idProveedor));
+                    TextBoxProveedor.Text = usuarioProveedor.Nombre + " " + usuarioProveedor.Apellido;
+                    TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
+                    TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
 
-                }
-                if (Request.QueryString["proveedor"] == null && idTipo.Equals("2"))
-                {
-                    Response.Redirect("Error.aspx", false);
-                }
-                else
-                {
-
-                    usuarioTemp = (Usuario)Session["usuario"];
-                    if (idTipo.Equals("1"))
-                    {
-
-
-                        TextBoxUsuarioSolicitante.Text = usuarioTemp.UserName;
-                        TextBoxNombreApellidoSolicitante.Text = usuarioTemp.Nombre + " " + usuarioTemp.Apellido;
-                        TextBoxEmailSolicitante.Text = usuarioTemp.Email;
-                        TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
-                        TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
-                        TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
-                        TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
-                    }
-                    else
-                    {
-                        idProveedor = Request.QueryString["proveedor"];   
-                        TextBoxUsuarioSolicitante.Text = usuarioTemp.UserName;
-                        TextBoxNombreApellidoSolicitante.Text = usuarioTemp.Nombre + " " + usuarioTemp.Apellido;
-                        TextBoxEmailSolicitante.Text = usuarioTemp.Email;
-                        TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
-                        TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
-                        usuarioProveedor = usuarioNegocioTemp.getUsuario(int.Parse(idProveedor));
-                        TextBoxProveedor.Text = usuarioProveedor.Nombre + " " + usuarioProveedor.Apellido;
-                        TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
-                        TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
-
-                    }
                 }
             }
+
         }
         protected void btnCancelarPedido_Click(object sender, EventArgs e)
         {
@@ -82,13 +81,13 @@ namespace ManoExperta
         protected void btnCargarPedido_Click(object sender, EventArgs e)
         {
 
-            if(usuarioProveedor.IdPersona != null)
+            if (usuarioProveedor.IdPersona != null)
             {
                 trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text, usuarioProveedor.IdPersona.ToString());
             }
             else
             {
-                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text);
+                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text);
 
             }
         }

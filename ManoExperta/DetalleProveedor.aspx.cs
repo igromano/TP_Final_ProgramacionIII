@@ -24,29 +24,28 @@ namespace ManoExperta
 
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("Login.aspx", true);
             }
-            else
+
+            if (Request.QueryString["id"] == null)
             {
-                if (Request.QueryString["id"] == null)
-                {
-                    Response.Redirect("Error.aspx", false);
-                }
-                id = Request.QueryString["id"];
-                usuarioTemp = usuarioNegocioTemp.getUsuario(int.Parse(id));
-                ticketsTemp = trabajoNegocioTemp.getTicketsPorRol(usuarioTemp);
-                if (!IsPostBack)
-                {
-                    ticketsTemp.RemoveAll(t => !t.Prestador.IdPersona.Equals(usuarioTemp.IdPersona));
-                    trabajos = ticketsTemp.Count();
-                    repListadoResenias.DataSource = ticketsTemp;
-                    repListadoResenias.DataBind();
-                    textBoxDireccion.Text = usuarioTemp.Domicilio;
-                    textBoxLocalidad.Text = usuarioTemp.IdLocalidad.ToString();
-
-                }
+                Response.Redirect("Error.aspx", false);
+            }
+            id = Request.QueryString["id"];
+            usuarioTemp = usuarioNegocioTemp.getUsuario(int.Parse(id));
+            ticketsTemp = trabajoNegocioTemp.getTicketsPorRol(usuarioTemp);
+            if (!IsPostBack)
+            {
+                ticketsTemp.RemoveAll(t => !t.Prestador.IdPersona.Equals(usuarioTemp.IdPersona));
+                trabajos = ticketsTemp.Count();
+                repListadoResenias.DataSource = ticketsTemp;
+                repListadoResenias.DataBind();
+                textBoxDireccion.Text = usuarioTemp.Domicilio;
+                textBoxLocalidad.Text = usuarioTemp.IdLocalidad.ToString();
 
             }
+
+
 
 
 

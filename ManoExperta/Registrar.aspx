@@ -56,7 +56,7 @@
                     </div>
                     <div id="DNIUsuario" class="form-text">
                         <asp:Label ID="Label12" CssClass="form-label fw-bold" runat="server" Text="DNI"></asp:Label>
-                        <asp:TextBox ID="TextBoxDNI" CssClass="form-control" runat="server" required="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxDNI" CssClass="form-control" runat="server" TextMode="Number" required="true"></asp:TextBox>
                     </div>
                     <div id="emailUsuario" class="form-text">
                         <asp:Label ID="Label16" CssClass="form-label fw-bold" runat="server" Text="Email"></asp:Label>

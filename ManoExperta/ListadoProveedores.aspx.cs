@@ -19,23 +19,21 @@ namespace ManoExperta
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("Login.aspx", true);
             }
-            else
-            {
-                if (!IsPostBack)
-                {
-                    usuariotemp = (Usuario)Session["usuario"];
-                    if (usuariotemp.RolUsuario != RolUsuario.USUARIO)
-                    {
-                        Response.Redirect("Home.aspx", false);
-                    }
-                    proveedores = usuarioNegocioTemp.getUsuariosPorRol(RolUsuario.PRESTADOR);
-                    repListadoProfesionales.DataSource = proveedores;
-                    repListadoProfesionales.DataBind();
-                }
 
+            if (!IsPostBack)
+            {
+                usuariotemp = (Usuario)Session["usuario"];
+                if (usuariotemp.RolUsuario != RolUsuario.USUARIO)
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+                proveedores = usuarioNegocioTemp.getUsuariosPorRol(RolUsuario.PRESTADOR);
+                repListadoProfesionales.DataSource = proveedores;
+                repListadoProfesionales.DataBind();
             }
+
 
 
         }
