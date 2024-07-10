@@ -30,9 +30,9 @@
                 <div class="row g-3">
                     <div class="col-12">
                         <label>Estado de Ticket:</label>
-                        <asp:DropDownList ID="ddlEstado" CssClass="form-select form-select-sm" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlEstado" CssClass="form-select form-select-sm" runat="server" ></asp:DropDownList>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12">    
                         <label>Fecha de solicitud:</label>
                         <div class="mb-3">
                             <label>Desde:</label>

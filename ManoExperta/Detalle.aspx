@@ -42,16 +42,17 @@
                         <label>Solicitado por:</label>
                         <asp:TextBox ID="TextBoxNombre_Cliente" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label>Fecha solicitado:</label>
                         <asp:TextBox ID="TextBoxFecha_Solicitado" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-12 mb-3">
                         <label>Comentario problema:</label>
                         <asp:TextBox ID="TextBoxComentario" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine"></asp:TextBox>
                     </div>
                     <hr />
                     <hr />
+                    <h4>Datos del proveedor:</h4>
                     <div class="col-md-6 mb-3">
                         <label>Proveedor:</label>
                         <asp:TextBox ID="TextBoxProveedor" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
@@ -63,24 +64,31 @@
                 </div>
                 <hr />
                 <div class="row" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
-                    <div class="col-md-6 mb-3">
-                        <label>Comentario proveedor:</label>
-                        <asp:TextBox ID="TextBoxComentario_Proveedor" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine"></asp:TextBox>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Monto del trabajo:</label>
-                        <asp:TextBox ID="TextBoxMonto_Trabajo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                    </div>
+                    <h4>Detalle del trabajo:</h4>
                     <div class="col-md-6 mb-3">
                         <label>Domicilio del trabajo:</label>
                         <asp:TextBox ID="TextBoxDireccion" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                     <div class="col-md-6 mb-3">
+                        <label>Localidad:</label>
+                        <asp:TextBox ID="TextBoxLocalidad" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Provincia:</label>
+                        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <label>Fecha estimativa del trabajo:</label>
                         <asp:TextBox ID="TextBoxFecha_Trabajo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                </div>
-                <hr />
+                    <div class="col-md-3 mb-3">
+                        <label>Monto del trabajo:</label>
+                        <asp:TextBox ID="TextBoxMonto_Trabajo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label>Comentario proveedor:</label>
+                        <asp:TextBox ID="TextBoxComentario_Proveedor" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine"></asp:TextBox>
+                    </div>                
                 <% if (estadoActual == "SOLICITADO" || estadoActual == "EN PROCESO" || estadoActual == "A ASIGNAR")
                     { %>
                 <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 20px; justify-content: flex-end;">
