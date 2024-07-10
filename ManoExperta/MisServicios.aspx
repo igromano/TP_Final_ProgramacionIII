@@ -135,9 +135,7 @@
                                 </div>
                                 <div class="col-md-2 d-flex align-items-center justify-content-center">
                                     <div class="row no-gutters" style="max-width: 90%">
-                                        <asp:Button ID="btnMasInfo2" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
-                                        <asp:Button ID="btnAgregarResnia" CssClass="btn btn-success ml-2" runat="server" Text="Agregar Reseña" CommandArgument="finalizar" />
-
+                                        <asp:Button ID="btnMasInfo2" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />                                       
                                     </div>
                                 </div>
                             </div>
