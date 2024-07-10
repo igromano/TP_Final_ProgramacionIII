@@ -57,7 +57,7 @@ namespace negocio
                 }
                 else
                 {
-                    datos.settearParametros("@IDUsrAprobacion", null);
+                    datos.settearParametros("@IDUsrAprobacion", DBNull.Value);
                 }
 
                 datos.ejecutarConsulta();
