@@ -48,7 +48,7 @@ namespace ManoExperta
                         TextBoxDireccion.Text = usuarioCreador.Domicilio; // cambiar cuando nacho lo agregue a la carga en getTicketsPorRol
                         TextBoxFecha_Solicitado.Text = ticket.FechaSolicitado.ToShortDateString();
                         TextBoxComentario.Text = ticket.ComentariosUsuario;
-                        
+                      
                         if(ticket.Prestador != null)
                         {
                             estadoActual = ticket.Estado.Nombre;
@@ -84,11 +84,11 @@ namespace ManoExperta
                     string action = ((Button)sender).CommandArgument;
                     if (action == "cancelar")
                     {
-                        trabajoNegocio.cambiarEstado(ticket.Id, 3);                        
+                        trabajoNegocio.cambiarEstado(ticket.Id, 3);
                     }
                     else if (action == "finalizar")
                     {
-                        trabajoNegocio.cambiarEstado(ticket.Id, 4);                        
+                        trabajoNegocio.cambiarEstado(ticket.Id, 4);
                     }
                     Session["tickets"] = tickets;
                     Response.Redirect("MisServicios.aspx", false);

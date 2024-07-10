@@ -13,15 +13,15 @@
                     <label>Solicitado por:</label>
                     <div class="col" style="display: grid">
                         <label>Usuario:</label>
-                        <asp:TextBox ID="TextBoxUsuarioSolicitante" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxUsuarioSolicitante" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                         <label>Nombre y Apellido:</label>
-                        <asp:TextBox ID="TextBoxNombreApellidoSolicitante" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxNombreApellidoSolicitante" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                     <div class="col" style="display: grid;">
                         <label>Fecha solicitado:</label>
-                        <asp:TextBox ID="TextBoxFechaSolicitud" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxFechaSolicitud" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                         <label>Email:</label>
-                        <asp:TextBox ID="TextBoxEmailSolicitante" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxEmailSolicitante" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                 </div>
                 <hr />
@@ -29,15 +29,15 @@
                     <label>Direccion:</label>
                     <div class="col-4">
                         <label>Calle y altura:</label>
-                        <asp:TextBox ID="TextBoxCalleAltura" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxCalleAltura" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                     <div class="col-4">
                         <label>Localidad:</label>
-                        <asp:TextBox ID="TextBoxLocalidad" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxLocalidad" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                     <div class="col-4">
                         <label>Provincia:</label>
-                        <asp:TextBox ID="TextBoxProvincia" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxProvincia" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row" style="margin-left: 20px; margin-right: 20px; margin-bottom: 10px">
@@ -50,7 +50,7 @@
                 <div class="row" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
                     <div class="col" style="display: grid">
                         <label>Proveedor:</label>
-                        <asp:TextBox ID="TextBoxProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxProveedor" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                     </div>
                 </div>
                 <% } %>
@@ -60,7 +60,7 @@
                         <asp:Button ID="btnCargarPedido" CssClass="btn btn-success" runat="server" Text="Cargar Ticket" OnClick="btnCargarPedido_Click" />
                     </div>
                     <div class="col" style="display: flex; justify-content: center">
-                        <asp:Button ID="btnCancelarPedido" CssClass="btn btn-danger" runat="server" Text="Cancelar Pedido" OnClick="btnCancelarPedido_Click"/>
+                        <asp:Button ID="btnCancelarPedido" CssClass="btn btn-danger" runat="server" Text="Volver" OnClick="btnCancelarPedido_Click"/>
                     </div>
                 </div>
             </div>
