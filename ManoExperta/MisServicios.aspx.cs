@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using negocio.Utils;
 
 namespace ManoExperta
 {
@@ -52,8 +53,8 @@ namespace ManoExperta
                       
             ServicioNegocio servicioNegocio = new ServicioNegocio();
             
-            List<Especialidad> especialidades = servicioNegocio.getEspecialidades();
-            List<Estado> estados = servicioNegocio.getEstados();
+            List<Especialidad> especialidades = Utils.getEspecialidades();
+            List<Estado> estados = Utils.getEstados();
             ddlEstado.DataSource = estados;
             ddlEstado.DataTextField = "Nombre"; 
             ddlEstado.DataValueField = "Id";    
