@@ -29,11 +29,8 @@ namespace ManoExperta
                     TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
                     List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
                     Session.Add("tickets", tickets);
-
-                    var trabajosActivos = tickets.Where(t => t.Estado.Id == 2 || t.Estado.Id == 1 || t.Estado.Id == 5).ToList();
-                    repTrabajosActivos.DataSource = trabajosActivos;
-                    var historialTrabajos = tickets.Where(t => t.Estado.Id == 3 || t.Estado.Id ==4).ToList();
-                    repHistorialTrabajos.DataSource = historialTrabajos;
+                    repTrabajosActivos.DataSource = tickets.FindAll(t => t.Estado.Id == 2 || t.Estado.Id == 1 || t.Estado.Id == 5);                   
+                    repHistorialTrabajos.DataSource = tickets.FindAll(t => t.Estado.Id == 3 || t.Estado.Id == 4);
                     repHistorialTrabajos.DataBind();
                     repTrabajosActivos.DataBind();
                     
@@ -52,16 +49,21 @@ namespace ManoExperta
 
         private void CargarDdlEstadosYEspecialidad()
         {
-            List<string> estados = new List<string> {"En Proceso", "Solicitado", "Cancelado", "A Asginar", "Realiado"};
-            estados.Insert(0, "");
+                      
+            ServicioNegocio servicioNegocio = new ServicioNegocio();
+            
+            List<Especialidad> especialidades = servicioNegocio.getEspecialidades();
+            List<Estado> estados = servicioNegocio.getEstados();
             ddlEstado.DataSource = estados;
-            ddlEstado.DataBind();
-            
-            
-            List<string> especialidades = new List<string> { "SIN ESPECIALIDAD", "PLOMERIA", "ELECTRICIDAD", "GASISTA", "HERRERIA" };
-            especialidades.Insert(0, "");
+            ddlEstado.DataTextField = "Nombre"; 
+            ddlEstado.DataValueField = "Id";    
+            ddlEstado.DataBind();                      
             DdlFiltro_Especialidad.DataSource = especialidades;
+            DdlFiltro_Especialidad.DataTextField = "Nombre";
+            DdlFiltro_Especialidad.DataValueField = "Id";
             DdlFiltro_Especialidad.DataBind();
+
+
         }
 
 
