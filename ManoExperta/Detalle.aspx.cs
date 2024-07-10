@@ -39,19 +39,26 @@ namespace ManoExperta
 
                     if (ticket != null)
                     {
+                        UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                        Usuario usuarioCreador;
+                        usuarioCreador = usuarioNegocio.getUsuario(ticket.Usuario.Id);    
                         estadoActual = ticket.Estado.Nombre;
 
                         TextBoxNombre_Cliente.Text = ticket.Usuario.Nombre + " " + ticket.Usuario.Apellido;
-                        TextBoxDireccion.Text = ticket.Usuario.Domicilio;
+                        TextBoxDireccion.Text = usuarioCreador.Domicilio; // cambiar cuando nacho lo agregue a la carga en getTicketsPorRol
                         TextBoxFecha_Solicitado.Text = ticket.FechaSolicitado.ToShortDateString();
                         TextBoxComentario.Text = ticket.ComentariosUsuario;
-                        if (ticket.Prestador != null)
+                      
+                        if(ticket.Prestador != null)
                         {
+                            estadoActual = ticket.Estado.Nombre;
+                            
                             TextBoxProveedor.Text = ticket.Prestador.Nombre + " " + ticket.Prestador.Apellido;
-                            TextBoxDireccion_Prov.Text = ticket.Prestador.Domicilio;
                             TextBoxFecha_Trabajo.Text = ticket.FechaRealizado.ToShortDateString();
                             TextBoxComentario_Proveedor.Text = ticket.ComentariosPrestador;
-
+                            TextBoxCuil_Prov.Text = ticket.Prestador.IdPersona;
+                            double monto = ticket.Monto;
+                            TextBoxMonto_Trabajo.Text = ticket.Monto.ToString(); // falta que nacho lo agregue a getTicketsPorRol para obtenerlo de la Sesion
                         }
                     }
                     else
