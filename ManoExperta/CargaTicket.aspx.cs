@@ -1,6 +1,7 @@
 ﻿using dominio;
 using ManoExperta.helpers;
 using negocio;
+using negocio.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,6 @@ namespace ManoExperta
         protected UsuarioNegocio usuarioNegocioTemp = new UsuarioNegocio();
         public Usuario usuarioProveedor = new Usuario();
         public TrabajoNegocio trabajoNegocioTemp = new TrabajoNegocio();
-        public List<Estado> estadoTemp = new List<Estado>();
-        public ServicioNegocio servicioNegocioTemp = new ServicioNegocio();
-        public List<Locacion> locacionesTemp = new List<Locacion>();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -47,7 +45,6 @@ namespace ManoExperta
                 {
 
                     usuarioTemp = (Usuario)Session["usuario"];
-                    locacionesTemp = servicioNegocioTemp.getLocaciones();
                     if (idTipo.Equals("1"))
                     {
 
@@ -57,8 +54,8 @@ namespace ManoExperta
                         TextBoxEmailSolicitante.Text = usuarioTemp.Email;
                         TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
                         TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
-                        TextBoxLocalidad.Text = locacionesTemp.Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
-                        TextBoxProvincia.Text = locacionesTemp.Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
+                        TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
+                        TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
                     }
                     else
                     {
@@ -70,8 +67,8 @@ namespace ManoExperta
                         TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
                         usuarioProveedor = usuarioNegocioTemp.getUsuario(int.Parse(idProveedor));
                         TextBoxProveedor.Text = usuarioProveedor.Nombre + " " + usuarioProveedor.Apellido;
-                        TextBoxLocalidad.Text = locacionesTemp.Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
-                        TextBoxProvincia.Text = locacionesTemp.Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
+                        TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
+                        TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
 
                     }
                 }
@@ -84,15 +81,14 @@ namespace ManoExperta
 
         protected void btnCargarPedido_Click(object sender, EventArgs e)
         {
-            estadoTemp = servicioNegocioTemp.getEstados();
 
             if(usuarioProveedor.IdPersona != null)
             {
-                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, estadoTemp.Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text, usuarioProveedor.IdPersona.ToString());
+                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text, usuarioProveedor.IdPersona.ToString());
             }
             else
             {
-                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0, estadoTemp.Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text);
+                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text);
 
             }
         }

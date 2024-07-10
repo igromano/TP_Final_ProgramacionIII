@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using dominio;
 using negocio;
 using System.Web.Services.Description;
+using negocio.Utils;
 
 namespace ManoExperta
 {
@@ -15,12 +16,8 @@ namespace ManoExperta
     {
         public Usuario usuariotemp = new Usuario();
         public TrabajoNegocio trabajoTemp = new TrabajoNegocio();
-        public ServicioNegocio servicioNegocioTemp = new ServicioNegocio();
-        public List<Estado> estadosTemp = new List<Estado>();
         public List<Ticket> ticketsTemp = new List<Ticket>();
-        public List<Locacion> locacionTemp = new List<Locacion>();
         public List<Locacion> provinciasUnicas = new List<Locacion>();
-        public List<Especialidad> especialidadTemp = new List<Especialidad>();
         public List<Ticket> ticketsFiltro = new List<Ticket>();
         public int trabajosActivos = 0;
         protected void Page_Load(object sender, EventArgs e)
@@ -39,12 +36,11 @@ namespace ManoExperta
                     {
                         Response.Redirect("Home.aspx", false);
                     }
-                    estadosTemp = servicioNegocioTemp.getEstados();
-                    ticketsTemp = trabajoTemp.getTicketsPorEstado(estadosTemp.Find(es => es.Nombre.Equals("A ASIGNAR")));
-                    Session["tickets"] = ticketsTemp;
 
-                    locacionTemp = servicioNegocioTemp.getLocaciones();
-                    DropDownListLocalidadFiltro.DataSource = locacionTemp;
+                    ticketsTemp = trabajoTemp.getTicketsPorEstado(Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")));
+                    Session["tickets"] = ticketsTemp;
+                    
+                    DropDownListLocalidadFiltro.DataSource = Utils.getLocaciones();
                     DropDownListLocalidadFiltro.DataTextField = "Nombre";
                     DropDownListLocalidadFiltro.DataValueField = "Id";
                     DropDownListLocalidadFiltro.DataBind();
@@ -54,7 +50,7 @@ namespace ManoExperta
                     repTrabajosActivos.DataSource = ticketsFiltro.FindAll(tck => tck.IdLocalidad == usuariotemp.IdLocalidad);
                     repTrabajosActivos.DataBind();
 
-                    provinciasUnicas = locacionTemp.GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
+                    provinciasUnicas = Utils.getLocaciones().GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
 
                     DropDownListProvinciaFiltro.DataSource = provinciasUnicas;
                     DropDownListProvinciaFiltro.DataTextField = "NombreProvincia";
