@@ -1,6 +1,7 @@
 ﻿using dominio;
 using ManoExperta.helpers;
 using negocio;
+using negocio.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,14 +43,19 @@ namespace ManoExperta
                 }
                 else
                 {
+
                     usuarioTemp = (Usuario)Session["usuario"];
                     if (idTipo.Equals("1"))
                     {
+
+
                         TextBoxUsuarioSolicitante.Text = usuarioTemp.UserName;
                         TextBoxNombreApellidoSolicitante.Text = usuarioTemp.Nombre + " " + usuarioTemp.Apellido;
                         TextBoxEmailSolicitante.Text = usuarioTemp.Email;
                         TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
                         TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
+                        TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
+                        TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
                     }
                     else
                     {
@@ -61,6 +67,8 @@ namespace ManoExperta
                         TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
                         usuarioProveedor = usuarioNegocioTemp.getUsuario(int.Parse(idProveedor));
                         TextBoxProveedor.Text = usuarioProveedor.Nombre + " " + usuarioProveedor.Apellido;
+                        TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
+                        TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
 
                     }
                 }
@@ -73,13 +81,14 @@ namespace ManoExperta
 
         protected void btnCargarPedido_Click(object sender, EventArgs e)
         {
+
             if(usuarioProveedor.IdPersona != null)
             {
-                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, 2, TextBoxProblema.Text, usuarioProveedor.IdPersona.ToString());
+                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text, usuarioProveedor.IdPersona.ToString());
             }
             else
             {
-                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0,2,TextBoxProblema.Text);
+                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(),0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text);
 
             }
         }

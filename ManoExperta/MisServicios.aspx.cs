@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using negocio.Utils;
 
 namespace ManoExperta
 {
@@ -15,6 +16,7 @@ namespace ManoExperta
         Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
                 Response.Redirect("Login.aspx", false);
@@ -24,14 +26,12 @@ namespace ManoExperta
                 usuario = (Usuario)Session["usuario"];
                 if (!IsPostBack)
                 {
+                    CargarDdlEstadosYEspecialidad();
                     TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
                     List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
                     Session.Add("tickets", tickets);
-
-                    var trabajosActivos = tickets.Where(t => t.Estado.Id == 2).ToList();
-                    repTrabajosActivos.DataSource = trabajosActivos;
-                    var historialTrabajos = tickets.Where(t => t.Estado.Id == 3 || t.Estado.Id ==4).ToList();
-                    repHistorialTrabajos.DataSource = historialTrabajos;
+                    repTrabajosActivos.DataSource = tickets.FindAll(t => t.Estado.Id == 2 || t.Estado.Id == 1 || t.Estado.Id == 5);                   
+                    repHistorialTrabajos.DataSource = tickets.FindAll(t => t.Estado.Id == 3 || t.Estado.Id == 4);
                     repHistorialTrabajos.DataBind();
                     repTrabajosActivos.DataBind();
                     
@@ -48,6 +48,30 @@ namespace ManoExperta
             }
         }
 
+        private void CargarDdlEstadosYEspecialidad()
+        {
+                      
+            ServicioNegocio servicioNegocio = new ServicioNegocio();
+            
+            List<Especialidad> especialidades = Utils.getEspecialidades();
+            List<Estado> estados = Utils.getEstados();
+            ddlEstado.DataSource = estados;
+            ddlEstado.DataTextField = "Nombre"; 
+            ddlEstado.DataValueField = "Id";    
+            ddlEstado.DataBind();                      
+            DdlFiltro_Especialidad.DataSource = especialidades;
+            DdlFiltro_Especialidad.DataTextField = "Nombre";
+            DdlFiltro_Especialidad.DataValueField = "Id";
+            DdlFiltro_Especialidad.DataBind();
+
+
+        }
+
+
+
+
 
     }
+
+    
 }

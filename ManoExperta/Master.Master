@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #80B9AD">
         <div class="d-flex" style="width: 100vw; margin-left: 20px; margin-right: 20px">
-            <a class="navbar-brand col-2 justify-content-end" href="#">Mano Experta
+            <a class="navbar-brand col-2 justify-content-end" href="/Home.aspx">Mano Experta
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

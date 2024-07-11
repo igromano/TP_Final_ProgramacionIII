@@ -33,6 +33,7 @@ namespace ManoExperta
             usuarioTemp = (Usuario)Session["usuario"];
             usuarioTemp.Activo = false;
             usuarioNegocioTemp.updateUsuario(usuarioTemp);
+            Session.Remove("usuario");
             Response.Redirect("Index.aspx", false);
         }
     }
