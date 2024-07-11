@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using accesoDatos;
 using dominio;
+using negocio.Utils;
 
 
 namespace negocio
@@ -62,7 +63,9 @@ namespace negocio
                         }
                     }
                 }
-
+                EmailService email = new EmailService();
+                email.armarMail("ignacioromano@hotmail.com", "Mail de prueba", "Esto es un mail de prueba de manoexperta");
+                email.enviarCorreo();
                 datos.cerrarConexion();
 
                 return null;

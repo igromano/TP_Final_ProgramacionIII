@@ -243,34 +243,34 @@ namespace negocio
             }
         }
 
-        //public void crearTicket(Ticket ticket)
-        //{
-        //    AccesoADatos datos = new AccesoADatos();
-        //    try
-        //    {
-        //        datos.configurarConsulta(" INSERT INTO Ticket(@IDUsuario, @IDPrestador, @IDEspecialidad, @Monto, @IDEstado, @ComentarioUsuario, FechaSolicitado) +" +
-        //            "VALUES(@IDUsuario, @IDPrestador, @IDEspecialidad, @Monto, @IDEstado, @ComentarioUsuario, getdate())");
+        public void updateTicket(Ticket ticket)
+        {
+            if(!ticket.Estado.Nombre.Equals("CANCELADO") || !ticket.Estado.Nombre.Equals("REALIZADO"))
+            {
+                AccesoADatos datos = new AccesoADatos();
+                try
+                {
+                    datos.configurarProcedimiento("SP_UpdateTicket");
+                    datos.settearParametros("@ID", ticket.Id);
+                    datos.settearParametros("@IDPrestador", ticket.Prestador.Id);
+                    datos.settearParametros("@IDEspecialidad", Utils.Utils.getEspecialidades().Find(e => e.Nombre == ticket.Especialidad).Id);
+                    datos.settearParametros("@monto", ticket.Monto);
+                    datos.settearParametros("@ComentarioUsuario", ticket.ComentariosUsuario);
+                    datos.settearParametros("@ComentarioPrestador", ticket.ComentariosPrestador);
 
-        //        datos.settearParametros("@IDUsuario", ticket.Usuario.IdPersona);
-        //        datos.settearParametros("@IDPrestador", ticket.Prestador.IdPersona);
-        //        datos.settearParametros("@IDEspecialidad", ticket.Especialidad);
-        //        datos.settearParametros("@Monto", ticket.Monto);
-        //        datos.settearParametros("@IDEstado", ticket.Estado);
-        //        datos.settearParametros("@ComentarioUsuario", ticket.ComentariosUsuario);
+                    datos.ejecutarConsulta();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally { datos.cerrarConexion(); }
 
-        //        datos.ejecutarConsulta();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        datos.cerrarConexion();
-        //    }
-
-        //}
-
-
+            }
+            else
+            {
+                throw new Exception("El ticket no puede ser modificado en estado CANCELADO o REALIZADO");
+            }
+        }
     }
 }
