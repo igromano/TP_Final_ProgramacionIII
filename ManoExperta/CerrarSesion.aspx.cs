@@ -15,13 +15,11 @@ namespace ManoExperta
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("Login.aspx", true);
             }
-            else
-            {
-                Session.Remove("usuario");
-                Response.Redirect("Index.aspx", false);
-            }
+            Session.Remove("usuario");
+            Response.Redirect("Index.aspx", false);
+
 
         }
     }

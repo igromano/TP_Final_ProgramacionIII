@@ -9,18 +9,19 @@ using dominio;
 using ManoExperta.helpers;
 using negocio;
 namespace ManoExperta
-{ 
+{
     public partial class Home : System.Web.UI.Page
     {
         public bool userLoggeado = false;
         public Usuario usuarioTemp = new Usuario();
+        public string error;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == true)
             {
                 usuarioTemp = (Usuario)Session["usuario"];
 
-                if(usuarioTemp.RolUsuario == RolUsuario.PRESTADOR)
+                if (usuarioTemp.RolUsuario == RolUsuario.PRESTADOR)
                 {
                     Response.Redirect("MisServicios.aspx");
                 }

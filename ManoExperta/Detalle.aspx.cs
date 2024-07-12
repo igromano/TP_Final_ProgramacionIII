@@ -19,52 +19,51 @@ namespace ManoExperta
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("Login.aspx", true);
+            }
+
+            if (Request.QueryString["idTicket"] == null)
+            {
+                Response.Redirect("Error.aspx", false);
             }
             else
             {
-                if (Request.QueryString["idTicket"] == null)
+                idTicket = Convert.ToInt32(Request.QueryString["idTicket"]);
+                Usuario usuario = (Usuario)Session["usuario"];
+                List<Ticket> tickets = (List<Ticket>)Session["tickets"];
+                Ticket ticket = tickets.Find(x => x.Id == idTicket);
+
+                if (ticket != null)
                 {
-                    Response.Redirect("Error.aspx", false);
+                    UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                    Usuario usuarioCreador;
+                    usuarioCreador = usuarioNegocio.getUsuario(ticket.Usuario.Id);
+                    estadoActual = ticket.Estado.Nombre;
+                    TextBoxNombre_Cliente.Text = ticket.Usuario.Nombre + " " + ticket.Usuario.Apellido;
+                    TextBoxDireccion.Text = usuarioCreador.Domicilio; // cambiar cuando nacho lo agregue a la carga en getTicketsPorRol
+                    List<Locacion> provinciasUnicas = Utils.getLocaciones().GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
+                    TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuario.IdLocalidad).NombreProvincia;
+                    TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuario.IdLocalidad).Nombre;
+                    TextBoxFecha_Solicitado.Text = ticket.FechaSolicitado.ToShortDateString();
+                    TextBoxComentario.Text = ticket.ComentariosUsuario;
+
+                    if (ticket.Prestador != null)
+                    {
+                        estadoActual = ticket.Estado.Nombre;
+
+                        TextBoxProveedor.Text = ticket.Prestador.Nombre + " " + ticket.Prestador.Apellido;
+                        TextBoxFecha_Trabajo.Text = ticket.FechaRealizado.ToShortDateString();
+                        TextBoxComentario_Proveedor.Text = ticket.ComentariosPrestador;
+                        TextBoxCuil_Prov.Text = ticket.Prestador.IdPersona;
+                        TextBoxMonto_Trabajo.Text = ticket.Monto.ToString();
+                    }
                 }
                 else
                 {
-                    idTicket = Convert.ToInt32(Request.QueryString["idTicket"]);
-                    Usuario usuario = (Usuario)Session["usuario"];                 
-                    List<Ticket> tickets = (List<Ticket>)Session["tickets"];
-                    Ticket ticket = tickets.Find(x => x.Id == idTicket);
-
-                    if (ticket != null)
-                    {                        
-                        UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                        Usuario usuarioCreador;
-                        usuarioCreador = usuarioNegocio.getUsuario(ticket.Usuario.Id);                        
-                        estadoActual = ticket.Estado.Nombre;                       
-                        TextBoxNombre_Cliente.Text = ticket.Usuario.Nombre + " " + ticket.Usuario.Apellido;
-                        TextBoxDireccion.Text = usuarioCreador.Domicilio; // cambiar cuando nacho lo agregue a la carga en getTicketsPorRol
-                        List<Locacion> provinciasUnicas = Utils.getLocaciones().GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
-                        TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuario.IdLocalidad).NombreProvincia;
-                        TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuario.IdLocalidad).Nombre;
-                        TextBoxFecha_Solicitado.Text = ticket.FechaSolicitado.ToShortDateString();
-                        TextBoxComentario.Text = ticket.ComentariosUsuario;
-                      
-                        if(ticket.Prestador != null)
-                        {
-                            estadoActual = ticket.Estado.Nombre;
-                            
-                            TextBoxProveedor.Text = ticket.Prestador.Nombre + " " + ticket.Prestador.Apellido;
-                            TextBoxFecha_Trabajo.Text = ticket.FechaRealizado.ToShortDateString();
-                            TextBoxComentario_Proveedor.Text = ticket.ComentariosPrestador;
-                            TextBoxCuil_Prov.Text = ticket.Prestador.IdPersona;                            
-                            TextBoxMonto_Trabajo.Text = ticket.Monto.ToString();
-                        }
-                    }
-                    else
-                    {
-                        Response.Redirect("Error.aspx", false);
-                    }   
+                    Response.Redirect("Error.aspx", false);
                 }
             }
+
         }
 
 

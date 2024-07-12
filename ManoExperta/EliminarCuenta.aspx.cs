@@ -18,12 +18,9 @@ namespace ManoExperta
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("Login.aspx", true);
             }
-            else
-            {
-                
-            }
+            
         }
 
         protected void btnEliminarCuenta_Click(object sender, EventArgs e)
