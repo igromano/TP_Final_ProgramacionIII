@@ -32,7 +32,7 @@ namespace negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al crear usuario en DB - Error: " + ex);
+                throw new Exception("Error al crear usuario en DB - Error: " + ex.ToString());
             }
             finally
             {
@@ -197,11 +197,11 @@ namespace negocio
                 switch (rol)
                 {
                     case RolUsuario.PRESTADOR:
-                        datos.configurarConsulta("SELECT (SELECT avg(re.Calificacion) from Ticket t inner join Resenias re on t.ID = re.IDTicket where t.IDPrestador = p.IDPersona) AS 'Calificacion', * FROM Personas p WHERE iDRol = @IdRol");
+                        datos.configurarConsulta("SELECT (SELECT avg(re.Calificacion) from Ticket t inner join Resenias re on t.ID = re.IDTicket where t.IDPrestador = p.IDPersona) AS 'Calificacion', * FROM Personas p inner join Especialidad_x_Prestador epp ON p.IDPersona = epp.ID_Persona WHERE iDRol = @IdRol");
                         break;
                     case RolUsuario.USUARIO:
                         datos.configurarConsulta("SELECT * FROM Personas WHERE iDRol = @IdRol");
-                    break;
+                        break;
                 }
 
                 datos.settearParametros("@IdRol", rol);
@@ -223,13 +223,17 @@ namespace negocio
 
                     if (!(datos.lector["Sexo"].ToString()).Equals("X"))
                     {
+                        Especialidad especialidad = new Especialidad();
                         usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
                         usuario.Domicilio = datos.lector["Domicilio"].ToString();
                         usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
+                        especialidad.Id = int.Parse(datos.lector["ID_Especialidad"].ToString());
+                        especialidad.Nombre = Utils.Utils.getEspecialidades().Find(e => e.Id == especialidad.Id).Nombre;
+                        usuario.Especialidad = especialidad;
 
-                        if (usuario.RolUsuario == RolUsuario.PRESTADOR)
+                        if (rol == RolUsuario.PRESTADOR)
                         {
-                            //usuario.Calificacion = int.Parse()
+                            usuario.Calificacion = int.Parse(datos.lector["Calificacion"].ToString());
                         }
                         listaUsuarios.Add(usuario);
                     }
@@ -239,8 +243,7 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
-                throw;
+                throw ex;
             }
         }
     }
