@@ -58,7 +58,11 @@ namespace ManoExperta
                 }
             }catch (Exception ex)
             {
-                throw new Exception("Se produjo un error al intentar iniciar sesión.", ex);
+                accesoExitoso = false;
+                txtUser.Text = "";
+                txtPass.Text = "";
+                error = "Los datos proporcionados son incorrectos";
+                //error = ex.ToString();
             }
         }
 

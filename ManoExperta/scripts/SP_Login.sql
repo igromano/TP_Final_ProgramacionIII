@@ -4,6 +4,7 @@ ALTER PROCEDURE SP_Login(
 )
 as
 begin
+DECLARE @error varchar(50)
 	begin try
 		IF @Usuario NOT IN (SELECT U.Usuario from Personas U)
 		BEGIN
@@ -16,6 +17,10 @@ begin
 		SELECT U.ID, U.iDRol, u.Contrasenia FROM Personas U WHERE U.Usuario = @Usuario
 	 end try
 	 begin catch
+		SET @error = ERROR_MESSAGE()
 		PRINT ERROR_MESSAGE()
+		RAISERROR(@error, 16, 0);
 	 end catch
 end
+
+
