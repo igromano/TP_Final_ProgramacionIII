@@ -26,13 +26,13 @@
                 <hr />
                 <div class="row">
                     <h4>Estadisticas trabajos:</h4>
-                    <label>Trabajos realizados: <%=trabajos %></label>
-                    <label>Puntacion:</label>
+                    <label>Trabajos realizados: <%=repListadoResenias.Items.Count %></label>
+                    <label>Puntacion: <%= usuarioTemp.Calificacion %></label>
                 </div>
                 <hr />
                 <div class="row" style="margin: 10px">
                     <h5>Reseñas:</h5>
-                    <% if (ticketsTemp.Count == 0) { %>
+                    <% if (repListadoResenias.Items.Count == 0) { %>
                         <h3> Este proveedor todavía no tiene reseñas. ¡Dale una oportunidad y pedile un trabajo!</h3>
                         <% } %>
                     <% else {  %>

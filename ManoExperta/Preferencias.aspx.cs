@@ -23,37 +23,35 @@ namespace ManoExperta
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("Login.aspx", true);
             }
-            else
+
+            usuariotemp = (Usuario)Session["usuario"];
+            if (!IsPostBack)
             {
+                locacionTemp = servicioNegocioTemp.getLocaciones();
+                DropDownListLocalidad.DataSource = locacionTemp;
+                DropDownListLocalidad.DataTextField = "Nombre";
+                DropDownListLocalidad.DataValueField = "Id";
+                DropDownListLocalidad.DataBind();
+                provinciasUnicas = locacionTemp.GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
+                DropDownListProvincia.DataSource = provinciasUnicas;
+                DropDownListProvincia.DataTextField = "NombreProvincia";
+                DropDownListProvincia.DataValueField = "IdProvincia";
+                DropDownListProvincia.DataBind();
+                DropDownListLocalidad.SelectedValue = usuariotemp.IdLocalidad.ToString();
+                DropDownListProvincia.SelectedValue = locacionTemp.Find(loc => loc.Id == usuariotemp.IdLocalidad) == null ? "0" : locacionTemp.Find(loc => loc.Id == usuariotemp.IdLocalidad).IdProvincia.ToString();
+                TextBoxUsuarioUsuario.Text = usuariotemp.UserName;
+                TextBoxNombreUsuario.Text = usuariotemp.Nombre;
+                TextBoxApellidoUsuario.Text = usuariotemp.Apellido;
+                TextBoxDireccionCalle.Text = usuariotemp.Domicilio;
+                TextBoxDNI.Text = usuariotemp.IdPersona;
+                TextBoxEmailUsuario.Text = (usuariotemp.Email).ToLower();
+                TextBoxFechaNacimiento.Text = usuariotemp.FechaNacimiento.ToString("dd-MM-yyyy").Equals("01-01-1900") ? "" : usuariotemp.FechaNacimiento.ToString("dd-MM-yyyy");
+                TextBoxTelefono.Text = usuariotemp.Telefono;
 
-                usuariotemp = (Usuario)Session["usuario"];
-                if (!IsPostBack)
-                {
-                    locacionTemp = servicioNegocioTemp.getLocaciones();
-                    DropDownListLocalidad.DataSource = locacionTemp;
-                    DropDownListLocalidad.DataTextField = "Nombre";
-                    DropDownListLocalidad.DataValueField = "Id";
-                    DropDownListLocalidad.DataBind();
-                    provinciasUnicas = locacionTemp.GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
-                    DropDownListProvincia.DataSource = provinciasUnicas;
-                    DropDownListProvincia.DataTextField = "NombreProvincia";
-                    DropDownListProvincia.DataValueField = "IdProvincia";
-                    DropDownListProvincia.DataBind();
-                    DropDownListLocalidad.SelectedValue = usuariotemp.IdLocalidad.ToString();
-                    DropDownListProvincia.SelectedValue = locacionTemp.Find(loc => loc.Id == usuariotemp.IdLocalidad).IdProvincia.ToString();
-                    TextBoxUsuarioUsuario.Text = usuariotemp.UserName;
-                    TextBoxNombreUsuario.Text = usuariotemp.Nombre;
-                    TextBoxApellidoUsuario.Text = usuariotemp.Apellido;
-                    TextBoxDireccionCalle.Text = usuariotemp.Domicilio;
-                    TextBoxDNI.Text = usuariotemp.IdPersona;
-                    TextBoxEmailUsuario.Text = (usuariotemp.Email).ToLower();
-                    TextBoxFechaNacimiento.Text = usuariotemp.FechaNacimiento.ToString("yyyy-MM-dd");
-                    TextBoxTelefono.Text = usuariotemp.Telefono;
-
-                }                
             }
+
         }
 
         public void cargarDatos()
@@ -120,7 +118,7 @@ namespace ManoExperta
             usuariotemp = (Usuario)Session["usuario"];
             Session["alertaError"] = "Ocurrio un error!";
             cargarDatos();
-            
+
         }
 
     }
