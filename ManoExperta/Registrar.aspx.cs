@@ -15,21 +15,25 @@ namespace ManoExperta
         protected bool creaProveedor;
         protected bool modalOpciones;
         public bool errorBool = false;
-        public bool registroExitoso;
+        public bool registroExitoso = true;
         public string error;
         protected void Page_Load(object sender, EventArgs e)
         {
             errorBool = false;
             if (!IsPostBack)
             {
-                modalOpciones = false;
-
+                modalOpciones = true;
+                Session["crear"] = "";
             }
-            modalOpciones = true; // revisar, 
+            else
+            {
+                modalOpciones = false;
+            }
         }
         protected void CrearUsuario(object sender, EventArgs e)
         {
             creaUsuario = true;
+            Session["crear"] = "usuario";
             creaProveedor = false;
             modalOpciones = false;
 
@@ -46,15 +50,11 @@ namespace ManoExperta
             string contraseniaRepetir = TextBoxUsuarioContraseniaConfirmar.Text;
             string dni = TextBoxDNI.Text;
 
-            if (!contrasenia.Equals(contraseniaRepetir))
-            {
-                errorBool = true;
-                error = "Las contraseñas no son iguales";
 
-            }
+
+
 
             Usuario nuevoUsuario = new Usuario(userName, contrasenia); // instancia del objeto usuario
-
             nuevoUsuario.Email = email; // asigno los valores a las propiedades del obj usuario
             nuevoUsuario.UserName = userName;
             nuevoUsuario.Nombre = nombre;
@@ -62,33 +62,48 @@ namespace ManoExperta
             nuevoUsuario.IdPersona = dni;
             nuevoUsuario.RolUsuario = RolUsuario.USUARIO;
 
-            if (!errorBool)
+            try
             {
+                if (!contrasenia.Equals(contraseniaRepetir))
+                {
+                    errorBool = true;
+                    throw new Exception("Las contraseñas no son iguales.");
+
+                }
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio(); // creo una instancia de usuarioNegocio
                 registroExitoso = usuarioNegocio.registrarUsuario(nuevoUsuario); // llamada a metodo registrarUsuario(nacho)
+                if (registroExitoso)
+                {
+                    // mostrar un mensaje de registro exitoso
+                    Session.Add("usuario", nuevoUsuario);
+                    error = "";
+                    Response.Redirect("Home.aspx");
 
+                }
+                else
+                {
+                    error = "Hubo un error en el registro";
+                }
             }
-
-
-
-            if (registroExitoso)
+            catch (Exception ex)
             {
-                // mostrar un mensaje de registro exitoso
-                Session.Add("usuario", nuevoUsuario);
-                error = "";
-                Response.Redirect("Home.aspx");
+                registroExitoso = false;
+                error = ex.Message;
+                Session["error"] = ex.Message;
+            }
 
-            }
-            else
-            {
-                error = "Hubo un error en el registro";
-            }
+
+
+
+
         }
 
         protected void CrearProveedor(object sender, EventArgs e)
         {
             creaUsuario = false;
+
             creaProveedor = true;
+            Session["crear"] = "proveedor";
             modalOpciones = false;
         }
 
@@ -132,7 +147,9 @@ namespace ManoExperta
             }
             catch (Exception ex)
             {
-                throw ex;
+                registroExitoso = false;
+                error = "HUBO UN ERROR";
+                Session["error"] = "Hubo un error en el registro...";
             }
 
 

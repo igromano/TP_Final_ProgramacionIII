@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using negocio.Utils;
 
 namespace ManoExperta
 {
@@ -27,18 +28,19 @@ namespace ManoExperta
                 Response.Redirect("Login.aspx", true);
             }
 
-            if (Request.QueryString["id"] == null)
+            if (Session["proveedorTemp"] == null)
             {
                 Response.Redirect("Error.aspx", false);
             }
-            id = Request.QueryString["id"];
-            usuarioTemp = usuarioNegocioTemp.getUsuario(int.Parse(id));
+            //id = Request.QueryString["id"];
+            //usuarioTemp = usuarioNegocioTemp.getUsuario(int.Parse(id));
+            usuarioTemp = (Usuario)Session["proveedorTemp"];
             ticketsTemp = trabajoNegocioTemp.getTicketsPorRol(usuarioTemp);
             if (!IsPostBack)
             {
                 ticketsTemp.RemoveAll(t => !t.Prestador.IdPersona.Equals(usuarioTemp.IdPersona));
-                trabajos = ticketsTemp.Count();
-                repListadoResenias.DataSource = ticketsTemp;
+                repListadoResenias.DataSource = ticketsTemp.FindAll(tck => (tck.FechaRealizado.Year != 1900 && (tck.Estado.Nombre.Equals("REALIZADO") || tck.Estado.Nombre.Equals("CANCELADO"))));
+                trabajos = repListadoResenias.Items.Count;
                 repListadoResenias.DataBind();
                 textBoxDireccion.Text = usuarioTemp.Domicilio;
                 textBoxLocalidad.Text = usuarioTemp.IdLocalidad.ToString();

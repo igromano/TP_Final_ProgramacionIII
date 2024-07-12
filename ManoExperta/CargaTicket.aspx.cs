@@ -53,8 +53,8 @@ namespace ManoExperta
                     TextBoxEmailSolicitante.Text = usuarioTemp.Email;
                     TextBoxFechaSolicitud.Text = DateTime.Now.ToString();
                     TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
-                    TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
-                    TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
+                    TextBoxLocalidad.Text = usuarioTemp.IdLocalidad == 0 ? "" : Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
+                    TextBoxProvincia.Text = usuarioTemp.IdLocalidad == 0 ? "" : Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
                 }
                 else
                 {
@@ -66,8 +66,8 @@ namespace ManoExperta
                     TextBoxCalleAltura.Text = usuarioTemp.Domicilio;
                     usuarioProveedor = usuarioNegocioTemp.getUsuario(int.Parse(idProveedor));
                     TextBoxProveedor.Text = usuarioProveedor.Nombre + " " + usuarioProveedor.Apellido;
-                    TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
-                    TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
+                    TextBoxLocalidad.Text = usuarioTemp.IdLocalidad == 0 ? "" : Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).Nombre;
+                    TextBoxProvincia.Text = usuarioTemp.IdLocalidad == 0 ? "" : Utils.getLocaciones().Find(loc => loc.Id == usuarioTemp.IdLocalidad).NombreProvincia;
 
                 }
             }

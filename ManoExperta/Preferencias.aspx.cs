@@ -47,7 +47,7 @@ namespace ManoExperta
                 TextBoxDireccionCalle.Text = usuariotemp.Domicilio;
                 TextBoxDNI.Text = usuariotemp.IdPersona;
                 TextBoxEmailUsuario.Text = (usuariotemp.Email).ToLower();
-                TextBoxFechaNacimiento.Text = usuariotemp.FechaNacimiento.ToString("yyyy-MM-dd");
+                TextBoxFechaNacimiento.Text = usuariotemp.FechaNacimiento.ToString("dd-MM-yyyy").Equals("01-01-1900") ? "" : usuariotemp.FechaNacimiento.ToString("dd-MM-yyyy");
                 TextBoxTelefono.Text = usuariotemp.Telefono;
 
             }
