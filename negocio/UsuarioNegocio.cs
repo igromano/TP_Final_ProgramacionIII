@@ -168,6 +168,8 @@ namespace negocio
                 datos.settearParametros("@FechaNacimiento", usuario.FechaNacimiento);
                 datos.settearParametros("@IDLocalidad", usuario.IdLocalidad);
                 datos.settearParametros("@Telefono", usuario.Telefono);
+                datos.settearParametros("@Domicilio", usuario.Domicilio);
+                datos.settearParametros("@Activo", usuario.Activo);
 
                 if (usuario.RolUsuario == RolUsuario.PRESTADOR)
                 {
@@ -231,7 +233,7 @@ namespace negocio
                         especialidad.Nombre = Utils.Utils.getEspecialidades().Find(e => e.Id == especialidad.Id).Nombre;
                         usuario.Especialidad = especialidad;
 
-                        if (rol == RolUsuario.PRESTADOR)
+                        if (rol == RolUsuario.PRESTADOR && !(datos.lector["Calificacion"] is DBNull))
                         {
                             usuario.Calificacion = int.Parse(datos.lector["Calificacion"].ToString());
                         }

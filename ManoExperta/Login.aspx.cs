@@ -20,7 +20,6 @@ namespace ManoExperta
         //public bool accesoExitoso = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-            getClientLocation();
 
             if (!IsPostBack)
             {
@@ -62,14 +61,8 @@ namespace ManoExperta
                 txtUser.Text = "";
                 txtPass.Text = "";
                 error = "Los datos proporcionados son incorrectos";
-                //error = ex.ToString();
             }
         }
 
-        async private void getClientLocation()
-        {
-            //ServiciosExternos service = new ServiciosExternos();
-            //Locacion locacion = await service.getLocacion();
-        }
     }
 }
