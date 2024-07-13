@@ -235,7 +235,34 @@ namespace negocio
             catch (Exception ex)
             {
 
-                throw new Exception("Error al obtener tickets desde la DB - Error: " + ex);
+                throw new Exception("Error al obtener tickets desde la DB - Error: " + ex.Message);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void registrarResenia(Ticket ticket)
+        {
+            if (ticket.Estado.Nombre.Equals("REALIZADO") || ticket.Estado.Nombre.Equals("CANCELADO"))
+            {
+                throw new Exception("El ticket debe estar finalizado para agregar una reseña");
+            }
+
+            AccesoADatos datos = new AccesoADatos();
+            try
+            {
+                datos.configurarConsulta("INSERT Resenias VALUES(@ID, GETDATE(), @Comentario, @Calificacion)");
+                datos.settearParametros("@ID", ticket.Id);
+                datos.settearParametros("@Comentario", ticket.ComentarioResenia);
+                datos.settearParametros("@Calificacion", ticket.Calificacion);
+
+                datos.ejecutarConsulta();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ingresar reseña, Error: " + ex.Message);
             }
             finally
             {
