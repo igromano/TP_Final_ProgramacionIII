@@ -9,7 +9,8 @@
     background-color: whitesmoke;
     opacity:0.92;
     width: 400px;
-    height: 350px;
+/*    height: 350px;*/
+height: auto;
     border-radius:10px;
 }
 .alert {

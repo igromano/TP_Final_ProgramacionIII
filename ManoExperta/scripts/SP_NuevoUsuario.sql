@@ -9,7 +9,8 @@ CREATE OR ALTER procedure SP_NuevoUsuario (
 @Sexo char = 'X',
 @FechaNacimiento date = '1900-01-01',
 @Domicilio varchar(100) = '',
-@IDLocalidad smallint = null
+@IDLocalidad smallint = null,
+@Activo bit = 1
 )
 as
 begin
@@ -21,11 +22,14 @@ declare @UsuarioExistente varchar(50)
 	end
 		if @Email IN (SELECT u.Email from Personas u)
 	begin 
-		RAISERROR ('Este usuario ya existe', 16, 0)
+		RAISERROR ('Este correo ya se encuentra registrado', 16, 0)
 	end
-		INSERT Personas values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email, @IDPersona, @Nombre, @Apellido, @Sexo, @FechaNacimiento, @Domicilio, @IDLocalidad, null ,1)
+		INSERT Personas values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email, @IDPersona, @Nombre, @Apellido, @Sexo, @FechaNacimiento, @Domicilio, @IDLocalidad, null ,@Activo)
 	END TRY
 	BEGIN CATCH
 		PRINT ERROR_MESSAGE()
+		RAISERROR ('Error al crear usuario', 16, 0)
 	END CATCH
 end;
+select * from Personas
+exec SP_NuevoUsuario 'mel', 'mel123',2,'melPatino@mail.com','456789','Mel', 'Patiño', '','','',1
