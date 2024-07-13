@@ -34,10 +34,7 @@ namespace negocio.Utils
                 inicio.IdProvincia = 0;
                 inicio.NombreProvincia = "SELECCIONAR";
                 locaciones.Add(inicio);
-                foreach (var locacion in servicioNegocio.getLocaciones())
-                {
-                    locaciones.Add(locacion);  
-                }
+                servicioNegocio.getLocaciones().ForEach(e => locaciones.Add(e));
 
                 return locaciones;
             }
@@ -49,8 +46,12 @@ namespace negocio.Utils
             if (especialidades.Count == 0)
             {
                 ServicioNegocio servicioNegocio = new ServicioNegocio();
-                especialidades = servicioNegocio.getEspecialidades();
-
+                Especialidad inicio = new Especialidad();
+                inicio.Id = 0;
+                inicio.Nombre = "SELECCIONAR";
+                especialidades.Add(inicio);
+                servicioNegocio.getEspecialidades().ForEach(e => especialidades.Add(e));
+ 
                 return especialidades;
             }
             return especialidades;
