@@ -191,3 +191,5 @@ SELECT (select avg(re.Calificacion) from Ticket t
 ) AS 'Calificacion', *
 FROM Personas p WHERE iDRol = 1 AND p.ID = 2
 
+update Personas
+

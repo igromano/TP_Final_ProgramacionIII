@@ -28,7 +28,16 @@ namespace negocio.Utils
             if (locaciones.Count == 0)
             {
                 ServicioNegocio servicioNegocio = new ServicioNegocio();
-                locaciones = servicioNegocio.getLocaciones();
+                Locacion inicio = new Locacion();   
+                inicio.Id = 0;
+                inicio.Nombre = "SELECCIONAR";
+                inicio.IdProvincia = 0;
+                inicio.NombreProvincia = "SELECCIONAR";
+                locaciones.Add(inicio);
+                foreach (var locacion in servicioNegocio.getLocaciones())
+                {
+                    locaciones.Add(locacion);  
+                }
 
                 return locaciones;
             }

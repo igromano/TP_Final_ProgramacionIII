@@ -16,18 +16,19 @@
 
     <form id="form1" runat="server">
 
-        <form class="row g-3 needs-validation" novalidate>
+        <form class="row g-4 needs-validation" novalidate>
             <div class="container align-self-end">
                 <div id="login" class="container opacity-85" style="--bs-bg-opacity: .5;">
                     <%if (!accesoExitoso)
                         { %>
-                    <div class="alert alert-danger" role="alert">
+                  <div class="alert alert-danger" role="alert">
+
                         <%:error %>
                     </div>
                     <%} %>
                     <div class="form-text opacity-100 needs-validation">
-                        <asp:Label ID="lblUser" CssClass="form-label fw-bold" runat="server" Text="Usuario"></asp:Label>
-                        <asp:TextBox ID="txtUser" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:Label ID="lblUser" CssClass="form-label fw-bold" runat="server" Text="Usuario o Email"></asp:Label>
+                        <asp:TextBox ID="txtUser" CssClass="form-control" runat="server" ValidateRequestMode="Inherit"></asp:TextBox>
                         <asp:Label ID="lblValidateUser" runat="server" Text=""></asp:Label>
                     </div>
 

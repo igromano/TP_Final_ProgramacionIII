@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
 using ManoExperta.Services;
+using System.Drawing;
 
 namespace ManoExperta
 {
@@ -17,7 +18,6 @@ namespace ManoExperta
         public bool accesoExitoso = true;
         public string error;
 
-        //public bool accesoExitoso = false;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -32,7 +32,7 @@ namespace ManoExperta
             try
             {
 
-                if (txtPass.Text.Length > 0 || txtUser.Text.Length > 0)
+                if (txtPass.Text.Length > 0 && txtUser.Text.Length > 0)
                 {
                     Usuario usuario = new UsuarioNegocio().login(new Usuario(txtUser.Text, txtPass.Text));
                     if (usuario != null)
@@ -44,23 +44,28 @@ namespace ManoExperta
                     }
                     else
                     {
+
                         accesoExitoso = false;
                         txtUser.Text = "";
                         txtPass.Text = "";
-                        error = "Los datos proporcionados son incorrectos";
                     }
                 }
                 else
                 {
+                    txtPass.BorderColor = txtPass.Text.Length == 0 ? Color.Red : Color.Gray;
+                    txtUser.BorderColor = txtUser.Text.Length == 0 ? Color.Red : Color.LightGray;
+
                     accesoExitoso = false;
-                    error = "Debe ingresar un usuario y contraseña";
+                    error = "Debe ingresar un usuario y/o contraseña";
                 }
             }catch (Exception ex)
             {
+                txtPass.BorderColor = txtPass.Text.Length == 0 ? Color.Red : Color.LightGray;
+                txtUser.BorderColor = txtUser.Text.Length == 0 ? Color.Red : Color.LightGray;
                 accesoExitoso = false;
                 txtUser.Text = "";
                 txtPass.Text = "";
-                error = "Los datos proporcionados son incorrectos";
+                error = ex.Message;
             }
         }
 
