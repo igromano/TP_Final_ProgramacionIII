@@ -20,6 +20,7 @@ namespace ManoExperta
         public List<Locacion> provinciasUnicas = new List<Locacion>();
         public List<Ticket> ticketsFiltro = new List<Ticket>();
         public int trabajosActivos = 0;
+        public (int codigo, string mensaje) alerta;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -55,10 +56,20 @@ namespace ManoExperta
                 DropDownListProvinciaFiltro.DataTextField = "NombreProvincia";
                 DropDownListProvinciaFiltro.DataValueField = "IdProvincia";
                 DropDownListProvinciaFiltro.DataBind();
+                if (usuariotemp.Sexo.ToString().Equals("X"))
+                {
+                    alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder tomar trabajos");
+                }
             }
             else
             {
+
                 ticketsTemp = (List<Ticket>)Session["tickets"];
+                usuariotemp = (Usuario)Session["usuario"];
+                if (usuariotemp.Sexo.ToString().Equals("X"))
+                {
+                    alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder tomar trabajos");
+                }
             }
 
 
@@ -70,8 +81,11 @@ namespace ManoExperta
             string id = ((Button)sender).CommandArgument;
             Response.Redirect("Detalle.aspx?idTicket=" + id, false);
         }
+        
+        protected void filtro(object sender, EventArgs e)
+        {
 
-
+        }
         protected void DropDownListProvinciaFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
 

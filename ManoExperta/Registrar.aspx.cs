@@ -75,7 +75,7 @@ namespace ManoExperta
                 if (registroExitoso)
                 {
                     // mostrar un mensaje de registro exitoso
-                    Session.Add("usuario", nuevoUsuario);
+                    Session.Add("usuario", usuarioNegocio.login(nuevoUsuario));
                     error = "";
                     Response.Redirect("Home.aspx");
 
@@ -132,7 +132,7 @@ namespace ManoExperta
                 bool registroExitoso = usuarioNegocio.registrarUsuario(nuevoProveedor);
                 if (registroExitoso)
                 {
-                    Session.Add("usuario", nuevoProveedor);
+                    Session.Add("usuario", usuarioNegocio.login(nuevoProveedor));
                     error = "";
                     Response.Redirect("Home.aspx");
                 }

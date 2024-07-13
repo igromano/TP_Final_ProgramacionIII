@@ -15,6 +15,8 @@ namespace ManoExperta
     {
         public int idTicket = 0;
         public string estadoActual;
+        public Ticket ticket = new Ticket();
+        public UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -31,19 +33,28 @@ namespace ManoExperta
                 idTicket = Convert.ToInt32(Request.QueryString["idTicket"]);
                 Usuario usuario = (Usuario)Session["usuario"];
                 List<Ticket> tickets = (List<Ticket>)Session["tickets"];
-                Ticket ticket = tickets.Find(x => x.Id == idTicket);
+
+                if(usuario.RolUsuario == RolUsuario.PRESTADOR)
+                {
+                    ticket = tickets.Find(tck => tck.Id == idTicket && tck.Prestador.IdPersona == usuario.IdPersona);
+                }
+                else
+                {
+
+                    ticket = tickets.Find(tck => tck.Id == idTicket && tck.Usuario.IdPersona == usuario.IdPersona);
+                }
 
                 if (ticket != null)
                 {
-                    UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+
                     Usuario usuarioCreador;
                     usuarioCreador = usuarioNegocio.getUsuario(ticket.Usuario.Id);
                     estadoActual = ticket.Estado.Nombre;
                     TextBoxNombre_Cliente.Text = ticket.Usuario.Nombre + " " + ticket.Usuario.Apellido;
                     TextBoxDireccion.Text = usuarioCreador.Domicilio; // cambiar cuando nacho lo agregue a la carga en getTicketsPorRol
                     List<Locacion> provinciasUnicas = Utils.getLocaciones().GroupBy(loc => new { loc.IdProvincia, loc.NombreProvincia }).Select(loc => loc.First()).ToList();
-                    TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuario.IdLocalidad).NombreProvincia;
-                    TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuario.IdLocalidad).Nombre;
+                    TextBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioCreador.IdLocalidad).NombreProvincia;
+                    TextBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == usuarioCreador.IdLocalidad).Nombre;
                     TextBoxFecha_Solicitado.Text = ticket.FechaSolicitado.ToShortDateString();
                     TextBoxComentario.Text = ticket.ComentariosUsuario;
 
@@ -104,6 +115,12 @@ namespace ManoExperta
         protected void btnAgregar_Resenia(object sender, EventArgs e)
         {
 
+        }
+
+        protected void LinkProveedor_Click(object sender, EventArgs e)
+        {
+            Session["proveedorTemp"] = usuarioNegocio.getUsuario(ticket.Prestador.Id);
+            Response.Redirect("DetalleProveedor.aspx", false);
         }
 
 

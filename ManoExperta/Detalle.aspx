@@ -53,7 +53,7 @@
                     <hr />
                     <h4>Datos del proveedor:</h4>
                     <div class="col-md-6 mb-3">
-                        <label>Proveedor:</label>
+                        <label>Proveedor: <asp:LinkButton ID="LinkProveedor" runat="server" OnClick="LinkProveedor_Click" Text="(Ver Detalle)"></asp:LinkButton></label>
                         <asp:TextBox ID="TextBoxProveedor" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
                     <div class="col-md-6 mb-3">
