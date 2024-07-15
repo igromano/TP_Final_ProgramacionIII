@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-12">
                                 <label>Por Localidad:</label>
-                                <asp:DropDownList ID="DropDownListLocalidadFiltro" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListLocalidadFiltro_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListLocalidadFiltro" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true" OnSelectedIndexChanged="filtro"></asp:DropDownList>
                             </div>
                         </div>
                     </div>
@@ -81,15 +81,13 @@
                                             <div class="row no-gutters" style="max-width: 80%">
                                                 <%if (usuariotemp.Sexo.ToString().Equals("X"))
                                                 { %>
-                                                <asp:Button ID="buttonMasInformacion2" runat="server" CssClass="btn btn-secondary mb-2" CommandArgument='<%# Eval("Id") %>' CommandName="IdTicket" OnClick="buttonMasInformacion_Click" Text="Más Información" />
-                                                <button class="btn btn-success" disabled>Tomar Trabajo</button>
+                                                <asp:Button ID="buttonMasInformacion2" runat="server" CssClass="btn btn-secondary mb-2" CommandArgument='<%# Eval("Id") %>' CommandName="IdTicket" OnClick="buttonMasInformacion_Click" Text="Ver Trabajo" Enabled="false" />
                                                 <% }
 
                                                 %>
                                                 <%else
                                                 { %>
-                                                <asp:Button ID="buttonMasInformacion" runat="server" CssClass="btn btn-secondary mb-2" CommandArgument='<%# Eval("Id") %>' CommandName="IdTicket" OnClick="buttonMasInformacion_Click" Text="Más Información" />
-                                                <button class="btn btn-success">Tomar Trabajo</button>
+                                                <asp:Button ID="buttonMasInformacion" runat="server" CssClass="btn btn-success mb-2" CommandArgument='<%# Eval("Id") %>' CommandName="IdTicket" OnClick="buttonMasInformacion_Click" Text="Ver Trabajo" />
                                                 <% } %>
                                             </div>
                                         </div>
@@ -110,13 +108,15 @@
                         var texto = div.textContent || div.innerText;
 
                         if (texto === "EN PROCESO") {
-                            div.style.backgroundColor = "#FFA500"; // Naranja para Pendiente
+                            div.style.backgroundColor = "#FFA500";
                         } else if (texto === "REALIZADO") {
-                            div.style.backgroundColor = "#008000"; // Verde para Completado
+                            div.style.backgroundColor = "#B4B90C";
                         } else if (texto === "SOLICITADO") {
-                            div.style.backgroundColor = "#0000FF"; // Azul para En Proceso
+                            div.style.backgroundColor = "#0A4383";
+                        } else if (texto === "A ASIGNAR") {
+                            div.style.backgroundColor = "#0000FF";
                         } else {
-                            div.style.backgroundColor = "#F44336"; // Color por defecto
+                            div.style.backgroundColor = "#F44336";
                         }
                     });
                 };

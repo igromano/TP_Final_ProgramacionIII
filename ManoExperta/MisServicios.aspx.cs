@@ -13,7 +13,7 @@ namespace ManoExperta
 {
     public partial class MisServicios : System.Web.UI.Page
     {
-        Usuario usuario = new Usuario();
+        public Usuario usuario = new Usuario();
         public (int codigo, string mensaje) alerta;
         public List<Ticket> filtroTickets = new List<Ticket> ();
         public List<Ticket> tickets = new List<Ticket> ();
@@ -98,6 +98,19 @@ namespace ManoExperta
             repHistorialTrabajos.DataSource = tickets.FindAll(t => t.Estado.Id == 3 || t.Estado.Id == 4);
             repHistorialTrabajos.DataBind();
             repTrabajosActivos.DataBind();
+        }
+
+        protected int evaluarUsuario(int idUsuarioAprobacion)
+        {
+            if(idUsuarioAprobacion != 0)
+            {
+                if(idUsuarioAprobacion == Convert.ToInt32(usuario.IdPersona))
+                {
+                    return 1;
+                }
+                return 2;
+            }
+            return 0;
         }
     }
 

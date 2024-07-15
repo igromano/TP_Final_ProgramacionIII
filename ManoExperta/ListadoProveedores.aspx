@@ -30,6 +30,23 @@
                         </div>
                     </div>
                     <div class="col-10" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px;">
+                                            <%if (alerta.codigo != 0)
+                        {
+                            if (alerta.codigo == 1)
+                            { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= alerta.mensaje %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <% }%>
+                    <%else if (alerta.codigo == 2)
+                        { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= alerta.mensaje %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <% }%>
+                    <%} %>
                         <h3>Buscá tu profesional:</h3>
                         <% if (repListadoProfesionales.Items.Count == 0)
                             { %>
@@ -72,7 +89,15 @@
                                             <div class="card-body">
                                                 <div class="row no-gutters" style="max-width: 80%">
                                                     <asp:Button ID="buttonMasInformacion" runat="server" CssClass="btn btn-secondary mb-2" Text="Más información" CommandArgument='<%#Eval("ID")%>' CommandName="ProveedorID" OnClick="buttonMasInformacion_Click" />
+                                                    <%if (usuariotemp.Sexo.ToString().Equals("X") || usuariotemp.Sexo.ToString().Equals("0"))%>
+                                                      <%{%>
+                                                    <asp:Button ID="button1" runat="server" CssClass="btn btn-success mb-2" Text="Solicitar Trabajo" CommandArgument='<%#Eval("ID")%>' CommandName="ProveedorID" OnClick="buttonSolicitarTrabajo_Click" Enabled="false"/>
+                                                      <%} %>
+                                                    <% else %>
+                                                    <%{ %>
+
                                                     <asp:Button ID="buttonSolicitarTrabajo" runat="server" CssClass="btn btn-success mb-2" Text="Solicitar Trabajo" CommandArgument='<%#Eval("ID")%>' CommandName="ProveedorID" OnClick="buttonSolicitarTrabajo_Click" />
+                                                    <%} %>
                                                 </div>
                                             </div>
                                         </div>

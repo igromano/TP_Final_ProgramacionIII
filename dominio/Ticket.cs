@@ -60,5 +60,6 @@ namespace dominio
             get { return fechaResenia; }
             set { if (value >= fechaRealizado) fechaResenia = value; } }
 
+        public string IdUsuarioAprobacion {  get; set; }
     }
 }

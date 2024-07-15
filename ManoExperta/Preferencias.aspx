@@ -14,6 +14,7 @@
                 <hr />
                 <menu>
                     <li><a href="Preferencias.aspx" style="text-decoration: none; color: black; font-weight: bold;">Mis datos</a></li>
+                    <li><a href="CambiarContrasena.aspx" style="text-decoration: none; color: black; font-weight: bold;">Cambiar Contraseña</a></li>
                     <li><a href="EliminarCuenta.aspx" style="text-decoration: none; color: black; font-weight: bold;">Eliminar Cuenta</a></li>
                     <li><a href="CerrarSesion.aspx" style="text-decoration: none; color: black; font-weight: bold;">Cerrar Sesion</a></li>
                 </menu>
@@ -24,6 +25,8 @@
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
                         <div class="container" style="max-width: 1000px">
+                            <h3>Datos de tu cuenta:</h3>
+                            <hr />
                             <%if (alerta.codigo != 0)
                                 {
                                     if (alerta.codigo == 1)

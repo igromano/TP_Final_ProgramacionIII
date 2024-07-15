@@ -20,6 +20,7 @@ namespace ManoExperta
         public List<Usuario> proveedoresFiltrados = new List<Usuario>();
         public UsuarioNegocio usuarioNegocioTemp = new UsuarioNegocio();
         public List<Locacion> locacionesList = new List<Locacion>();
+        public (int codigo, string mensaje) alerta;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -30,6 +31,10 @@ namespace ManoExperta
             if (!IsPostBack)
             {
                 usuariotemp = (Usuario)Session["usuario"];
+                if (usuariotemp.Sexo.ToString().Equals("X") || usuariotemp.Sexo.ToString().Equals("0"))
+                {
+                    alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder soliticar trabajos. Completá tus datos en Preferencias por favor.");
+                }
                 if (usuariotemp.RolUsuario != RolUsuario.USUARIO)
                 {
                     Response.Redirect("Home.aspx", false);

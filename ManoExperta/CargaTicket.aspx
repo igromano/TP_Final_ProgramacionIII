@@ -6,6 +6,23 @@
     <div class="container-fluid" id="MenuCentral" style="background-color: #80B9AD; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px;">
         <div id="SubMenuCentral" style="flex: 1; width: 100%; display: flex; border-radius: 10px">
             <div class="container" style="background-color: #B3E2A7; padding: 10px; border-radius: 10px">
+                <%if (alerta.codigo != 0)
+                    {
+                        if (alerta.codigo == 1)
+                        { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <%= alerta.mensaje %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% }%>
+                <%else if (alerta.codigo == 2)
+                    { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <%= alerta.mensaje %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% }%>
+                <%} %>
                 <h3>Carga Ticket</h3>
                 <hr />
                 <hr />
@@ -60,7 +77,7 @@
                         <asp:Button ID="btnCargarPedido" CssClass="btn btn-success" runat="server" Text="Cargar Ticket" OnClick="btnCargarPedido_Click" />
                     </div>
                     <div class="col" style="display: flex; justify-content: center">
-                        <asp:Button ID="btnCancelarPedido" CssClass="btn btn-danger" runat="server" Text="Volver" OnClick="btnCancelarPedido_Click"/>
+                        <asp:Button ID="btnCancelarPedido" CssClass="btn btn-danger" runat="server" Text="Volver" OnClick="btnCancelarPedido_Click" />
                     </div>
                 </div>
             </div>

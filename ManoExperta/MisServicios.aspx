@@ -11,8 +11,10 @@
                 if (texto === "EN PROCESO") {
                     div.style.backgroundColor = "#FFA500";
                 } else if (texto === "REALIZADO") {
-                    div.style.backgroundColor = "#008000";
+                    div.style.backgroundColor = "#0A831B";
                 } else if (texto === "SOLICITADO") {
+                    div.style.backgroundColor = "#0A4383";
+                } else if (texto === "A ASIGNAR") {
                     div.style.backgroundColor = "#0000FF";
                 } else {
                     div.style.backgroundColor = "#F44336";
@@ -50,8 +52,8 @@
                             <asp:DropDownList ID="DdlFiltro_Especialidad" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true"></asp:DropDownList>
                         </div>
                         <div class="col-auto" style="padding: 10px;">
-                            <asp:Button ID="botonFiltro" runat="server" CssClass="btn btn-success" OnClick="filtro" Text="Aplicar Filtro"/>
-                            <asp:Button ID="ButtonLimpiarFiltro" runat="server" CssClass="btn btn-danger" OnClick="ButtonLimpiarFiltro_Click" Text="Limpiar Filtro"/>
+                            <asp:Button ID="botonFiltro" runat="server" CssClass="btn btn-success" OnClick="filtro" Text="Aplicar Filtro" />
+                            <asp:Button ID="ButtonLimpiarFiltro" runat="server" CssClass="btn btn-danger" OnClick="ButtonLimpiarFiltro_Click" Text="Limpiar Filtro" />
                         </div>
                     </div>
                     <div class="col-10" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px;">
@@ -105,8 +107,18 @@
                                             <div class="card-body">
                                                 <h5 class="card-title"><%# Eval("Prestador.nombre") %> <%# Eval("Prestador.apellido") %></h5>
                                                 <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
-                                                <div class="capsulaMatricula">Matriculado</div>
+                                               <%--  <%if (evaluarUsuario(Convert.ToInt32(Eval("IdUsuarioAprobacion"))) != 0){%>
+                                                    <%if (evaluarUsuario(Convert.ToInt32(Eval("IdUsuarioAprobacion"))) == 1)%>
+                                                        <%{%>
+                                                        <div class="capsulaMatricula" style="background-color: green">En Aprobación</div>
+                                                        <%} %>
+                                                    <%else%>
+                                                        <%{%>
+                                                        <div class="capsulaMatricula" style="background-color: red">Requiere Aprobacion</div>
+                                                        <%}%>
 
+                                                <%} %>
+                                                --%>
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex align-items-center justify-content-center">
@@ -155,7 +167,6 @@
                                             <div class="card-body">
                                                 <h5 class="card-title"><%# Eval("Prestador.nombre") %> <%# Eval("Prestador.apellido") %></h5>
                                                 <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
-                                                <div class="capsulaMatricula">Matriculado</div>
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex align-items-center justify-content-center">
