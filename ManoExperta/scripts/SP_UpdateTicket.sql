@@ -1,19 +1,19 @@
 --Actalizacion de tickets
 CREATE OR ALTER PROCEDURE SP_UpdateTicket(
 @ID bigint,
---@FechaRealizado date,
-@IDPrestador varchar (50) = '',
+@FechaRealizado date = null,
+@IDPrestador varchar (50) = null,
 @IDEspecialidad int,
 @Monto money,
---@IDEstado smallint,
+@IDEstado smallint,
 @ComentarioUsuario varchar(1000),
-@ComentarioPrestador varchar(1000)
---@IDUsrAprobacion varchar(50)
+@ComentarioPrestador varchar(1000),
+@IDUsrAprobacion varchar(50) = null
 ) AS
 BEGIN
 	BEGIN TRY
-		UPDATE Ticket SET IDPrestador = @IDPrestador, IDEspecialidad = @IDEspecialidad,	
-			Monto = @Monto, ComentarioUsuario = @ComentarioUsuario, ComentarioPrestador = @ComentarioPrestador
+		UPDATE Ticket SET FechaRealizado = @FechaRealizado, IDPrestador = @IDPrestador, IDEspecialidad = @IDEspecialidad,	
+			Monto = @Monto, IDEstado = @IDEstado, ComentarioUsuario = @ComentarioUsuario, ComentarioPrestador = @ComentarioPrestador, IDUsrAprobacion = @IDUsrAprobacion
 			where ID = @ID
 	END TRY
 	BEGIN CATCH
