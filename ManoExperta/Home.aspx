@@ -10,7 +10,7 @@
         <div class="row" style="justify-content: center; text-align: center;">
         </div>
         <div id="SubMenuCentral" style="flex: 1; width: 100%; height: 100vh; display: flex;">
-            <div class="col justify-content-center" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px;">
+            <div class="col justify-content-center" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px; border-radius:10px">
                 <%if (alerta.codigo != 0)
                     {
                         if (alerta.codigo == 1)

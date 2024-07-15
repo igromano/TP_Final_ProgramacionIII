@@ -28,6 +28,10 @@ namespace ManoExperta
             }
 
             usuariotemp = (Usuario)Session["usuario"];
+            if (usuariotemp.Sexo.ToString().Equals("X") || usuariotemp.Sexo.ToString().Equals("0"))
+            {
+                alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder soliticar trabajos. Completá tus datos en Preferencias por favor.");
+            }
             if (!IsPostBack)
             {
                 cargarDatos();
@@ -85,7 +89,11 @@ namespace ManoExperta
                 usuariotemp.Email = TextBoxEmailUsuario.Text;
                 usuariotemp.FechaNacimiento = DateTime.Parse(TextBoxFechaNacimiento.Text);
                 usuariotemp.IdLocalidad = int.Parse(DropDownListLocalidad.SelectedValue);
-                usuariotemp.Especialidad.Id = Convert.ToInt32(DropDownListEspecialidad.SelectedValue);
+                if (usuariotemp.RolUsuario == RolUsuario.PRESTADOR)
+                {
+                    usuariotemp.Especialidad.Id = Convert.ToInt32(DropDownListEspecialidad.SelectedValue);
+
+                }
                 usuarioNegocioTemp.updateUsuario(usuariotemp);
                 btnActualizarDatos.Enabled = false;
                 btnDescartar.Enabled = false;

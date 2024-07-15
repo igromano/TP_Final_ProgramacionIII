@@ -40,12 +40,12 @@
                     <div class="d-grid gap-2 p-4">
                         <asp:Button ID="btnLogin" CssClass="btn btn-success" runat="server" Text="Acceder" OnClick="btnLogin_Click" />
                     </div>
-                    <asp:Label ID="lblIp" runat="server"></asp:Label>
 
 
                     <div class="d-grid gap-2 p-4">
                         <a href="Registrar.aspx" class="">Registrate</>
                     </div>
+                    <asp:Label ID="lblIp" runat="server"></asp:Label>
                 </div>
         </form>
         </div>

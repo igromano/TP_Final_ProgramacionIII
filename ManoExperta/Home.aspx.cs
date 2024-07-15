@@ -23,6 +23,7 @@ namespace ManoExperta
                 if (usuarioTemp.Sexo.ToString().Equals("X") || usuarioTemp.Sexo.ToString().Equals("0"))
                 {
                     alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder soliticar trabajos. Completá tus datos en Preferencias por favor.");
+                    ButtonProblema.Enabled = false;
                 }
 
                 if (usuarioTemp.RolUsuario == RolUsuario.PRESTADOR)

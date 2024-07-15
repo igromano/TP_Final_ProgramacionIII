@@ -19,7 +19,9 @@ namespace ManoExperta
         public TrabajoNegocio trabajoNegocioTemp = new TrabajoNegocio();
         public List<Ticket> ticketsTemp = new List<Ticket>();
         public Usuario usuarioTemp = new Usuario();
+        public Usuario usuario = new Usuario();
         public int trabajos = 0;
+        public (int codigo, string mensaje) alerta;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -36,14 +38,23 @@ namespace ManoExperta
             //usuarioTemp = usuarioNegocioTemp.getUsuario(int.Parse(id));
             usuarioTemp = (Usuario)Session["proveedorTemp"];
             ticketsTemp = trabajoNegocioTemp.getTicketsPorRol(usuarioTemp);
+            usuario = (Usuario)Session["usuario"];
             if (!IsPostBack)
             {
+                if (usuario.Sexo.ToString().Equals("X") || usuario.Sexo.ToString().Equals("0"))
+                {
+                    alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder soliticar trabajos. Completá tus datos en Preferencias por favor.");
+                }
                 ticketsTemp.RemoveAll(t => !t.Prestador.IdPersona.Equals(usuarioTemp.IdPersona));
                 repListadoResenias.DataSource = ticketsTemp.FindAll(tck => (tck.FechaRealizado.Year != 1900 && (tck.Estado.Nombre.Equals("REALIZADO") || tck.Estado.Nombre.Equals("CANCELADO"))));
                 trabajos = repListadoResenias.Items.Count;
                 repListadoResenias.DataBind();
                 textBoxDireccion.Text = usuarioTemp.Domicilio;
-                textBoxLocalidad.Text = usuarioTemp.IdLocalidad.ToString();
+                textBoxLocalidad.Text = Utils.getLocaciones().Find(loc => loc.Id == Convert.ToInt32(usuarioTemp.IdLocalidad)).Nombre;
+                textBoxProvincia.Text = Utils.getLocaciones().Find(loc => loc.Id == Convert.ToInt32(usuarioTemp.IdLocalidad)).NombreProvincia;
+                textBoxEspecialidad.Text = usuarioTemp.Especialidad.Nombre;
+                textBoxEmail.Text = usuarioTemp.Email;
+                textBoxPrestadorDesde.Text = usuarioTemp.FechaAlta.ToString("yyyy-MM-dd");
 
             }
 
@@ -51,6 +62,12 @@ namespace ManoExperta
 
 
 
+        }
+
+        protected void buttonSolicitarTrabajo_Click(object sender, EventArgs e)
+        {
+            
+            Response.Redirect("CargaTicket.aspx?tipo=2&proveedor=" + usuarioTemp.Id, false);
         }
     }
 }

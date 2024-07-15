@@ -13,6 +13,7 @@ namespace ManoExperta
 {
     public partial class CargaTicket : System.Web.UI.Page
     {
+        public (int codigo, string mensaje) alerta;
         protected string idTipo = "";
         protected string idProveedor = "";
         public Usuario usuarioTemp = new Usuario();
@@ -80,15 +81,25 @@ namespace ManoExperta
 
         protected void btnCargarPedido_Click(object sender, EventArgs e)
         {
-
-            if (usuarioProveedor.IdPersona != null)
+            try
             {
-                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text, usuarioProveedor.IdPersona.ToString());
+
+                if (usuarioProveedor.IdPersona != null)
+                {
+                    trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, Utils.getEstados().Find(es => es.Nombre.Equals("SOLICITADO")).Id, TextBoxProblema.Text, usuarioProveedor.IdPersona.ToString(), usuarioProveedor.Especialidad.Id, Convert.ToInt32(usuarioTemp.IdPersona));
+                }
+                else
+                {
+                    trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text);
+
+                }
+                TextBoxProblema.Text = "";
+
+                alerta = (1, "Ticket ingresado correctamente");
             }
-            else
+            catch(Exception ex)
             {
-                trabajoNegocioTemp.registrarTrabajo(usuarioTemp.IdPersona.ToString(), 0, Utils.getEstados().Find(es => es.Nombre.Equals("A ASIGNAR")).Id, TextBoxProblema.Text);
-
+                alerta = (2, "Ocurrió un error cargando el ticket. Intenta nuevamente por favor.");
             }
         }
     }

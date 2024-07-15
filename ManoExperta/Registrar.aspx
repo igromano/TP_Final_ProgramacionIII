@@ -41,11 +41,22 @@
 
 
                 <div id="registrarUsuario" class="container opacity-85" style="--bs-bg-opacity: .5; max-width: 400px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <%if (!registroExitoso)
-                        { %>
-                    <div class="alert alert-danger" role="alert">
-                        <%:error %>
+                    <%if (alerta.codigo != 0)
+                        {
+                            if (alerta.codigo == 1)
+                            { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= alerta.mensaje %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                    <% }%>
+                    <%else if (alerta.codigo == 2)
+                        { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= alerta.mensaje %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <% }%>
                     <%} %>
                     <div id="nombreUsuario" class="form-text">
                         <asp:Label ID="Label7" CssClass="form-label fw-bold" runat="server" Text="Nombre"></asp:Label>
@@ -95,11 +106,22 @@
         <form class="row g-3 needs-validation" novalidate>
             <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
                 <div id="registrarProveedor" class="container opacity-85" style="--bs-bg-opacity: .5; max-width: 400px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <%if (!registroExitoso)
-                        { %>
-                    <div class="alert alert-danger" role="alert">
-                        <%:error %>
+                    <%if (alerta.codigo != 0)
+                        {
+                            if (alerta.codigo == 1)
+                            { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= alerta.mensaje %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                    <% }%>
+                    <%else if (alerta.codigo == 2)
+                        { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= alerta.mensaje %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <% }%>
                     <%} %>
                     <div id="nombreProveedor" class="form-text">
                         <asp:Label ID="Label9" CssClass="form-label fw-bold" runat="server" Text="Nombre"></asp:Label>
