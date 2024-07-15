@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE SP_UpdateUser (
+CREATE OR ALTER PROCEDURE [dbo].[SP_UpdateUser] (
 @Id int = null, 
 @Usuario varchar(50),
 @Email varchar(255),
@@ -11,14 +11,15 @@ CREATE OR ALTER PROCEDURE SP_UpdateUser (
 @IDLocalidad smallint,
 @Telefono varchar(100),
 @IDEspecialidad int = 0,
-@Contrasenia varchar(50)
+@Contrasenia varchar(50),
+@Activo bit
 ) as
 begin
 	begin try
 			begin
 				update Personas set IDPersona = @IdPersona, Nombre = @Nombre, Apellido = @Apellido, Sexo = @Sexo, 
 				FechaNacimiento = @FechaNacimiento, Domicilio = @Domicilio, IDLocalidad = @IDLocalidad,
-				Telefono = @Telefono, Contrasenia = @Contrasenia
+				Telefono = @Telefono, Contrasenia = @Contrasenia, Activo = @Activo
 				where ID = @Id
 				IF @IDEspecialidad != 0 AND @IdPersona NOT IN(SELECT ep.ID_Persona FROM Especialidad_x_Prestador ep)
 					BEGIN
