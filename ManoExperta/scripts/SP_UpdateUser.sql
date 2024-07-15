@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [dbo].[SP_UpdateUser] (
+CREATE OR ALTER PROCEDURE SP_UpdateUser (
 @Id int = null, 
 @Usuario varchar(50),
 @Email varchar(255),
