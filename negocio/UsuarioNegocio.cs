@@ -216,33 +216,36 @@ namespace negocio
 
                 while (datos.lector.Read())
                 {
-                    Usuario usuario = new Usuario();
-                    usuario.Id = int.Parse(datos.lector["ID"].ToString());
-                    usuario.UserName = datos.lector["Usuario"].ToString();
-                    usuario.Contrasenia = datos.lector["Contrasenia"].ToString();
-                    usuario.RolUsuario = (RolUsuario)(Int16)datos.lector["iDRol"];
-                    usuario.FechaAlta = DateTime.Parse(datos.lector["FechaAlta"].ToString());
-                    usuario.Email = datos.lector["Email"].ToString();
-                    usuario.IdPersona = datos.lector["IDPersona"].ToString();
-                    usuario.Nombre = datos.lector["Nombre"].ToString();
-                    usuario.Apellido = datos.lector["Apellido"].ToString();
-                    usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
-
-                    if (!(datos.lector["Sexo"].ToString()).Equals("X"))
+                    if (bool.Parse(datos.lector["Activo"].ToString()))
                     {
-                        Especialidad especialidad = new Especialidad();
-                        usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
-                        usuario.Domicilio = datos.lector["Domicilio"].ToString();
-                        usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
-                        especialidad.Id = int.Parse(datos.lector["ID_Especialidad"].ToString());
-                        especialidad.Nombre = Utils.Utils.getEspecialidades().Find(e => e.Id == especialidad.Id).Nombre;
-                        usuario.Especialidad = especialidad;
-
-                        if (rol == RolUsuario.PRESTADOR && !(datos.lector["Calificacion"] is DBNull))
+                        Usuario usuario = new Usuario();
+                        usuario.Id = int.Parse(datos.lector["ID"].ToString());
+                        usuario.UserName = datos.lector["Usuario"].ToString();
+                        usuario.Contrasenia = datos.lector["Contrasenia"].ToString();
+                        usuario.RolUsuario = (RolUsuario)(Int16)datos.lector["iDRol"];
+                        usuario.FechaAlta = DateTime.Parse(datos.lector["FechaAlta"].ToString());
+                        usuario.Email = datos.lector["Email"].ToString();
+                        usuario.IdPersona = datos.lector["IDPersona"].ToString();
+                        usuario.Nombre = datos.lector["Nombre"].ToString();
+                        usuario.Apellido = datos.lector["Apellido"].ToString();
+                        usuario.FechaNacimiento = DateTime.Parse(datos.lector["FechaNacimiento"].ToString());
+                        usuario.Activo = bool.Parse(datos.lector["Activo"].ToString());
+                        if (!(datos.lector["Sexo"].ToString()).Equals("X"))
                         {
-                            usuario.Calificacion = int.Parse(datos.lector["Calificacion"].ToString());
+                            Especialidad especialidad = new Especialidad();
+                            usuario.Sexo = char.Parse(datos.lector["Sexo"].ToString());
+                            usuario.Domicilio = datos.lector["Domicilio"].ToString();
+                            usuario.IdLocalidad = int.Parse(datos.lector["IDLocalidad"].ToString());
+                            especialidad.Id = int.Parse(datos.lector["ID_Especialidad"].ToString());
+                            especialidad.Nombre = Utils.Utils.getEspecialidades().Find(e => e.Id == especialidad.Id).Nombre;
+                            usuario.Especialidad = especialidad;
+
+                            if (rol == RolUsuario.PRESTADOR && !(datos.lector["Calificacion"] is DBNull))
+                            {
+                                usuario.Calificacion = int.Parse(datos.lector["Calificacion"].ToString());
+                            }
+                            listaUsuarios.Add(usuario);
                         }
-                        listaUsuarios.Add(usuario);
                     }
                 }
 
