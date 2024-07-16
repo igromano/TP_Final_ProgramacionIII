@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="MisServicios.aspx.cs" Inherits="ManoExperta.MisServicios" %>
+﻿<%@ Page Title="Mis Servicios" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="MisServicios.aspx.cs" Inherits="ManoExperta.MisServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -92,7 +92,17 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="card-body">
+                                                <% if (usuario.RolUsuario == dominio.RolUsuario.PRESTADOR) %>
+                                                <%{%>
+                                                <h5 class="card-title"><%# Eval("Usuario.nombre") %> <%# Eval("Usuario.apellido") %></h5>
+                                                <%}
+
+                                                %>
+                                                <%else%>
+                                                <%{%>
+
                                                 <h5 class="card-title"><%# Eval("Prestador.nombre") %> <%# Eval("Prestador.apellido") %></h5>
+                                                <%} %>
                                                 <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
                                             </div>
                                         </div>
@@ -139,7 +149,17 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="card-body">
+                                                <% if (usuario.RolUsuario == dominio.RolUsuario.PRESTADOR) %>
+                                                <%{%>
+                                                <h5 class="card-title"><%# Eval("Usuario.nombre") %> <%# Eval("Usuario.apellido") %></h5>
+                                                <%}
+
+                                                %>
+                                                <%else%>
+                                                <%{%>
+
                                                 <h5 class="card-title"><%# Eval("Prestador.nombre") %> <%# Eval("Prestador.apellido") %></h5>
+                                                <%} %>
                                                 <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
                                             </div>
                                         </div>

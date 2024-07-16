@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="CambiarContrasena.aspx.cs" Inherits="ManoExperta.CambiarContrasena" %>
+﻿<%@ Page Title="Cambiar Contraseña" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="CambiarContrasena.aspx.cs" Inherits="ManoExperta.CambiarContrasena" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

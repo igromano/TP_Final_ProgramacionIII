@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Preferencias.aspx.cs" Inherits="ManoExperta.Preferencias" %>
+﻿<%@ Page Title="Preferencias" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Preferencias.aspx.cs" Inherits="ManoExperta.Preferencias" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

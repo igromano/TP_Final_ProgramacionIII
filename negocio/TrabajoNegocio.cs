@@ -62,7 +62,7 @@ namespace negocio
         public void cambiarEstado(int idTrabajo, int idEstado, Usuario usuario = null)
         {
             AccesoADatos datos = new AccesoADatos();
-
+            Ticket ticketTemp = new Ticket();
             try
             {
                 datos.configurarConsulta("UPDATE Ticket set IDEstado = @IDEstado, IDUsrAprobacion = @IDUsrAprobacion where ID = @IDTrabajo");
@@ -78,6 +78,12 @@ namespace negocio
                 }
 
                 datos.ejecutarConsulta();
+                ticketTemp = getTicketPorId(idTrabajo);
+                EmailService email = new EmailService();
+                email.armarMail(ticketTemp.Usuario.Email, ticketTemp.Usuario.Nombre + " Su ticket se ha actualizado", "Se cambio el estado de su ticket. Por favor ingrese en el link para verificarlo.", "Detalle.aspx?idTicket=" + idTrabajo);
+                email.enviarCorreo();
+                email.armarMail(ticketTemp.Prestador.Email, ticketTemp.Prestador.Nombre + " Su ticket se ha actualizado", "Se cambio el estado de su ticket. Por favor ingrese en el link para verificarlo.", "Detalle.aspx?idTicket=" + idTrabajo);
+                email.enviarCorreo();
             }
             catch (Exception ex)
             {
@@ -85,9 +91,6 @@ namespace negocio
             }
             finally { datos.cerrarConexion(); }
 
-            EmailService email = new EmailService();
-            email.armarMail(usuario.Email, "Su ticket se ha actualizado", "", "Detalle.aspx?idTicket=1005");
-            email.enviarCorreo();
         }
 
         public List<Ticket> getTicketsPorRol(Usuario usuario)
@@ -182,15 +185,24 @@ namespace negocio
             }
         }
 
-        public List<Ticket> getTicketsPorEstado(Estado estado)
+        public List<Ticket> getTicketsPorEstado(Estado estado = null)
         {
             List<Ticket> listadoTickets = new List<Ticket>();
             AccesoADatos datos = new AccesoADatos();
             try
             {
-                datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Estado = @IdEstado");
-                datos.settearParametros("@IdEstado", estado.Id);
-                datos.ejecutarConsulta();
+                if (estado == null)
+                {
+                    datos.configurarConsulta("SELECT * FROM VW_VerTickets");
+                    datos.ejecutarConsulta();
+                }
+                else
+                {
+                    datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Estado = @IdEstado");
+                    datos.settearParametros("@IdEstado", estado.Id);
+                    datos.ejecutarConsulta();
+
+                }
 
                 while (datos.lector.Read())
                 {
@@ -301,6 +313,8 @@ namespace negocio
                 AccesoADatos datos = new AccesoADatos();
                 try
                 {
+                    Usuario usuario = new Usuario();
+                    UsuarioNegocio usuarioNegocioTemp = new UsuarioNegocio();
                     datos.configurarProcedimiento("SP_UpdateTicket");
                     datos.settearParametros("@ID", ticket.Id);
                     if (ticket.Prestador != null)
@@ -323,6 +337,13 @@ namespace negocio
                     }
 
                     datos.ejecutarConsulta();
+                    usuario = usuarioNegocioTemp.getUsuario(ticket.Usuario.Id);
+                    EmailService email = new EmailService();
+                    email.armarMail(usuario.Email, usuario.Nombre + " Su ticket se ha actualizado", "Se cambio el estado de su ticket. Por favor ingrese en el link para verificarlo.", "Detalle.aspx?idTicket=" + ticket.Id);
+                    email.enviarCorreo();
+                    usuario = usuarioNegocioTemp.getUsuario(ticket.Prestador.Id);
+                    email.armarMail(usuario.Email, usuario.Nombre + " Su ticket se ha actualizado", "Se cambio el estado de su ticket. Por favor ingrese en el link para verificarlo.", "Detalle.aspx?idTicket=" + ticket.Id);
+                    email.enviarCorreo();
                 }
                 catch (Exception ex)
                 {

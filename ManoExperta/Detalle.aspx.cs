@@ -47,7 +47,7 @@ namespace ManoExperta
                 if (((List<Ticket>)Session["tickets"]) != null)
                 {
                     //tickets = (List<Ticket>)Session["tickets"];
-                    tickets = trabajoNegocio.getTicketsPorRol(usuario);
+                    tickets = trabajoNegocio.getTicketsPorEstado();
                     ticket = tickets.Find(tck => tck.Id == idTicket);
                 }
                 else
