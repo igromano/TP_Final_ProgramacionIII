@@ -59,10 +59,12 @@ namespace negocio
                              datos.lector["Contrasenia"].ToString();
                         if (pass.Length > 0 && pass.Equals(usuario.Contrasenia))
                         {
-                            EmailService email = new EmailService();
-                            email.armarMail("ignacioromano@hotmail.com", "Mail de prueba", "Esto es un mail de prueba de manoexperta");
-                            email.enviarCorreo();
+
                             return getUsuario(int.Parse(datos.lector["ID"].ToString()));
+                        }
+                        else
+                        {
+                            throw new Exception("Contraseña incorrecta");
                         }
                     }
                 }
@@ -93,8 +95,9 @@ namespace negocio
             {
                 datos.configurarConsulta("SELECT * FROM Personas p " +
                     "LEFT JOIN Especialidad_x_Prestador ep ON p.IDPersona = ep.ID_Persona " +
-                    "where p.ID = @idUsuario");
+                    "where p.ID = @idUsuario OR p.IDPersona = @idUsuarioP");
                 datos.settearParametros("@idUsuario", idUsuario);
+                datos.settearParametros("@idUsuarioP", idUsuario.ToString());
                 datos.ejecutarConsulta();
                 while (datos.lector.Read())
                 {

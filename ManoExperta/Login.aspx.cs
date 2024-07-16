@@ -37,9 +37,21 @@ namespace ManoExperta
                     Usuario usuario = new UsuarioNegocio().login(new Usuario(txtUser.Text, txtPass.Text));
                     if (usuario != null)
                     {
+                        if (!usuario.Activo)
+                        {
+                            throw new Exception("Usuario inhabilitado, contacte a soporte");
+                        }
                         Session.Add("usuario", usuario);
                         accesoExitoso = true;
-                        Response.Redirect("Home.aspx", false);
+                        if (Session["estadoRuta"] == null)
+                        {
+                            Response.Redirect("Home.aspx", false);
+                        }
+                        else
+                        {
+                            Response.Redirect(((string)Session["estadoRuta"]).ToString(), false);
+                            Session.Remove("estadoRuta");
+                        }
                         //string url = Request.Url.ToString();
 
                     }

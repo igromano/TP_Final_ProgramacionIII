@@ -17,15 +17,10 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #80B9AD">
         <div class="d-flex" style="width: 100vw; margin: 10px; margin-left: 80px; margin-right: 80px">
-            <a href="Index.aspx" class="navbar-brand">Mano Experta</a>
+            <a href="Index.aspx" class="navbar-brand" style="font-family: Impact, Haettenschweiler,  Arial Narrow Bold, sans-serif; font-style: italic; font-size: 1.5em;">Mano Experta</a>
             <div class="row" style="width: 100%">
-                <div class="col">
-                    <button class="btn btn btn-outline-secondary" type="button">Contrata</button>
-                    <a href="Provee.aspx" class="btn btn btn-outline-secondary" type="button">Provee</a>
-                    <button class="btn btn btn-outline-secondary" type="button">Nosotros</button>
-
-                </div>
-                <div class="col d-flex justify-content-end">
+ 
+                <div id="btn-index" class="col d-flex justify-content-end">
                     <a class="btn btn btn-outline-secondary" href="Login.aspx" style="margin-right: 5px">Iniciar Sesion</a>
                     <a class="btn btn btn-secondary" href="Registrar.aspx">Registrate</a>
                 </div>
