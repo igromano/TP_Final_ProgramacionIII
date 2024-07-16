@@ -15,7 +15,7 @@
 
                             <div class="col-12">
                                 <label>Por Provincia:</label>
-                                <asp:DropDownList ID="DropDownListProvinciaFiltro" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProvinciaFiltro_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListProvinciaFiltro" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true" OnSelectedIndexChanged="filtro"></asp:DropDownList>
                             </div>
                             <div class="col-12">
                                 <label>Por Localidad:</label>

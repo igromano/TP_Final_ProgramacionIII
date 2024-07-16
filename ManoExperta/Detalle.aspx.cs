@@ -163,7 +163,6 @@ namespace ManoExperta
                     {
                         alerta = (1, "El proveedor indica que el trabajo ya se hizo. Por favor confirmalo para indicar que fue realizado.");
                         btnConfirmarRealizado.Visible = true;
-                        btnCancelarRealizado.Visible = true;
                     }
                     else
                     {
