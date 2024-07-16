@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PRUEBA" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Esto es una prueba de envs</Value>
+      <Value Profile="(Default)">Esto es una prueba de env</Value>
     </Setting>
   </Settings>
 </SettingsFile>

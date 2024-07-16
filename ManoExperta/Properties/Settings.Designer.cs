@@ -25,7 +25,7 @@ namespace ManoExperta.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Esto es una prueba de envs")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Esto es una prueba de env")]
         public string PRUEBA {
             get {
                 return ((string)(this["PRUEBA"]));
