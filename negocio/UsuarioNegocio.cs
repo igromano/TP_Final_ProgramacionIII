@@ -59,9 +59,6 @@ namespace negocio
                              datos.lector["Contrasenia"].ToString();
                         if (pass.Length > 0 && pass.Equals(usuario.Contrasenia))
                         {
-                            EmailService email = new EmailService();
-                            email.armarMail("ignacioromano@hotmail.com", "Mail de prueba", "Esto es un mail de prueba de manoexperta");
-                            email.enviarCorreo();
                             return getUsuario(int.Parse(datos.lector["ID"].ToString()));
                         }
                     }

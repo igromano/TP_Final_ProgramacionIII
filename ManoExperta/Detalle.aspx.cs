@@ -38,8 +38,16 @@ namespace ManoExperta
             {
                 idTicket = Convert.ToInt32(Request.QueryString["idTicket"]);
                 usuario = (Usuario)Session["usuario"];
-                tickets = (List<Ticket>)Session["tickets"];
-                ticket = tickets.Find(tck => tck.Id == idTicket);
+                if(((List<Ticket>)Session["tickets"]) != null)
+                {
+                    tickets = (List<Ticket>)Session["tickets"];
+                    ticket = tickets.Find(tck => tck.Id == idTicket);
+                }
+                else
+                {
+                   ticket = trabajoNegocio.getTicketPorId(idTicket);
+                }
+
 
                 /*if(usuario.RolUsuario == RolUsuario.PRESTADOR)
                 {

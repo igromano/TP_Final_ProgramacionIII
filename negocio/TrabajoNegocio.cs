@@ -1,5 +1,6 @@
 ﻿using accesoDatos;
 using dominio;
+using negocio.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,6 +72,10 @@ namespace negocio
                 throw ex;
             }
             finally { datos.cerrarConexion(); }
+
+            EmailService email = new EmailService();
+            email.armarMail(usuario.Email, "Su ticket se ha actualizado", "", "Detalle.aspx?idTicket=1005");
+            email.enviarCorreo();
         }
 
         public List<Ticket> getTicketsPorRol(Usuario usuario)
@@ -317,6 +322,91 @@ namespace negocio
             else
             {
                 throw new Exception("El ticket no puede ser modificado en estado CANCELADO o REALIZADO");
+            }
+        }
+
+        public Ticket getTicketPorId(int idticket)
+        {
+            AccesoADatos datos = new AccesoADatos();
+            try
+            {
+                datos.configurarConsulta("SELECT * FROM VW_VerTickets WHERE ID_Ticket = @IDticket");
+                datos.settearParametros("@IDticket", idticket);
+
+                datos.ejecutarConsulta();
+
+                Ticket tmpTicket = new Ticket();
+                
+                while (datos.lector.Read())
+                {
+                    Usuario tmpUsuario = new Usuario();
+                    Usuario tmpPrestador = new Usuario();
+
+                    tmpTicket.Id = int.Parse(datos.lector["ID_Ticket"].ToString());
+
+                    tmpUsuario.IdPersona = datos.lector["ID_Usuario"].ToString();
+                    tmpUsuario.Nombre = datos.lector["Usr_Nombre"].ToString();
+                    tmpUsuario.Apellido = datos.lector["Usr_Apellido"].ToString();
+                    tmpUsuario.RolUsuario = RolUsuario.USUARIO;
+                    tmpUsuario.Id = int.Parse(datos.lector["ID_Usr_Cliente"].ToString());
+                    tmpTicket.Usuario = tmpUsuario;
+                    tmpTicket.Monto = double.Parse(datos.lector["Monto"].ToString());
+
+                    if (!(datos.lector["ID_Prestador"] is DBNull))
+                    {
+                        tmpPrestador.IdPersona = datos.lector["ID_Prestador"].ToString();
+                        tmpPrestador.Nombre = datos.lector["Pres_Nombre"].ToString();
+                        tmpPrestador.Apellido = datos.lector["Pres_Apellido"].ToString();
+                        tmpPrestador.RolUsuario = RolUsuario.PRESTADOR;
+                        tmpPrestador.Id = int.Parse(datos.lector["ID_Usr_Prestador"].ToString());
+                        tmpTicket.Prestador = tmpPrestador;
+                    }
+
+                    Estado tmpEstado = new Estado();
+
+                    tmpTicket.Especialidad = datos.lector["Especialidad"].ToString();
+                    tmpEstado.Id = int.Parse(datos.lector["ID_Estado"].ToString());
+                    tmpEstado.Nombre = datos.lector["Estado"].ToString();
+                    tmpTicket.Estado = tmpEstado;
+
+                    tmpTicket.ComentariosUsuario = datos.lector["Usr_Comentarios"].ToString();
+                    tmpTicket.ComentariosPrestador = datos.lector["Pres_Comentarios"].ToString();
+
+                    tmpTicket.Calificacion = (int.Parse(datos.lector["Calificacion"].ToString()) < 0) ||
+                        (int.Parse(datos.lector["Calificacion"].ToString())) > 5
+                        ? 0 : int.Parse(datos.lector["Calificacion"].ToString());
+
+                    tmpTicket.ComentarioResenia = datos.lector["Res_Comentario"] is DBNull ?
+                        "" : datos.lector["Res_Comentario"].ToString();
+
+                    tmpTicket.FechaSolicitado = datos.lector["Fecha_Solicitado"] is DBNull ?
+                        DateTime.Parse("1900-01-01") :
+                        DateTime.Parse(datos.lector["Fecha_Solicitado"].ToString());
+
+                    tmpTicket.FechaRealizado = datos.lector["Fecha_Realizado"] is DBNull ?
+                        DateTime.Parse("1900-01-01") :
+                        DateTime.Parse(datos.lector["Fecha_Realizado"].ToString());
+
+                    tmpTicket.FechaResenia = datos.lector["Fecha_Res"] is DBNull ?
+                        DateTime.Parse("1900-01-01") :
+                        DateTime.Parse(datos.lector["Fecha_Res"].ToString());
+                    tmpTicket.DomicilioTrabajo = datos.lector["Usr_Domicilio"].ToString();
+                    tmpTicket.IdLocalidad = int.Parse(datos.lector["ID_Localidad_Trabajo"].ToString());
+                    tmpTicket.IdProvincia = int.Parse(datos.lector["ID_Provincia_Trabajo"].ToString());
+                    tmpTicket.IdUsuarioAprobacion = datos.lector["ID_Usr_Aprobacion"] is DBNull ? "" : datos.lector["ID_Usr_Aprobacion"].ToString();
+                    
+                }
+                
+                return tmpTicket;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }
