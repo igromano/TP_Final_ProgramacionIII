@@ -15,6 +15,15 @@ namespace ManoExperta
     {
 
         /// <summary>
+        /// Control scriptManagerPreferencias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptManagerPreferencias;
+
+        /// <summary>
         /// Control TextBoxNombre_Cliente.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace ManoExperta
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxNombre_Cliente;
+
+        /// <summary>
+        /// Control TextBoxDNICliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDNICliente;
 
         /// <summary>
         /// Control TextBoxFecha_Solicitado.
@@ -42,6 +60,15 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxComentario;
 
         /// <summary>
+        /// Control LinkProveedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkProveedor;
+
+        /// <summary>
         /// Control TextBoxProveedor.
         /// </summary>
         /// <remarks>
@@ -49,6 +76,15 @@ namespace ManoExperta
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxProveedor;
+
+        /// <summary>
+        /// Control TextBox1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
         /// Control TextBoxCuil_Prov.
@@ -105,6 +141,15 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxMonto_Trabajo;
 
         /// <summary>
+        /// Control TextBoxEspecialidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxEspecialidad;
+
+        /// <summary>
         /// Control TextBoxComentario_Proveedor.
         /// </summary>
         /// <remarks>
@@ -114,13 +159,40 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxComentario_Proveedor;
 
         /// <summary>
-        /// Control btnCancelarTrabajo.
+        /// Control btnPostularse.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarTrabajo;
+        protected global::System.Web.UI.WebControls.Button btnPostularse;
+
+        /// <summary>
+        /// Control btnAprobarSolicitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAprobarSolicitud;
+
+        /// <summary>
+        /// Control btnConfirmarRealizado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfirmarRealizado;
+
+        /// <summary>
+        /// Control btnAceptarPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptarPedido;
 
         /// <summary>
         /// Control btnPasarRealizado.
@@ -132,12 +204,66 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.Button btnPasarRealizado;
 
         /// <summary>
-        /// Control btnGuardarReseña.
+        /// Control btnRechazarPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnGuardarReseña;
+        protected global::System.Web.UI.WebControls.Button btnRechazarPedido;
+
+        /// <summary>
+        /// Control btnDescartarSolicitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDescartarSolicitud;
+
+        /// <summary>
+        /// Control btnCancelarRealizado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarRealizado;
+
+        /// <summary>
+        /// Control btnCancelarTrabajo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarTrabajo;
+
+        /// <summary>
+        /// Control dropDownListPuntaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropDownListPuntaje;
+
+        /// <summary>
+        /// Control textBoxResenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textBoxResenia;
+
+        /// <summary>
+        /// Control buttonGuardarResenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonGuardarResenia;
     }
 }

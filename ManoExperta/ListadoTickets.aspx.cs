@@ -19,7 +19,9 @@ namespace ManoExperta
         public List<Ticket> ticketsTemp = new List<Ticket>();
         public List<Locacion> provinciasUnicas = new List<Locacion>();
         public List<Ticket> ticketsFiltro = new List<Ticket>();
+        public Ticket ticketTemp = new Ticket();
         public int trabajosActivos = 0;
+        public (int codigo, string mensaje) alerta;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -55,10 +57,20 @@ namespace ManoExperta
                 DropDownListProvinciaFiltro.DataTextField = "NombreProvincia";
                 DropDownListProvinciaFiltro.DataValueField = "IdProvincia";
                 DropDownListProvinciaFiltro.DataBind();
+                if (usuariotemp.Sexo.ToString().Equals("X"))
+                {
+                    alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder tomar trabajos");
+                }
             }
             else
             {
+
                 ticketsTemp = (List<Ticket>)Session["tickets"];
+                usuariotemp = (Usuario)Session["usuario"];
+                if (usuariotemp.Sexo.ToString().Equals("X"))
+                {
+                    alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder tomar trabajos");
+                }
             }
 
 
@@ -71,7 +83,17 @@ namespace ManoExperta
             Response.Redirect("Detalle.aspx?idTicket=" + id, false);
         }
 
-
+        protected void filtro(object sender, EventArgs e)
+        {
+            ticketsFiltro = trabajoTemp.getTicketsPorEstado(Utils.getEstados().Find(est => est.Nombre.Equals("A ASIGNAR")));
+            ticketsFiltro.RemoveAll(tck => !tck.Especialidad.Equals("SIN ESPECIALIDAD"));
+            if (DropDownListLocalidadFiltro.SelectedValue != "0")
+            {
+                ticketsFiltro.RemoveAll(tck => tck.IdLocalidad != Utils.getLocaciones().Find(loc => loc.Id == tck.IdLocalidad).Id);
+            }
+            repTrabajosActivos.DataSource = ticketsFiltro;
+            repTrabajosActivos.DataBind();
+        }
         protected void DropDownListProvinciaFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -89,6 +111,28 @@ namespace ManoExperta
             repTrabajosActivos.DataSource = ticketsFiltro.FindAll(tck => tck.IdLocalidad == int.Parse(DropDownListLocalidadFiltro.SelectedValue));
             repTrabajosActivos.DataBind();
             trabajosActivos = repTrabajosActivos.Items.Count;
+        }
+
+        protected void buttonTomarTrabajo_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(((Button)sender).CommandArgument);
+            try
+            {
+                ticketsTemp = (List<Ticket>)Session["tickets"];
+                ticketTemp = ticketsTemp.Find(tck => tck.Id == id);
+                ticketTemp.Prestador = usuariotemp;
+                ticketTemp.Especialidad = usuariotemp.Especialidad.Nombre;
+                ticketTemp.Estado = Utils.getEstados().Find(est => est.Nombre.Equals("SOLICITADO"));
+                ticketTemp.IdUsuarioAprobacion = usuariotemp.IdPersona;
+                trabajoTemp.updateTicket(ticketTemp);
+            }
+            catch (Exception ex)
+            {
+                alerta = (2, "Ocurrió un error al asignar el trabajo." + ex.ToString());
+            }
+
+
+
         }
     }
 }

@@ -3,6 +3,7 @@ using dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace negocio
 {
     public class TrabajoNegocio
     {
-        public void registrarTrabajo(string idUsuario, double monto, int idEstado, string comentarioUsuario, string idPrestador = "0", int idEspecialidad = 0)
+        public void registrarTrabajo(string idUsuario, double monto, int idEstado, string comentarioUsuario, string idPrestador = "0", int idEspecialidad = 0, int idUsuarioAprobacion = 0)
         {
             AccesoADatos datos = new AccesoADatos();
             try
@@ -28,8 +29,11 @@ namespace negocio
                 datos.settearParametros("@IdEspecialidad", idEspecialidad);
                 datos.settearParametros("@Monto", monto);
                 datos.settearParametros("@IdEstado", idEstado);
-                datos.settearParametros("@ComentarioUsuario", comentarioUsuario);
-
+                datos.settearParametros("@ComentarioUsuario", comentarioUsuario);                
+                if(idUsuarioAprobacion != 0)
+                {
+                    datos.settearParametros("@IDUsuarioAprobacion", idUsuarioAprobacion);
+                }
                 datos.ejecutarConsulta();
             }
             catch (Exception ex)
@@ -102,6 +106,7 @@ namespace negocio
                     tmpUsuario.RolUsuario = RolUsuario.USUARIO;
                     tmpUsuario.Id = int.Parse(datos.lector["ID_Usr_Cliente"].ToString());
                     tmpTicket.Usuario = tmpUsuario;
+                    tmpTicket.Monto = double.Parse(datos.lector["Monto"].ToString());
 
                     if (!(datos.lector["ID_Prestador"] is DBNull))
                     {
@@ -141,6 +146,7 @@ namespace negocio
                     tmpTicket.FechaResenia = datos.lector["Fecha_Res"] is DBNull ?
                         DateTime.Parse("1900-01-01") :
                         DateTime.Parse(datos.lector["Fecha_Res"].ToString());
+                    tmpTicket.IdUsuarioAprobacion = datos.lector["ID_Usr_Aprobacion"] is DBNull ? "" : datos.lector["ID_Usr_Aprobacion"].ToString();
 
                     listadoTickets.Add(tmpTicket);
                 }
@@ -183,6 +189,7 @@ namespace negocio
                     tmpUsuario.RolUsuario = RolUsuario.USUARIO;
                     tmpUsuario.Id = int.Parse(datos.lector["ID_Usr_Cliente"].ToString());
                     tmpTicket.Usuario = tmpUsuario;
+                    tmpTicket.Monto = double.Parse(datos.lector["Monto"].ToString());
 
                     if (!(datos.lector["ID_Prestador"] is DBNull))
                     {
@@ -225,7 +232,7 @@ namespace negocio
                     tmpTicket.DomicilioTrabajo = datos.lector["Usr_Domicilio"].ToString();
                     tmpTicket.IdLocalidad = int.Parse(datos.lector["ID_Localidad_Trabajo"].ToString());
                     tmpTicket.IdProvincia = int.Parse(datos.lector["ID_Provincia_Trabajo"].ToString());
-
+                    tmpTicket.IdUsuarioAprobacion = datos.lector["ID_Usr_Aprobacion"] is DBNull ? "" : datos.lector["ID_Usr_Aprobacion"].ToString();
                     listadoTickets.Add(tmpTicket);
                 }
 
@@ -245,7 +252,7 @@ namespace negocio
 
         public void registrarResenia(Ticket ticket)
         {
-            if (ticket.Estado.Nombre.Equals("REALIZADO") || ticket.Estado.Nombre.Equals("CANCELADO"))
+            if (ticket.Estado.Nombre.Equals("EN PROCESO") || ticket.Estado.Nombre.Equals("A ASIGNAR") || ticket.Estado.Nombre.Equals("SOLICITADO"))
             {
                 throw new Exception("El ticket debe estar finalizado para agregar una reseña");
             }
@@ -272,18 +279,31 @@ namespace negocio
 
         public void updateTicket(Ticket ticket)
         {
-            if(!ticket.Estado.Nombre.Equals("CANCELADO") || !ticket.Estado.Nombre.Equals("REALIZADO"))
+            if (!ticket.Estado.Nombre.Equals("CANCELADO") || !ticket.Estado.Nombre.Equals("REALIZADO"))
             {
                 AccesoADatos datos = new AccesoADatos();
                 try
                 {
                     datos.configurarProcedimiento("SP_UpdateTicket");
                     datos.settearParametros("@ID", ticket.Id);
-                    datos.settearParametros("@IDPrestador", ticket.Prestador.Id);
-                    datos.settearParametros("@IDEspecialidad", Utils.Utils.getEspecialidades().Find(e => e.Nombre == ticket.Especialidad).Id);
-                    datos.settearParametros("@monto", ticket.Monto);
+                    if (ticket.Prestador != null)
+                    {
+
+                        datos.settearParametros("@IDPrestador", ticket.Prestador.IdPersona);
+                    }
+                    datos.settearParametros("@IDEspecialidad", Utils.Utils.getEspecialidades().Find(e => e.Nombre.Equals(ticket.Especialidad)).Id);
+                    datos.settearParametros("@Monto", ticket.Monto);
+                    datos.settearParametros("@IDEstado", ticket.Estado.Id);
                     datos.settearParametros("@ComentarioUsuario", ticket.ComentariosUsuario);
                     datos.settearParametros("@ComentarioPrestador", ticket.ComentariosPrestador);
+                    if (!ticket.IdUsuarioAprobacion.Equals("0"))
+                    {
+                        datos.settearParametros("@IDUsrAprobacion", ticket.IdUsuarioAprobacion);
+                    }
+                    if(ticket.FechaRealizado.Year != 1900)
+                    {
+                        datos.settearParametros("@FechaRealizado", ticket.FechaRealizado);
+                    }
 
                     datos.ejecutarConsulta();
                 }

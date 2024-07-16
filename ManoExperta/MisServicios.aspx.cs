@@ -13,7 +13,11 @@ namespace ManoExperta
 {
     public partial class MisServicios : System.Web.UI.Page
     {
-        Usuario usuario = new Usuario();
+        public Usuario usuario = new Usuario();
+        public (int codigo, string mensaje) alerta;
+        public List<Ticket> filtroTickets = new List<Ticket> ();
+        public List<Ticket> tickets = new List<Ticket> ();
+        TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -22,11 +26,19 @@ namespace ManoExperta
                 Response.Redirect("Login.aspx", true);
             }
             usuario = (Usuario)Session["usuario"];
+            if (usuario.RolUsuario == RolUsuario.PRESTADOR)
+            {
+                if (usuario.Sexo.ToString().Equals("X") || usuario.Sexo.ToString().Equals("0"))
+                {
+                    alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder tomar trabajos");
+                }
+
+            }
+
             if (!IsPostBack)
             {
                 CargarDdlEstadosYEspecialidad();
-                TrabajoNegocio trabajoNegocio = new TrabajoNegocio();
-                List<Ticket> tickets = trabajoNegocio.getTicketsPorRol(usuario);
+                tickets = trabajoNegocio.getTicketsPorRol(usuario);
                 Session.Add("tickets", tickets);
                 repTrabajosActivos.DataSource = tickets.FindAll(t => t.Estado.Id == 2 || t.Estado.Id == 1 || t.Estado.Id == 5);
                 repHistorialTrabajos.DataSource = tickets.FindAll(t => t.Estado.Id == 3 || t.Estado.Id == 4);
@@ -50,14 +62,11 @@ namespace ManoExperta
         {
 
             ServicioNegocio servicioNegocio = new ServicioNegocio();
-
-            List<Especialidad> especialidades = Utils.getEspecialidades();
-            List<Estado> estados = Utils.getEstados();
-            ddlEstado.DataSource = estados;
+            ddlEstado.DataSource = Utils.getEstados();
             ddlEstado.DataTextField = "Nombre";
-            ddlEstado.DataValueField = "Id";
+            ddlEstado.DataValueField = "Id";            
             ddlEstado.DataBind();
-            DdlFiltro_Especialidad.DataSource = especialidades;
+            DdlFiltro_Especialidad.DataSource = Utils.getEspecialidades();
             DdlFiltro_Especialidad.DataTextField = "Nombre";
             DdlFiltro_Especialidad.DataValueField = "Id";
             DdlFiltro_Especialidad.DataBind();
@@ -65,10 +74,44 @@ namespace ManoExperta
 
         }
 
+        protected void filtro(object sender, EventArgs e)
+        {
+            filtroTickets = trabajoNegocio.getTicketsPorRol(usuario);
+            if (ddlEstado.SelectedValue != "0")
+            {
+                filtroTickets.RemoveAll(tck => tck.Estado.Id != int.Parse(ddlEstado.SelectedValue));
+            }
+            if(DdlFiltro_Especialidad.SelectedValue != "0")
+            {
 
+            }
+            repTrabajosActivos.DataSource = filtroTickets.FindAll(t => t.Estado.Id == 2 || t.Estado.Id == 1 || t.Estado.Id == 5);
+            repHistorialTrabajos.DataSource = filtroTickets.FindAll(t => t.Estado.Id == 3 || t.Estado.Id == 4);
+            repHistorialTrabajos.DataBind();
+            repTrabajosActivos.DataBind();
+        }
 
+        protected void ButtonLimpiarFiltro_Click(object sender, EventArgs e)
+        {
+            tickets = (List<Ticket>)Session["tickets"];
+            repTrabajosActivos.DataSource = tickets.FindAll(t => t.Estado.Id == 2 || t.Estado.Id == 1 || t.Estado.Id == 5);
+            repHistorialTrabajos.DataSource = tickets.FindAll(t => t.Estado.Id == 3 || t.Estado.Id == 4);
+            repHistorialTrabajos.DataBind();
+            repTrabajosActivos.DataBind();
+        }
 
-
+        protected int evaluarUsuario(int idUsuarioAprobacion)
+        {
+            if(idUsuarioAprobacion != 0)
+            {
+                if(idUsuarioAprobacion == Convert.ToInt32(usuario.IdPersona))
+                {
+                    return 1;
+                }
+                return 2;
+            }
+            return 0;
+        }
     }
 
 

@@ -12,23 +12,42 @@
                     <div class="col-2" style="background-color: #B3E2A7; padding: 10px;">
                         <h3>Filtros</h3>
                         <div class="row g-3">
-                            
+
                             <div class="col-12">
                                 <label>Por Provincia:</label>
                                 <asp:DropDownList ID="DropDownListProvinciaFiltro" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProvinciaFiltro_SelectedIndexChanged"></asp:DropDownList>
                             </div>
                             <div class="col-12">
                                 <label>Por Localidad:</label>
-                                <asp:DropDownList ID="DropDownListLocalidadFiltro" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListLocalidadFiltro_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListLocalidadFiltro" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true" OnSelectedIndexChanged="filtro"></asp:DropDownList>
                             </div>
                         </div>
                     </div>
                     <div class="col-10" id="InfoCentral" style="background-color: #B3E2A7; padding: 20px;">
+                        <%if (alerta.codigo != 0)
+                            {
+                                if (alerta.codigo == 1)
+                                { %>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <%= alerta.mensaje %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <% }%>
+                        <%else if (alerta.codigo == 2)
+                            { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <%= alerta.mensaje %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <% }%>
+                        <%} %>
                         <h3>Trabajos Disponibles: <%=trabajosActivos %> </h3>
                         <% if (repTrabajosActivos.Items.Count == 0)
                             {%>
-                        <h5> Ups... Parece que no hay trabajos activos en esta zona todavía.</h5>
-                        <%} else { %>
+                        <h5>Ups... Parece que no hay trabajos activos en esta zona todavía.</h5>
+                        <%}
+                            else
+                            { %>
                         <asp:Repeater runat="server" ID="repTrabajosActivos">
                             <ItemTemplate>
                                 <div class="card mb-3" style="width: 100%;">
@@ -60,8 +79,16 @@
                                         </div>
                                         <div class="col-md-2 d-flex align-items-center justify-content-center">
                                             <div class="row no-gutters" style="max-width: 80%">
-                                                <asp:Button ID="buttonMasInformacion" runat="server" CssClass="btn btn-secondary mb-2" CommandArgument='<%# Eval("Id") %>' CommandName="IdTicket" OnClick="buttonMasInformacion_Click" Text="Más Información" />
-                                                <button class="btn btn-success">Tomar Trabajo</button>
+                                                <%if (usuariotemp.Sexo.ToString().Equals("X"))
+                                                { %>
+                                                <asp:Button ID="buttonMasInformacion2" runat="server" CssClass="btn btn-secondary mb-2" CommandArgument='<%# Eval("Id") %>' CommandName="IdTicket" OnClick="buttonMasInformacion_Click" Text="Ver Trabajo" Enabled="false" />
+                                                <% }
+
+                                                %>
+                                                <%else
+                                                { %>
+                                                <asp:Button ID="buttonMasInformacion" runat="server" CssClass="btn btn-success mb-2" CommandArgument='<%# Eval("Id") %>' CommandName="IdTicket" OnClick="buttonMasInformacion_Click" Text="Ver Trabajo" />
+                                                <% } %>
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +96,7 @@
                             </ItemTemplate>
                         </asp:Repeater>
                         <hr />
-                         <% } %>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -81,13 +108,15 @@
                         var texto = div.textContent || div.innerText;
 
                         if (texto === "EN PROCESO") {
-                            div.style.backgroundColor = "#FFA500"; // Naranja para Pendiente
+                            div.style.backgroundColor = "#FFA500";
                         } else if (texto === "REALIZADO") {
-                            div.style.backgroundColor = "#008000"; // Verde para Completado
+                            div.style.backgroundColor = "#B4B90C";
                         } else if (texto === "SOLICITADO") {
-                            div.style.backgroundColor = "#0000FF"; // Azul para En Proceso
+                            div.style.backgroundColor = "#0A4383";
+                        } else if (texto === "A ASIGNAR") {
+                            div.style.backgroundColor = "#0000FF";
                         } else {
-                            div.style.backgroundColor = "#F44336"; // Color por defecto
+                            div.style.backgroundColor = "#F44336";
                         }
                     });
                 };

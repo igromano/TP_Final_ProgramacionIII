@@ -159,6 +159,15 @@ namespace ManoExperta
         protected global::System.Web.UI.WebControls.TextBox TextBoxFechaNacimiento;
 
         /// <summary>
+        /// Control DropDownSexo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownSexo;
+
+        /// <summary>
         /// Control labelDireccionCalle.
         /// </summary>
         /// <remarks>
@@ -211,6 +220,15 @@ namespace ManoExperta
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListProvincia;
+
+        /// <summary>
+        /// Control DropDownListEspecialidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListEspecialidad;
 
         /// <summary>
         /// Control btnActualizarDatos.

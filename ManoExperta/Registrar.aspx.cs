@@ -14,12 +14,10 @@ namespace ManoExperta
         protected bool creaUsuario;
         protected bool creaProveedor;
         protected bool modalOpciones;
-        public bool errorBool = false;
         public bool registroExitoso = true;
-        public string error;
+        public (int codigo, string mensaje) alerta;
         protected void Page_Load(object sender, EventArgs e)
         {
-            errorBool = false;
             if (!IsPostBack)
             {
                 modalOpciones = true;
@@ -66,7 +64,6 @@ namespace ManoExperta
             {
                 if (!contrasenia.Equals(contraseniaRepetir))
                 {
-                    errorBool = true;
                     throw new Exception("Las contraseñas no son iguales.");
 
                 }
@@ -75,20 +72,19 @@ namespace ManoExperta
                 if (registroExitoso)
                 {
                     // mostrar un mensaje de registro exitoso
-                    Session.Add("usuario", nuevoUsuario);
-                    error = "";
+                    Session.Add("usuario", usuarioNegocio.login(nuevoUsuario));
                     Response.Redirect("Home.aspx");
 
                 }
                 else
                 {
-                    error = "Hubo un error en el registro";
+                    alerta = (2, "Hubo un error en el registro");
                 }
             }
             catch (Exception ex)
             {
                 registroExitoso = false;
-                error = ex.Message;
+                alerta = (2, ex.Message);
                 Session["error"] = ex.Message;
             }
 
@@ -114,7 +110,7 @@ namespace ManoExperta
             string email = TextBoxEmailProveedor.Text;
             string userName = TextBoxUsuarioProveedor.Text;
             string contrasenia = TextBoxProveedorContrasenia.Text;
-            string contraseniaRepetida = TextBoxUsuarioContraseniaConfirmar.Text;
+            string contraseniaRepetir = TextBoxProveedorContraseniaConfirmar.Text;
             string cuil = TextBoxCUIL.Text;
 
             Usuario nuevoProveedor = new Usuario(userName, contrasenia); // crea instancia de nuevo prov
@@ -128,38 +124,33 @@ namespace ManoExperta
 
             try
             {
+                if (!contrasenia.Equals(contraseniaRepetir))
+                {
+                    throw new Exception("Las contraseñas no son iguales.");
+
+                }
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 bool registroExitoso = usuarioNegocio.registrarUsuario(nuevoProveedor);
                 if (registroExitoso)
                 {
-                    Session.Add("usuario", nuevoProveedor);
-                    error = "";
+                    Session.Add("usuario", usuarioNegocio.login(nuevoProveedor));
                     Response.Redirect("Home.aspx");
                 }
                 else
                 {
-                    // AGREGAR ESTOS LBL EN EL FRONT
-
-                    //lblMensajeDeError.Text = "No se pudo registrar el usuario. Por favor, intente denuevo.";
-                    //lblMensajeError.Visible = true;
+                    throw new Exception("No se pudo registrar al usuario. Por favor intente nuevamente.");
                 }
 
             }
             catch (Exception ex)
             {
                 registroExitoso = false;
-                error = "HUBO UN ERROR";
+                alerta = (2, ex.Message);
                 Session["error"] = "Hubo un error en el registro...";
             }
 
 
 
-
-        }
-
-
-        protected void pronvincia_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
     }

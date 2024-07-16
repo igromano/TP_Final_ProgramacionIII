@@ -6,30 +6,15 @@
     <asp:ScriptManager ID="scriptManagerPreferencias" runat="server"></asp:ScriptManager>
     <link href="Style/Home.css" rel="stylesheet" />
     <div class="container-fluid" id="MenuCentral" style="background-color: #80B9AD; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px;">
-        <%-- <% if (Session["alertaOK"] != null) { %>
-
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> <%=Session["alerta"].ToString() %>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-
-        <%    } %>
-        <%if (Session["alertaError"] != null) { %>
-                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Holy guacamole!</strong> <%=Session["alertaError"].ToString() %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-
-            <%} %>
-        --%>
         <div id="SubMenuCentral" style="flex: 1; width: 100%; display: flex;">
+
             <div class="col-2" style="background-color: #B3E2A7; border-radius: 10px; padding: 20px; margin-right: 10px">
                 <h4><%= usuariotemp.Nombre %> <%= usuariotemp.Apellido %></h4>
                 <h5><%= usuariotemp.Email %></h5>
                 <hr />
                 <menu>
                     <li><a href="Preferencias.aspx" style="text-decoration: none; color: black; font-weight: bold;">Mis datos</a></li>
+                    <li><a href="CambiarContrasena.aspx" style="text-decoration: none; color: black; font-weight: bold;">Cambiar Contraseña</a></li>
                     <li><a href="EliminarCuenta.aspx" style="text-decoration: none; color: black; font-weight: bold;">Eliminar Cuenta</a></li>
                     <li><a href="CerrarSesion.aspx" style="text-decoration: none; color: black; font-weight: bold;">Cerrar Sesion</a></li>
                 </menu>
@@ -40,6 +25,25 @@
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
                         <div class="container" style="max-width: 1000px">
+                            <h3>Datos de tu cuenta:</h3>
+                            <hr />
+                            <%if (alerta.codigo != 0)
+                                {
+                                    if (alerta.codigo == 1)
+                                    { %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <%= alerta.mensaje %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <% }%>
+                            <%else if (alerta.codigo == 2)
+                                { %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <%= alerta.mensaje %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <% }%>
+                            <%} %>
                             <h3>Tus datos de ingreso:</h3>
                             <div class="row">
                                 <div class="col">
@@ -105,17 +109,12 @@
                             <br />
                             <h5>¿Con que sexo te indentificás?</h5>
                             <p class="d-inline-flex gap-1">
-                                <input type="radio" class="btn-check btn-outline-secondary" name="genero" id="masculino" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="masculino">Masculino</label>
-
-                                <input type="radio" class="btn-check" name="genero" id="femenino" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="femenino">Femenino</label>
-
-                                <input type="radio" class="btn-check" name="genero" id="noBinario" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="noBinario">No Binario</label>
-
-                                <input type="radio" class="btn-check" name="genero" id="prefieroNoDecir" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="prefieroNoDecir">Prefiero no decir</label>
+                                <asp:DropDownList ID="DropDownSexo" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="cambioDatos">
+                                    <asp:ListItem Text="" Value="X"></asp:ListItem>
+                                    <asp:ListItem Text="Prefiero no decir" Value="O"></asp:ListItem>
+                                    <asp:ListItem Text="Masculino" Value="M"></asp:ListItem>
+                                    <asp:ListItem Text="Femenino" Value="F"></asp:ListItem>
+                                </asp:DropDownList>
 
                             </p>
                             <hr />
@@ -136,13 +135,24 @@
                                     <asp:DropDownList ID="DropDownListProvincia" runat="server" CssClass="form-select" AutoPostBack="true" OnTextChanged="cambioDatos"></asp:DropDownList>
                                 </div>
                             </div>
+                            <% if (usuariotemp.RolUsuario == dominio.RolUsuario.PRESTADOR)
+                                {%>
+                            <hr />
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5>¿Cuál es tu especialidad?:</h5>
+                                    <asp:DropDownList ID="DropDownListEspecialidad" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="cambioDatos"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <% } %>
+
                             <br />
                             <div class="row justify-content-center">
                                 <div class="col-auto">
                                     <asp:Button ID="btnActualizarDatos" CssClass="btn btn-success" runat="server" Text="Actualizar Datos" Enabled="false" OnClick="btnActualizarDatos_Click" />
                                 </div>
                                 <div class="col-auto">
-                                    <asp:Button ID="btnDescartar" CssClass="btn btn-danger" runat="server" Text="Descartar Cambios" Enabled="false" OnClick="btnDescartar_Click" />
+                                    <asp:Button ID="btnDescartar" CssClass="btn btn-danger" runat="server" Text="Descartar Cambios" Enabled="false" OnClick="btnDescartar_Click" CausesValidation="false" ValidationGroup="none" />
                                 </div>
                             </div>
                         </div>

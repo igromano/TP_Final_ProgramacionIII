@@ -32,7 +32,7 @@ namespace negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al crear usuario en DB - Error: " + ex.ToString());
+                throw new Exception("Error al crear usuario en DB - Error: " + ex.Message);
             }
             finally
             {
@@ -133,6 +133,7 @@ namespace negocio
                     {
                         usuario.Especialidad.Nombre = "SIN ESPECIALIDAD";
                     }
+                    usuario.Activo = bool.Parse(datos.lector["Activo"].ToString());
                 }
                 return usuario;
             }

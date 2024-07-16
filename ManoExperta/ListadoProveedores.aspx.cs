@@ -4,6 +4,7 @@ using negocio;
 using negocio.Utils;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Deployment.Internal;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,8 @@ namespace ManoExperta
         public List<Usuario> proveedores = new List<Usuario>();
         public List<Usuario> proveedoresFiltrados = new List<Usuario>();
         public UsuarioNegocio usuarioNegocioTemp = new UsuarioNegocio();
+        public List<Locacion> locacionesList = new List<Locacion>();
+        public (int codigo, string mensaje) alerta;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
@@ -28,6 +31,10 @@ namespace ManoExperta
             if (!IsPostBack)
             {
                 usuariotemp = (Usuario)Session["usuario"];
+                if (usuariotemp.Sexo.ToString().Equals("X") || usuariotemp.Sexo.ToString().Equals("0"))
+                {
+                    alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder soliticar trabajos. Completá tus datos en Preferencias por favor.");
+                }
                 if (usuariotemp.RolUsuario != RolUsuario.USUARIO)
                 {
                     Response.Redirect("Home.aspx", false);
@@ -35,7 +42,7 @@ namespace ManoExperta
                 proveedores = usuarioNegocioTemp.getUsuariosPorRol(RolUsuario.PRESTADOR);
                 Session.Add("proveedores", proveedores);
                 Session.Add("proveedoresFiltrados", proveedores);
-                repListadoProfesionales.DataSource = Session["proveedoresFiltrados"];
+                repListadoProfesionales.DataSource = proveedores;
                 repListadoProfesionales.DataBind();
                 DropDownListLocalidadFiltro.DataSource = Utils.getLocaciones();
                 DropDownListLocalidadFiltro.DataTextField = "Nombre";
@@ -50,9 +57,6 @@ namespace ManoExperta
                 DropDownListaEspecialidadFiltro.DataValueField = "Id";
                 DropDownListaEspecialidadFiltro.DataBind();
             }
-
-
-
         }
 
         protected void buttonMasInformacion_Click(object sender, EventArgs e)
@@ -70,40 +74,48 @@ namespace ManoExperta
             Response.Redirect("CargaTicket.aspx?tipo=2&proveedor=" + id, false);
         }
 
-        protected void DropDownListaEspecialidadFiltro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            proveedoresFiltrados.RemoveAll(prov => prov.Especialidad.Id != int.Parse(DropDownListaEspecialidadFiltro.SelectedValue));
-            repListadoProfesionales.DataSource = Session["proveedoresFiltrados"];
-            repListadoProfesionales.DataBind();
-        }
-
-        protected void DropDownListProvinciaFiltro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            repListadoProfesionales.DataSource = Session["proveedoresFiltrados"];
-            repListadoProfesionales.DataBind();
-        }
-
-        protected void DropDownListLocalidadFiltro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            proveedoresFiltrados = (List<Usuario>)Session["proveedoresFiltrados"];
-            proveedoresFiltrados.RemoveAll(prov => prov.IdLocalidad != int.Parse(DropDownListLocalidadFiltro.SelectedValue.ToString()));
-            Session["proveedoresFiltrados"] = proveedoresFiltrados;
-            cargarRepeater();
-
-
-
-        }
-
         protected void buttonLimpiarFiltro_Click(object sender, EventArgs e)
         {
-            Session["proveedoresFiltrados"] = proveedores;
+            proveedoresFiltrados = (List<Usuario>)Session["proveedores"];
+            DropDownListaEspecialidadFiltro.SelectedValue = "0";
+            DropDownListLocalidadFiltro.SelectedValue = "0";
+            DropDownListProvinciaFiltro.SelectedValue = "0";
             cargarRepeater();
         }
 
+        protected void filtro(object sender, EventArgs e)
+        {
+            proveedoresFiltrados = usuarioNegocioTemp.getUsuariosPorRol(RolUsuario.PRESTADOR);
+            if (Convert.ToInt32(DropDownListaEspecialidadFiltro.SelectedValue) != 0)
+            {
+                proveedoresFiltrados.RemoveAll(prov => prov.Especialidad.Id != Convert.ToInt32(DropDownListaEspecialidadFiltro.SelectedValue));
+            }
+            if (Convert.ToInt32(DropDownListLocalidadFiltro.SelectedValue) != 0)
+            {
+                proveedoresFiltrados.RemoveAll(prov => prov.IdLocalidad != Convert.ToInt32(DropDownListLocalidadFiltro.SelectedValue));
+            }
+            /*if (Convert.ToInt32(DropDownListProvinciaFiltro.SelectedValue) != 0)
+            {
+                proveedoresFiltrados.RemoveAll(prov => prov.IdLocalidad == Utils.getLocaciones().Find(loc => loc.Id == Convert.ToInt32(DropDownListProvinciaFiltro.SelectedValue)).IdProvincia);
+            }
+            */
+            cargarRepeater();            
+
+        }
         protected void cargarRepeater()
         {
-            repListadoProfesionales.DataSource = (List<Usuario>)Session["proveedores"];
+            repListadoProfesionales.DataSource = proveedoresFiltrados;
             repListadoProfesionales.DataBind();
+        }
+
+        protected string obtenerLocalidad(int idLocalidad)
+        {
+            return Utils.getLocaciones().Find(loc => loc.Id == idLocalidad) != null ? Utils.getLocaciones().Find(loc => loc.Id == idLocalidad).Nombre : "";
+        }
+
+        protected string obtenerCalificacion(int calificacion)
+        {
+            return calificacion != 0 && calificacion != null ? new string('★', calificacion) : "Sin calificacion";
         }
     }
 }

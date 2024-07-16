@@ -11,88 +11,88 @@ namespace ManoExperta
 {
 
 
-    public partial class DetalleProveedor
+    public partial class CambiarContrasena
     {
 
         /// <summary>
-        /// Control textBoxDireccion.
+        /// Control scriptManager1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textBoxDireccion;
+        protected global::System.Web.UI.ScriptManager scriptManager1;
 
         /// <summary>
-        /// Control textBoxLocalidad.
+        /// Control lblUser.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textBoxLocalidad;
+        protected global::System.Web.UI.WebControls.Label lblUser;
 
         /// <summary>
-        /// Control textBoxProvincia.
+        /// Control TextBoxContrasenaActual.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textBoxProvincia;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxContrasenaActual;
 
         /// <summary>
-        /// Control textBoxEmail.
+        /// Control lblValidateUser.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textBoxEmail;
+        protected global::System.Web.UI.WebControls.Label lblValidateUser;
 
         /// <summary>
-        /// Control textBoxEspecialidad.
+        /// Control lblPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textBoxEspecialidad;
+        protected global::System.Web.UI.WebControls.Label lblPass;
 
         /// <summary>
-        /// Control textBoxPrestadorDesde.
+        /// Control TextBoxUsuarioContrasenia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textBoxPrestadorDesde;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxUsuarioContrasenia;
 
         /// <summary>
-        /// Control repListadoResenias.
+        /// Control Label15.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repListadoResenias;
+        protected global::System.Web.UI.WebControls.Label Label15;
 
         /// <summary>
-        /// Control button1.
+        /// Control TextBoxUsuarioContraseniaConfirmar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button1;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxUsuarioContraseniaConfirmar;
 
         /// <summary>
-        /// Control buttonSolicitarTrabajo.
+        /// Control btnActualizarContrasena.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonSolicitarTrabajo;
+        protected global::System.Web.UI.WebControls.Button btnActualizarContrasena;
     }
 }
