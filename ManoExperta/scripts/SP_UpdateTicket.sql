@@ -21,3 +21,4 @@ BEGIN
 		RAISERROR('Error al actualizar ticket', 16, 0);
 	END CATCH
 END
+

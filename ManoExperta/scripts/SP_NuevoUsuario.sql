@@ -14,6 +14,7 @@ CREATE OR ALTER procedure SP_NuevoUsuario (
 )
 as
 begin
+declare @error varchar(70)
 declare @UsuarioExistente varchar(50)
 	BEGIN TRY
 	if @Usuario IN (SELECT u.Usuario from Personas u)
@@ -27,8 +28,8 @@ declare @UsuarioExistente varchar(50)
 		INSERT Personas values(@Usuario, @Contrasenia, @IdRol, GETDATE(), @Email, @IDPersona, @Nombre, @Apellido, @Sexo, @FechaNacimiento, @Domicilio, @IDLocalidad, null ,@Activo)
 	END TRY
 	BEGIN CATCH
-		PRINT ERROR_MESSAGE()
-		RAISERROR ('Error al crear usuario', 16, 0)
+		SET @error = ERROR_MESSAGE()
+		RAISERROR (@error, 16, 0)
 	END CATCH
 end;
 select * from Personas
