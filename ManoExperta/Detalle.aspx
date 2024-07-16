@@ -6,32 +6,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="scriptManagerPreferencias" runat="server"></asp:ScriptManager>
     <link href="Style/Home.css" rel="stylesheet" />
-    <%-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Ingrese su Reseña</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h6 class="d-inline">Puntaje: </h6>
-                    <asp:DropDownList ID="dropDownListPuntaje" CssClass="form-control" runat="server">
-                        <asp:ListItem Text="1" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="2" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="3" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="4" Value="4"></asp:ListItem>
-                        <asp:ListItem Text="5" Value="5"></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:TextBox ID="textBoxResenia" CssClass="form-control" TextMode="MultiLine" runat="server" required="true"></asp:TextBox>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
-                    <asp:Button ID="buttonGuardarResenia" CssClass="btn btn-success ml-2" runat="server" Text="Guardar" OnClick="buttonGuardarResenia_Click" />
-                </div>
-            </div>
-        </div>
-    </div>
-    --%>
     <div class="container-fluid" id="MenuCentral" style="background-color: #80B9AD; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px;">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
@@ -145,7 +119,6 @@
                                     <asp:Button ID="btnPasarRealizado" CssClass="btn btn-success ml-2" runat="server" Text="Confirmar Realizado" CommandArgument="PASAR REALIZADO" OnClick="btnAccionTrabajo" Visible="false" />
                                     <asp:Button ID="btnRechazarPedido" CssClass="btn btn-danger" runat="server" Text="Rechazar Pedido" CommandArgument="DESCARTAR SOLICITUD" OnClick="btnAccionTrabajo" Visible="false" />
                                     <asp:Button ID="btnDescartarSolicitud" CssClass="btn btn-danger" runat="server" Text="Descartar Solicitud" CommandArgument="DESCARTAR SOLICITUD" OnClick="btnAccionTrabajo" Visible="false" />
-                                    <asp:Button ID="btnCancelarRealizado" CssClass="btn btn-danger" runat="server" Text="Cancelar Realizado" CommandArgument="CANCELAR REALIZADO" OnClick="btnAccionTrabajo" Visible="false" />
                                     <asp:Button ID="btnCancelarTrabajo" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" CommandArgument="CANCELAR TRABAJO" OnClick="btnAccionTrabajo" Visible="false" />
                                 </div>
                             </div>
