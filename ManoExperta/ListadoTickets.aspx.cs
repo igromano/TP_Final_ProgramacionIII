@@ -45,7 +45,7 @@ namespace ManoExperta
                 DropDownListLocalidadFiltro.DataTextField = "Nombre";
                 DropDownListLocalidadFiltro.DataValueField = "Id";
                 DropDownListLocalidadFiltro.DataBind();
-                DropDownListLocalidadFiltro.SelectedValue = usuariotemp.IdLocalidad.ToString();
+                
 
                 ticketsFiltro = new List<Ticket>(ticketsTemp);
                 repTrabajosActivos.DataSource = ticketsFiltro.FindAll(tck => tck.IdLocalidad == usuariotemp.IdLocalidad);
@@ -57,6 +57,9 @@ namespace ManoExperta
                 DropDownListProvinciaFiltro.DataTextField = "NombreProvincia";
                 DropDownListProvinciaFiltro.DataValueField = "IdProvincia";
                 DropDownListProvinciaFiltro.DataBind();
+
+                DropDownListProvinciaFiltro.SelectedValue = Utils.getLocaciones().Find(loc => loc.Id == usuariotemp.IdLocalidad).IdProvincia.ToString();
+                DropDownListLocalidadFiltro.SelectedValue = usuariotemp.IdLocalidad.ToString();
                 if (usuariotemp.Sexo.ToString().Equals("X"))
                 {
                     alerta = (2, "Tus datos no están completos. Por favor, completá tus datos para poder tomar trabajos");
@@ -89,28 +92,15 @@ namespace ManoExperta
             ticketsFiltro.RemoveAll(tck => !tck.Especialidad.Equals("SIN ESPECIALIDAD"));
             if (DropDownListLocalidadFiltro.SelectedValue != "0")
             {
-                ticketsFiltro.RemoveAll(tck => tck.IdLocalidad != Utils.getLocaciones().Find(loc => loc.Id == tck.IdLocalidad).Id);
+                ticketsFiltro.RemoveAll(tck => tck.IdLocalidad != Convert.ToInt32(DropDownListLocalidadFiltro.SelectedValue));
             }
+            /*if(DropDownListProvinciaFiltro.SelectedValue != "0")
+            {
+                ticketsFiltro.RemoveAll(tck => tck.IdLocalidad != Utils.getLocaciones().Find(loc => loc.IdProvincia == Convert.ToInt32(DropDownListProvinciaFiltro.SelectedValue)).Id);
+            }
+            */
             repTrabajosActivos.DataSource = ticketsFiltro;
             repTrabajosActivos.DataBind();
-        }
-        protected void DropDownListProvinciaFiltro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            ticketsFiltro = new List<Ticket>(ticketsTemp);
-
-            string idSeleccionado = DropDownListProvinciaFiltro.SelectedValue;
-            //ticketsFiltro.RemoveAll(tck => !tck..Equals(idSeleccionado));
-            repTrabajosActivos.DataSource = ticketsFiltro;
-            repTrabajosActivos.DataBind();
-        }
-
-        protected void DropDownListLocalidadFiltro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ticketsFiltro = new List<Ticket>(ticketsTemp);
-            repTrabajosActivos.DataSource = ticketsFiltro.FindAll(tck => tck.IdLocalidad == int.Parse(DropDownListLocalidadFiltro.SelectedValue));
-            repTrabajosActivos.DataBind();
-            trabajosActivos = repTrabajosActivos.Items.Count;
         }
 
         protected void buttonTomarTrabajo_Click(object sender, EventArgs e)

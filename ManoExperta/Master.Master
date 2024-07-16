@@ -25,14 +25,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <form class="d-flex mx-auto col-8">
-                    <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Buscar por Profesional" aria-label="Buscar">
-                        <button class="btn btn-outline-primary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
+
                 <%if (Session["usuario"] == null)
                     { %>
                 <div class="col d-flex justify-content-end">
@@ -45,15 +38,15 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <span style="display: flex; align-items: center">
-                            <a class="nav-link" href="Login.aspx" role="button" aria-expanded="false">
-                                <i class="fas fa-solid fa-headphones"></i> Ayuda</a>
-                            <%if (esProveedor) { %>
+
+                            <%if (esProveedor)
+                            { %>
                             <a class="nav-link" href="ListadoTickets.aspx" role="button" aria-expanded="false">
-                                <i class="fas fa-solid fa-briefcase"></i> Tickets Disponibles</a>
+                                <i class="fas fa-solid fa-briefcase"></i>Tickets Disponibles</a>
                             <% } %>
                             <a class="nav-link" href="MisServicios.aspx" role="button" aria-expanded="false">
-                                <i class="fas fa-solid fa-handshake"></i> Mis Servicios</a>
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-solid fa-user"></i> <%= usuarioTemp.UserName%></a>
+                                <i class="fas fa-solid fa-handshake"></i>Mis Servicios</a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-solid fa-user"></i><%= usuarioTemp.UserName%></a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="Home.aspx">Home</a></li>
                                 <li><a class="dropdown-item" href="Preferencias.aspx">Preferencias</a></li>

@@ -37,15 +37,7 @@
                                 <label>Estado de Ticket:</label>
                                 <asp:DropDownList ID="ddlEstado" CssClass="form-select form-select-sm" runat="server" AutoPostBack="true"></asp:DropDownList>
                             </div>
-                            <div class="col-12">
-                                <label>Fecha de solicitud:</label>
-                                <div class="mb-3">
-                                    <label>Desde:</label>
-                                    <asp:TextBox ID="txtFechaDesde" CssClass="form-control form-control-sm" runat="server" type="date"></asp:TextBox>
-                                    <label>Hasta:</label>
-                                    <asp:TextBox ID="txtFechaHasta" CssClass="form-control form-control-sm" runat="server" type="date"></asp:TextBox>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-12">
                             <label>Por especialidad:</label>
@@ -86,7 +78,7 @@
                                         <div class="col-md-5">
                                             <div class="card-body">
                                                 <h5 class="card-title">Ticket: <%# Eval("Id") %></h5>
-                                                <p class="card-text"><small class="text-muted"><%# Eval("ComentariosUsuario") %></small></p>
+                                                <p class="card-text"><small><%# Eval("ComentariosUsuario") %></small></p>
                                                 <div class="row align-items-center justify-content-cente">
                                                     <div class="col-md-3">
                                                         <p class="card-text"><small class="text-muted">Estado: <span class="capsulaEstadoTrabajo"><%# Eval("Estado.Nombre") %></span></small></p>
@@ -94,11 +86,6 @@
                                                     <div class="col-md-5">
                                                         <p class="card-text"><small class="text-muted">Presupuesto estimado: $<%# Eval("Monto") %></small></p>
                                                     </div>
-                                                    <%-- 
-                                            <div class="col-md-4">
-                                                <p class="card-text"><small class="text-muted">Dias estimados: 4 días</small></p>
-                                            </div>
-                                                    --%>
                                                 </div>
 
                                             </div>
@@ -107,24 +94,11 @@
                                             <div class="card-body">
                                                 <h5 class="card-title"><%# Eval("Prestador.nombre") %> <%# Eval("Prestador.apellido") %></h5>
                                                 <p class="card-text"><small class="text-muted"><%# Eval("Especialidad") %></small></p>
-                                               <%--  <%if (evaluarUsuario(Convert.ToInt32(Eval("IdUsuarioAprobacion"))) != 0){%>
-                                                    <%if (evaluarUsuario(Convert.ToInt32(Eval("IdUsuarioAprobacion"))) == 1)%>
-                                                        <%{%>
-                                                        <div class="capsulaMatricula" style="background-color: green">En Aprobación</div>
-                                                        <%} %>
-                                                    <%else%>
-                                                        <%{%>
-                                                        <div class="capsulaMatricula" style="background-color: red">Requiere Aprobacion</div>
-                                                        <%}%>
-
-                                                <%} %>
-                                                --%>
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex align-items-center justify-content-center">
                                             <div class="row no-gutters" style="max-width: 90%">
                                                 <asp:Button ID="btnMasInfo" CssClass="btn btn-secondary mb-2" runat="server" Text="Mas información" CommandName="MasInfo" CommandArgument='<%# Eval("Id") %>' />
-                                                <asp:Button ID="BtnCancelar2" CssClass="btn btn-danger" runat="server" Text="Cancelar Trabajo" />
                                             </div>
                                         </div>
                                     </div>
