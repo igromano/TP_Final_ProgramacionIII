@@ -1,0 +1,29 @@
+﻿body {
+    background-image: url('../Resources/images/login_background.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+#login {
+    margin-top: 150px;
+    padding-top: 50px;
+    background-color: whitesmoke;
+    opacity:0.92;
+    width: 400px;
+/*    height: 350px;*/
+height: auto;
+    border-radius:10px;
+}
+.alert {
+    height: 50px;
+    width: 350px;
+}
+
+#registrar {
+    margin-top: 150px;
+    padding-top: 50px;
+    background-color: whitesmoke;
+    opacity: 0.92;
+    width: 400px;
+    height: 350px;
+    border-radius: 10px;
+}
