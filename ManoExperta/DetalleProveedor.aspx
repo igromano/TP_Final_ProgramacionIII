@@ -69,7 +69,7 @@
                 <hr />
                 <div class="row">
                     <h4>Estadisticas trabajos:</h4>
-                    <label>Trabajos realizados: <%=repListadoResenias.Items.Count %></label>
+                    <label>Trabajos realizados: <%=trabajos %></label>
                     <label>Puntacion: <%= usuarioTemp.Calificacion %></label>
                 </div>
                 <hr />
