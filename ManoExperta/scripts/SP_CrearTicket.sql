@@ -8,11 +8,13 @@ CREATE OR ALTER PROCEDURE SP_CrearTicket (
 @IDUsuarioAprobacion varchar(50) = null
 ) AS
 BEGIN
+DECLARE @Id bigint
 	IF @IdPrestador = '0'
 		SET @IdPrestador = null
 	IF @IdEspecialidad = 0
 		SET @IdEspecialidad = null
 	INSERT INTO Ticket(IDUsuario, IDPrestador, IDEspecialidad, Monto, IDEstado, ComentarioUsuario, FechaSolicitado, IDUsrAprobacion) 
+	OUTPUT inserted.ID
 	VALUES(@IdUsuario, @IdPrestador, @IdEspecialidad, @Monto, @IdEstado, @ComentarioUsuario, getdate(), @IDUsuarioAprobacion)
-
+	
 END

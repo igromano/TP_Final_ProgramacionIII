@@ -25,8 +25,13 @@ namespace ManoExperta
         List<Ticket> tickets = new List<Ticket>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            idTicket = Convert.ToInt32(Request.QueryString["idTicket"]);
             if (AuthServices.estaLogueado((Usuario)Session["usuario"]) == false)
             {
+                if (idTicket != null)
+                {
+                    Session.Add("estadoRuta", Request.Url.ToString());
+                }
                 Response.Redirect("Login.aspx", true);
             }
 
@@ -36,16 +41,24 @@ namespace ManoExperta
             }
             else
             {
-                idTicket = Convert.ToInt32(Request.QueryString["idTicket"]);
+
                 usuario = (Usuario)Session["usuario"];
-                if(((List<Ticket>)Session["tickets"]) != null)
+
+                if (((List<Ticket>)Session["tickets"]) != null)
                 {
-                    tickets = (List<Ticket>)Session["tickets"];
+                    //tickets = (List<Ticket>)Session["tickets"];
+                    tickets = trabajoNegocio.getTicketsPorRol(usuario);
                     ticket = tickets.Find(tck => tck.Id == idTicket);
                 }
                 else
                 {
-                   ticket = trabajoNegocio.getTicketPorId(idTicket);
+                    ticket = trabajoNegocio.getTicketPorId(idTicket);
+
+                }
+                
+                if (ticket == null || usuario.RolUsuario == RolUsuario.USUARIO && ticket.Usuario.IdPersona != usuario.IdPersona)
+                {
+                    Response.Redirect("Error.aspx", false);
                 }
 
 
@@ -317,7 +330,7 @@ namespace ManoExperta
                 alerta = (2, ex.Message);
             }
         }
-        
+
 
     }
 }

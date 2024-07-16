@@ -11,18 +11,10 @@
                         <h1>Comentanos qué necesitas y cuál es tu problema</h1>
                     </div>
                     <div class="text-white" style="margin-top: 30px">
-                        <h4>Estoy buscando un...</h4>
-                        <div class="dropdown">
-                            <input type="text" class="form-control" id="dropdownInput" data-bs-toggle="dropdown" aria-expanded="false" placeholder="Qué profesional...">
-                            <ul class="dropdown-menu" aria-labelledby="dropdownInput">
-                                <li><a class="dropdown-item">Gasista</a></li>
-                                <li><a class="dropdown-item">Plomero</a></li>
-                                <li><a class="dropdown-item">Electricista</a></li>
-                                <li><a class="dropdown-item">Albañil</a></li>
-                            </ul>
-                        </div>
+                        <h4>Te proporcionamos las herramientas para resolver los problemas en tu casa. Buscá proveedores o compartí tu problema para que un proveedor te pueda ayudar. Te acompañamos en el proceso.</h4>
+                        
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 15px">
-                            <div class="btn btn-outline-light btn-lg">Buscar</div>
+                            <a href="Registrar.aspx" class="btn btn-outline-light btn-lg">Registrarse</a>
                         </div>
                     </div>
                 </div>
@@ -45,16 +37,8 @@
                         <h1>Haz públicos tus servicios y ten acceso a clientes en toda la Argentina</h1>
                     </div>
                     <div class="text-white" style="margin-top: 30px">
-                        <h4>Yo soy...</h4>
-                        <div class="dropdown">
-                            <input type="text" class="form-control" id="dropdownInput2" data-bs-toggle="dropdown" aria-expanded="false" placeholder="Qué profesional...">
-                            <ul class="dropdown-menu" aria-labelledby="dropdownInput2">
-                                <li><a class="dropdown-item">Gasista</a></li>
-                                <li><a class="dropdown-item">Plomero</a></li>
-                                <li><a class="dropdown-item">Electricista</a></li>
-                                <li><a class="dropdown-item">Albañil</a></li>
-                            </ul>
-                        </div>
+                        <h4>Comparti tus servicios con miles de usuarios que lo necesitan. Expandí tu negocio con nosotros y mejorá tus ventas.</h4>
+
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 15px">
                             <a href="Registrar.aspx" class="btn btn-outline-light btn-lg">Registrarse</a>
                         </div>

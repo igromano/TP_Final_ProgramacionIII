@@ -52,13 +52,13 @@ namespace accesoDatos
         }
 
         //Retorna 
-        public int ejecutarAccion()
+        public long ejecutarAccion()
         {
             comando.Connection = conexion;
             try
             {
                 conexion.Open();
-                return (int)comando.ExecuteScalar();
+                return (long)comando.ExecuteScalar();
             }
             catch (Exception ex)
             {

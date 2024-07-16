@@ -45,8 +45,8 @@
                                 <i class="fas fa-solid fa-briefcase"></i>Tickets Disponibles</a>
                             <% } %>
                             <a class="nav-link" href="MisServicios.aspx" role="button" aria-expanded="false">
-                                <i class="fas fa-solid fa-handshake"></i>Mis Servicios</a>
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-solid fa-user"></i><%= usuarioTemp.UserName%></a>
+                                <i class="fas fa-solid fa-handshake"></i> Mis Servicios</a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-solid fa-user"></i> <%= usuarioTemp.UserName%></a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="Home.aspx">Home</a></li>
                                 <li><a class="dropdown-item" href="Preferencias.aspx">Preferencias</a></li>

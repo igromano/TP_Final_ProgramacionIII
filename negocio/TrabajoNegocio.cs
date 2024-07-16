@@ -15,6 +15,8 @@ namespace negocio
     {
         public void registrarTrabajo(string idUsuario, double monto, int idEstado, string comentarioUsuario, string idPrestador = "0", int idEspecialidad = 0, int idUsuarioAprobacion = 0)
         {
+            long id;
+            Usuario usr;
             AccesoADatos datos = new AccesoADatos();
             try
             {
@@ -35,7 +37,16 @@ namespace negocio
                 {
                     datos.settearParametros("@IDUsuarioAprobacion", idUsuarioAprobacion);
                 }
-                datos.ejecutarConsulta();
+                //datos.ejecutarConsulta();
+                id = long.Parse(datos.ejecutarAccion().ToString());
+                
+                UsuarioNegocio usrNegocio = new UsuarioNegocio();
+                usr = usrNegocio.getUsuario(int.Parse(idUsuario));
+                EmailService email = new EmailService();
+                email.armarMail(usr.Email, "Nueva solicitud " + usr.Apellido + " " + usr.Nombre, "Se ha creado su ticket, le dejamos acceso al mismo para que pueda darle seguimiento"
+                    , "Detalle.aspx?idTicket=" + id.ToString());
+                email.enviarCorreo();
+
             }
             catch (Exception ex)
             {
@@ -45,6 +56,7 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
+
         }
 
         public void cambiarEstado(int idTrabajo, int idEstado, Usuario usuario = null)
